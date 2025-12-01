@@ -134,14 +134,15 @@
 
             /* === MAIN CONTAINER === */
             #container {
-                background-color: rgba(16, 16, 16, 0.7);
+                background-color: rgba(16, 16, 16, 0.411);
                 backdrop-filter: blur(12px) saturate(180%);
                 -webkit-backdrop-filter: blur(12px) saturate(180%);
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 border-radius: var(--border-radius-lg);
                 padding: var(--space-md);
-                max-width: 480px;
-                width: 100%;
+                width: 80%;
+                height: auto;
+                /* Chiều cao = 70% chiều rộng */
                 text-align: center;
                 box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(var(--color-primary-rgb), 0.15);
                 position: relative;
@@ -149,10 +150,81 @@
                 transform-style: preserve-3d;
                 opacity: 0;
                 transform: translateY(20px);
-                /* Animation Start */
+                display: flex;
+                flex-direction: row;
+                gap: 0;
+            }
+
+            .left-column, .right-column {
                 display: flex;
                 flex-direction: column;
                 gap: var(--space-sm);
+                text-align: center; /* Maintain center alignment */
+            }
+
+            .left-column {
+                flex: 1;
+                padding-right: var(--space-md);
+                border-right: 1px solid rgba(var(--color-primary-rgb), 0.15);
+            }
+
+            .right-column {
+                flex: 2;
+                padding-left: var(--space-md);
+            }
+
+            /* === TABS STYLES === */
+            .tabs-nav {
+                display: flex;
+                gap: var(--space-xs);
+                border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.1);
+                margin-bottom: var(--space-sm);
+            }
+
+            .tab-link {
+                background: none;
+                border: none;
+                color: var(--color-text-secondary);
+                font-family: var(--font-secondary);
+                font-size: 0.9rem;
+                padding: var(--space-xs) var(--space-sm);
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                border-bottom: 2px solid transparent;
+                position: relative;
+                top: 1px;
+            }
+
+            .tab-link:hover {
+                color: var(--color-secondary);
+            }
+
+            .tab-link.active {
+                color: var(--color-primary);
+                border-bottom-color: var(--color-primary);
+                text-shadow: 0 0 4px rgba(var(--color-primary-rgb), 0.3);
+            }
+
+            .tab-content {
+                display: none;
+                opacity: 0;
+                animation: fadeOut 0.4s ease-out forwards;
+            }
+
+            .tab-content.active {
+                display: block;
+                opacity: 1;
+                animation: fadeIn 0.4s ease-in forwards;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(-10px); }
             }
 
             /* === PROFILE SECTION === */
@@ -262,6 +334,46 @@
                 text-shadow: 0 0 3px rgba(var(--color-primary-rgb), 0.3);
                 margin-bottom: 0;
             }
+
+            /* === LOCATION & WEATHER STYLES === */
+            #location-weather {
+                font-family: var(--font-primary);
+                font-size: 0.8rem;
+                color: var(--color-text-secondary);
+                margin-top: var(--space-xs);
+                opacity: 0; /* For animation */
+                transform: translateY(10px); /* For animation */
+                text-shadow: 0 0 2px rgba(var(--color-primary-rgb), 0.2);
+            }
+
+            #location {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+            }
+
+            #weather {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                font-size: 1.2rem;
+                font-family: var(--font-secondary);
+                margin-top: var(--space-xs);
+                color: var(--color-text-primary);
+            }
+
+            #location ion-icon {
+                font-size: 1.1em;
+                color: var(--color-accent);
+            }
+
+            #weather ion-icon {
+                font-size: 1.8em;
+                color: var(--color-accent);
+            }
+
 
             /* === TO-DO LIST STYLES === */
             #todo-section {
@@ -1071,6 +1183,14 @@
             }
 
             /* === RESPONSIVENESS === */
+            @media (min-width: 769px) {
+                #todo-list {
+                    max-height: 350px;
+                }
+                #anime-results-container, #anime-episode-list-container {
+                    max-height: 350px;
+                }
+            }
             @media (min-width: 500px) {
                 #todo-form {
                     flex-direction: row;
@@ -1091,6 +1211,20 @@
             }
 
             @media (max-width: 768px) {
+                #container {
+                    flex-direction: column;
+                }
+                .left-column {
+                    border-right: none;
+                    padding-right: 0;
+                    border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.15);
+                    padding-bottom: var(--space-md);
+                    margin-bottom: var(--space-md);
+                }
+                .right-column {
+                    padding-left: 0;
+                }
+
                 :root {
                     --space-lg: 1.8rem;
                     --space-md: 1.1rem;
@@ -1144,6 +1278,12 @@
 
                 #anime-results-container, #anime-episode-list-container {
                     max-height: 200px;
+                }
+
+                /* Custom footer placement for mobile */
+                #container > footer {
+                    order: 3; /* places it after left-column (1) and right-column (2) */
+                    margin-top: var(--space-md);
                 }
             }
 
@@ -1238,129 +1378,626 @@
                 white-space: nowrap;
                 border: 0;
             }
+            /* === POMODORO TIMER STYLES === */
+#pomodoro-section {
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
+    padding-top: var(--space-sm);
+    opacity: 1 !important; /* Changed from 0 */
+    transform: translateY(0) !important; /* Changed from 20px */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.pomodoro-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    width: 100%;
+    background-color: rgba(var(--color-primary-rgb), 0.05);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-md);
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 15px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.timer-mode {
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    color: var(--color-primary);
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.5);
+    padding: 0 var(--space-xs);
+    border-radius: var(--border-radius-sm);
+    transition: all 0.3s ease;
+    min-width: 80px;
+    text-align: center;
+}
+
+.timer-value {
+    font-family: var(--font-secondary);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.7);
+    letter-spacing: 2px;
+    margin: var(--space-xs) 0;
+}
+
+.progress-bar-container {
+    width: 90%;
+    height: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.1);
+}
+
+#pomodoro-progress-bar, .progress-bar {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-sm);
+    transition: width 0.9s linear;
+    box-shadow: 0 0 8px 1px var(--color-primary);
+}
+
+.pomodoro-count {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
+}
+
+.pomodoro-controls {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+.pomodoro-controls button {
+    padding: var(--space-xs) var(--space-sm);
+    background-color: rgba(var(--color-primary-rgb), 0.15);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-speed-fast) ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xxs);
+    height: 38px;
+    min-width: 90px;
+}
+
+.pomodoro-controls button:hover, .pomodoro-controls button:focus {
+    background-color: var(--color-primary);
+    color: var(--color-bg-dark);
+    box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.6);
+    outline: none;
+}
+
+.pomodoro-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgba(var(--color-primary-rgb), 0.05);
+    color: var(--color-text-secondary);
+    border-color: rgba(var(--color-primary-rgb), 0.1);
+    box-shadow: none;
+}
+
+.pomodoro-controls button ion-icon {
+    font-size: 1.2em;
+}
+
+.pomodoro-settings {
+    width: 100%;
+    border-top: 1px dashed rgba(var(--color-primary-rgb), 0.15);
+    padding-top: var(--space-sm);
+    margin-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    text-align: left;
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) rgba(var(--color-primary-rgb), 0.1);
+}
+
+.pomodoro-settings::-webkit-scrollbar {
+    width: 5px;
+}
+
+.pomodoro-settings::-webkit-scrollbar-track {
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border-radius: 3px;
+}
+
+.pomodoro-settings::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+}
+
+.pomodoro-settings h3 {
+    text-align: center;
+    margin-bottom: var(--space-xxs);
+    font-size: 0.95rem;
+}
+
+.pomodoro-settings .setting-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-xxs) var(--space-xs);
+    background-color: rgba(var(--color-primary-rgb), 0.03);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.1);
+}
+
+.pomodoro-settings label {
+    flex-grow: 1;
+    color: var(--color-text-primary);
+    font-size: 0.85rem;
+}
+
+.pomodoro-settings input[type="number"],
+.pomodoro-settings input[type="range"] {
+    width: 70px;
+    padding: 4px 8px;
+    background-color: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: 0.8rem;
+    text-align: center;
+    -moz-appearance: textfield;
+}
+
+.pomodoro-settings input[type="number"]::-webkit-outer-spin-button,
+.pomodoro-settings input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.pomodoro-settings input[type="range"] {
+    flex-grow: 0;
+    width: 120px;
+    height: 6px;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+
+.pomodoro-settings input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    margin-top: -5px;
+    box-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.7);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.3);
+}
+
+.pomodoro-settings input[type="range"]::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.7);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.3);
+}
+
+.pomodoro-settings input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 3px;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.1);
+}
+
+.pomodoro-settings input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 3px;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.1);
+}
+
+.pomodoro-settings input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    cursor: pointer;
+    position: relative;
+    transition: background-color var(--transition-speed-fast), border-color var(--transition-speed-fast);
+}
+
+.pomodoro-settings input[type="checkbox"]:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.5);
+}
+
+.pomodoro-settings input[type="checkbox"]:checked::after {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-bg-dark);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Collapsible Settings Styles */
+.pomodoro-settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: var(--space-xs);
+    background-color: rgba(var(--color-primary-rgb), 0.08);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--space-xs);
+    transition: background-color var(--transition-speed-fast);
+    user-select: none;
+}
+
+.pomodoro-settings-header:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.15);
+}
+
+.pomodoro-settings-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.settings-toggle-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+    color: var(--color-primary);
+}
+
+.settings-toggle-icon.collapsed {
+    transform: rotate(-90deg);
+}
+
+.pomodoro-settings-content {
+    max-height: 250px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.pomodoro-settings-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+}
+
+.pomodoro-settings.collapsed .pomodoro-settings-content {
+    overflow: hidden;
+}
+
+#toggle-dark-mode-btn {
+    padding: var(--space-xs) var(--space-sm);
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.5);
+    color: var(--color-primary);
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 0.85rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-speed-fast) ease;
+    width: 100%;
+    margin-top: var(--space-xs);
+}
+
+#toggle-dark-mode-btn:hover, #toggle-dark-mode-btn:focus {
+    background-color: var(--color-primary);
+    color: var(--color-bg-dark);
+    box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.4);
+    outline: none;
+}
+
+.pomodoro-display.work .timer-mode {
+    color: var(--pomodoro-work-color);
+    text-shadow: 0 0 5px rgba(var(--pomodoro-work-color-rgb), 0.5);
+    background-color: rgba(var(--pomodoro-work-color-rgb), 0.1);
+}
+
+.pomodoro-display.work #pomodoro-progress-bar,
+.pomodoro-display.work .progress-bar {
+    background-color: var(--pomodoro-work-color);
+    box-shadow: 0 0 8px 1px var(--pomodoro-work-color);
+}
+
+.pomodoro-display.short-break .timer-mode {
+    color: var(--pomodoro-short-break-color);
+    text-shadow: 0 0 5px rgba(var(--pomodoro-short-break-color-rgb), 0.5);
+    background-color: rgba(var(--pomodoro-short-break-color-rgb), 0.1);
+}
+
+.pomodoro-display.short-break #pomodoro-progress-bar,
+.pomodoro-display.short-break .progress-bar {
+    background-color: var(--pomodoro-short-break-color);
+    box-shadow: 0 0 8px 1px var(--pomodoro-short-break-color);
+}
+
+.pomodoro-display.long-break .timer-mode {
+    color: var(--pomodoro-long-break-color);
+    text-shadow: 0 0 5px rgba(var(--pomodoro-long-break-color-rgb), 0.5);
+    background-color: rgba(var(--pomodoro-long-break-color-rgb), 0.1);
+}
+
+.pomodoro-display.long-break #pomodoro-progress-bar,
+.pomodoro-display.long-break .progress-bar {
+    background-color: var(--pomodoro-long-break-color);
+    box-shadow: 0 0 8px 1px var(--pomodoro-long-break-color);
+}
+
+/* Work Mode */
+.pomodoro-display.work .timer-mode {
+    color: var(--pomodoro-work-color);
+    text-shadow: 0 0 5px rgba(var(--pomodoro-work-color-rgb), 0.5);
+    background-color: rgba(var(--pomodoro-work-color-rgb), 0.15);
+}
+
+.pomodoro-display.work #pomodoro-progress-bar,
+.pomodoro-display.work .progress-bar {
+    background-color: var(--pomodoro-work-color);
+    box-shadow: 0 0 8px 1px var(--pomodoro-work-color);
+}
+
+/* Short Break Mode */
+.pomodoro-display.short-break .timer-mode {
+    color: var(--pomodoro-short-break-color);
+    text-shadow: 0 0 5px rgba(var(--pomodoro-short-break-color-rgb), 0.5);
+    background-color: rgba(var(--pomodoro-short-break-color-rgb), 0.15);
+}
+
+.pomodoro-display.short-break #pomodoro-progress-bar,
+.pomodoro-display.short-break .progress-bar {
+    background-color: var(--pomodoro-short-break-color);
+    box-shadow: 0 0 8px 1px var(--pomodoro-short-break-color);
+}
+
+/* Long Break Mode */
+.pomodoro-display.long-break .timer-mode {
+    color: var(--pomodoro-long-break-color);
+    text-shadow: 0 0 5px rgba(var(--pomodoro-long-break-color-rgb), 0.5);
+    background-color: rgba(var(--pomodoro-long-break-color-rgb), 0.15);
+}
+
+.pomodoro-display.long-break #pomodoro-progress-bar,
+.pomodoro-display.long-break .progress-bar {
+    background-color: var(--pomodoro-long-break-color);
+    box-shadow: 0 0 8px 1px var(--pomodoro-long-break-color);
+}
+
+body.light-mode {
+    --color-bg-dark: #f0f0f0;
+    --color-text-primary: #333;
+    --color-text-secondary: #666;
+    --grid-line-color: rgba(0, 0, 0, 0.05);
+}
+body.light-mode #pomodoro-progress-bar, body.light-mode .progress-bar {
+    filter: brightness(0.8);
+}
+body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-controls button:focus {
+    color: var(--color-text-primary);
+}
         </style>
     </head>
     <body>
         <div id="container">
-            <div id="profile">
-                <div id="profile-image-wrapper">
-                    <img id="avatar" src="https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg" alt="Ảnh đại diện anime của HTCH"/>
-                </div>
-                <p id="username" data-text="@htch9999">@htch9999</p>
-                <div id="clock">00:00:00</div>
-            </div>
-            <!-- /// TO-DO LIST SECTION /// -->
-            <section id="todo-section" aria-labelledby="todo-heading">
-                <h2 id="todo-heading" class="sci-fi-heading">TO DO LIST</h2>
-                <form id="todo-form" aria-label="Thêm nhiệm vụ mới">
-                    <div class="todo-input-group">
-                        <input type="text" id="todo-input" placeholder="Nhiệm vụ mới..." required aria-label="Nội dung nhiệm vụ">
-                        <input type="time" id="todo-time" aria-label="Thời gian nhắc nhở" title="Chọn giờ nhắc nhở (trong ngày)">
+            <div class="left-column">
+                <div id="profile">
+                    <div id="profile-image-wrapper">
+                        <img id="avatar" src="https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg" alt="Ảnh đại diện anime của HTCH"/>
                     </div>
-                    <button type="submit" id="add-todo-btn" aria-label="Thêm nhiệm vụ">
-                        <ion-icon name="add-circle-outline"></ion-icon>
-                        ADD
-                
-                    </button>
-                </form>
-                <ul id="todo-list" aria-live="polite">
-                <!-- Todo items appear here -->
-                </ul>
-                <button id="request-permission-btn" style="display: none;" aria-label="Yêu cầu quyền hiển thị thông báo">
-                    <ion-icon name="notifications-outline"></ion-icon>
-                    Cho phép thông báo
-             
-                </button>
-            </section>
-            <!-- /// END TO-DO LIST /// -->
-            <!-- /// AUDIO PLAYER /// -->
-            <div id="audio-player">
-                <div class="track-info">
-                    <span id="track-title" title="Đang tải nhạc...">Đang tải nhạc...</span>
-                    <div class="progress-container">
-                        <div id="progress-bar"></div>
+                    <p id="username" data-text="@htch9999">@htch9999</p>
+                    <div id="clock">00:00:00</div>
+                    <div id="location-weather">
+                        <div id="location"><ion-icon name="location-outline"></ion-icon> Đang tải vị trí...</div>
+                        <div id="weather"><ion-icon name="cloud-outline"></ion-icon> Đang tải thời tiết...</div>
                     </div>
                 </div>
-                <div class="controls">
-                    <div class="main-controls">
-                        <button id="prev-btn" aria-label="Bài trước" disabled>
-                            <ion-icon name="play-skip-back-outline"></ion-icon>
-                        </button>
-                        <button id="play-pause-btn" aria-label="Phát nhạc" disabled>
-                            <ion-icon name="play-outline"></ion-icon>
-                        </button>
-                        <button id="next-btn" aria-label="Bài tiếp theo" disabled>
-                            <ion-icon name="play-skip-forward-outline"></ion-icon>
-                        </button>
+                <!-- /// AUDIO PLAYER /// -->
+                <div id="audio-player">
+                    <div class="track-info">
+                        <span id="track-title" title="Đang tải nhạc...">Đang tải nhạc...</span>
+                        <div class="progress-container">
+                            <div id="progress-bar"></div>
+                        </div>
                     </div>
+                    <div class="controls">
+                        <div class="main-controls">
+                            <button id="prev-btn" aria-label="Bài trước" disabled>
+                                <ion-icon name="play-skip-back-outline"></ion-icon>
+                            </button>
+                            <button id="play-pause-btn" aria-label="Phát nhạc" disabled>
+                                <ion-icon name="play-outline"></ion-icon>
+                            </button>
+                            <button id="next-btn" aria-label="Bài tiếp theo" disabled>
+                                <ion-icon name="play-skip-forward-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Container ẩn cho YouTube Player -->
+                    <div id="youtube-player-container"></div>
                 </div>
-                <!-- Container ẩn cho YouTube Player -->
-                <div id="youtube-player-container"></div>
+                <!-- /// END AUDIO PLAYER /// -->
+
+                <!-- /// SOCIAL LINKS /// -->
+                <div id="social-links" aria-label="Liên kết mạng xã hội khác">
+                    <a href="https://github.com/htch9999" target="_blank" rel="noopener noreferrer" aria-label="HTCH trên Github" title="Github">
+                        <ion-icon name="logo-github"></ion-icon>
+                    </a>
+                    <a href="https://youtube.com/@loif.ch.9999" target="_blank" rel="noopener noreferrer" aria-label="HTCH trên Youtube" title="YouTube">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                    <a href="https://facebook.com/htch.9999" target="_blank" rel="noopener noreferrer" aria-label="HTCH on Facebook" title="Facebook">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </div>
+                <!-- /// FOOTER /// -->
+                <footer>
+                    <p>&copy; <span id="copyright-year"></span>. <a href="https://github.com/htch9999" target="_blank" rel="noopener noreferrer" style="color:#c3ff8a">htch9999</a> - All rights reserved.</p>
+                    <script>
+                        (function(){ 
+                            const el = document.getElementById('copyright-year');
+                            if(el) el.textContent = new Date().getFullYear();
+                        })();
+                    </script>
+                </footer>
             </div>
-            <!-- /// END AUDIO PLAYER /// -->
-            <!-- === ANIME SEARCH SECTION === -->
-            <section id="anime-search-section" aria-labelledby="anime-search-heading">
-                <h2 id="anime-search-heading" class="sci-fi-heading">DISCOVER ANIME</h2>
-                <div id="search-wrapper">
-                    <input type="search" id="anime-search-input" placeholder="Đang tải data..." aria-label="Nhập tên anime cần tìm" disabled>
-                    <button id="search-button" aria-label="Tìm kiếm" disabled>
-                        <ion-icon name="search-outline"></ion-icon>
-                    </button>
+            <div class="right-column">
+                <div class="tabs-nav">
+                    <button class="tab-link active" data-tab="todo-content" aria-controls="todo-content">To-Do List</button>
+                    <button class="tab-link" data-tab="anime-content" aria-controls="anime-content">Discover Anime (VietSub)</button>
+                    <button class="tab-link" data-tab="pomodoro-content" aria-controls="pomodoro-content">Pomodoro Timer</button>
                 </div>
-                <div id="anime-results-container" aria-live="polite">
-                    <p class="placeholder-text">Đang tải dữ liệu anime...</p>
+
+                <div id="todo-content" class="tab-content active" role="tabpanel">
+                    <!-- /// TO-DO LIST SECTION /// -->
+                    <section id="todo-section" aria-labelledby="todo-heading">
+                        <h2 id="todo-heading" class="sci-fi-heading" style="display:none;">TO DO LIST</h2>
+                        <form id="todo-form" aria-label="Add new tasks">
+                            <div class="todo-input-group">
+                                <input type="text" id="todo-input" placeholder="New tasks..." required aria-label="Nội dung nhiệm vụ">
+                                <input type="time" id="todo-time" aria-label="Thời gian nhắc nhở" title="Chọn giờ nhắc nhở (trong ngày)">
+                            </div>
+                            <button type="submit" id="add-todo-btn" aria-label="Thêm nhiệm vụ">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                                ADD
+                            </button>
+                        </form>
+                        <ul id="todo-list" aria-live="polite">
+                            <!-- Todo items appear here -->
+                        </ul>
+                        <button id="request-permission-btn" style="display: none;" aria-label="Yêu cầu quyền hiển thị thông báo">
+                            <ion-icon name="notifications-outline"></ion-icon>
+                            Allow Notifications
+                        </button>
+                    </section>
+                    <!-- /// END TO-DO LIST /// -->
                 </div>
-                <div id="anime-episode-list-container">
-                    <h3 id="episode-list-heading" class="sci-fi-heading" style="display: none;">Anime Title</h3>
-                    <ul id="anime-episode-list" aria-live="polite"></ul>
-                    <button id="back-to-search-btn" style="display: none;">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
-                        Quay lại
-                    </button>
+
+                <div id="anime-content" class="tab-content" role="tabpanel">
+                    <!-- === ANIME SEARCH SECTION === -->
+                    <section id="anime-search-section" aria-labelledby="anime-search-heading">
+                        <h2 id="anime-search-heading" class="sci-fi-heading" style="display:none;">DISCOVER ANIME</h2>
+                        <div id="search-wrapper">
+                            <input type="search" id="anime-search-input" placeholder="Loading data..." aria-label="Enter the name of the anime you want to find" disabled>
+                            <button id="search-button" aria-label="Search" disabled>
+                                <ion-icon name="search-outline"></ion-icon>
+                            </button>
+                        </div>
+                        <div id="anime-results-container" aria-live="polite">
+                            <p class="placeholder-text">Loading anime data...</p>
+                        </div>
+                        <div id="anime-episode-list-container">
+                            <h3 id="episode-list-heading" class="sci-fi-heading" style="display: none;">Anime Title</h3>
+                            <ul id="anime-episode-list" aria-live="polite"></ul>
+                            <button id="back-to-search-btn" style="display: none;">
+                                <ion-icon name="arrow-back-outline"></ion-icon>
+                                Back
+                            </button>
+                        </div>
+                    </section>
+                    <!-- === END ANIME SEARCH SECTION === -->
                 </div>
-            </section>
-            <!-- === END ANIME SEARCH SECTION === -->
-            <!-- /// LINKS LIST /// -->
-<!--             <nav id="links" aria-label="Liên kết chính">
-                <span id="main-content" class="visually-hidden">Nội dung chính</span>
-                <ul>
-                    <li>
-                        <a href="https://facebook.com/htch.9999" target="_blank" rel="noopener noreferrer">Facebook</a>
-                    </li>
-                    <li>
-                        <a href="https://zalo.me/09xxxxxxxx" target="_blank" rel="noopener noreferrer">Zalo</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/htch9999" target="_blank" rel="noopener noreferrer">Github</a>
-                    </li>
-                    <li>
-                        <a href="https://discordapp.com/users/htch9999.off" target="_blank" rel="noopener noreferrer">Discord</a>®
-                    </li>
-                </ul>
-            </nav> -->
-            <!-- /// END LINKS LIST /// -->
-            <!-- /// SOCIAL LINKS /// -->
-            <div id="social-links" aria-label="Liên kết mạng xã hội khác">
-                <a href="https://github.com/htch9999" target="_blank" rel="noopener noreferrer" aria-label="HTCH trên Github" title="Github">
-                    <ion-icon name="logo-github"></ion-icon>
-                </a>
-                <a href="https://youtube.com/@loif.ch.9999" target="_blank" rel="noopener noreferrer" aria-label="HTCH trên Youtube" title="YouTube">
-                    <ion-icon name="logo-youtube"></ion-icon>
-                </a>
-                <a href="https://facebook.com/htch.9999" target="_blank" rel="noopener noreferrer" aria-label="HTCH on Facebook" title="Facebook">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                </a>
+
+                <div id="pomodoro-content" class="tab-content" role="tabpanel">
+                    <section id="pomodoro-section" aria-labelledby="pomodoro-heading">
+                        <h2 id="pomodoro-heading" class="sci-fi-heading" style="display:none;">POMODORO TIMER</h2>
+                        <div class="pomodoro-display">
+                            <div class="timer-mode" data-mode="work">Work</div>
+                            <div class="timer-value" id="timer-display">25:00</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="pomodoro-progress-bar"></div>
+                            </div>
+                            <div class="pomodoro-count" id="pomodoro-count">Pomodoros: 0/4</div>
+                        </div>
+
+                        <div class="pomodoro-controls">
+                            <button id="start-pause-btn" aria-label="Start Pomodoro">
+                                <ion-icon name="play-outline"></ion-icon>
+                                Start
+                            </button>
+                            <button id="reset-btn" aria-label="Reset Pomodoro">
+                                <ion-icon name="refresh-outline"></ion-icon>
+                                Reset
+                            </button>
+                            <button id="skip-btn" aria-label="Skip Break" style="display: none;">
+                                <ion-icon name="play-skip-forward-outline"></ion-icon>
+                                Skip
+                            </button>
+                        </div>
+
+                        <div class="pomodoro-settings">
+                        <div class="pomodoro-settings-header" id="settings-toggle">
+                            <h3 class="sci-fi-heading">
+                                <ion-icon name="chevron-down-outline" class="settings-toggle-icon"></ion-icon>
+                                Settings
+                            </h3>
+                        </div>
+                        <div class="pomodoro-settings-content">
+                            <div class="setting-group">
+                                <label for="work-duration">Work (min):</label>
+                                <input type="number" id="work-duration" value="25" min="1" max="60">
+                            </div>
+                            <div class="setting-group">
+                                <label for="short-break-duration">Short Break (min):</label>
+                                <input type="number" id="short-break-duration" value="5" min="1" max="30">
+                            </div>
+                            <div class="setting-group">
+                                <label for="long-break-duration">Long Break (min):</label>
+                                <input type="number" id="long-break-duration" value="15" min="1" max="60">
+                            </div>
+                            <div class="setting-group">
+                                <label for="auto-start-breaks">Auto start breaks:</label>
+                                <input type="checkbox" id="auto-start-breaks">
+                            </div>
+                            <div class="setting-group">
+                                <label for="auto-start-pomodoros">Auto start pomodoros:</label>
+                                <input type="checkbox" id="auto-start-pomodoros">
+                            </div>
+                            <div class="setting-group">
+                                <label for="sound-volume">Sound Volume:</label>
+                                <input type="range" id="sound-volume" min="0" max="1" step="0.1" value="0.8">
+                            </div>
+<!--                             <div class="setting-group">
+                                    <button id="toggle-dark-mode-btn">Toggle Dark Mode</button>
+                                </div> -->
+                        </div> <!-- Close pomodoro-settings-content -->
+                    </div> <!-- Close pomodoro-settings -->
+                </section>
+                </div>
+
             </div>
-            <!-- /// FOOTER /// -->
-            <footer>
-                <p>&copy; <span id="copyright-year"></span>. <a href="https://github.com/htch9999" target="_blank" rel="noopener noreferrer" style="color:#c3ff8a">htch9999</a> - All rights reserved.</p>
-                <script>
-                    (function(){ 
-                        const el = document.getElementById('copyright-year');
-                        if(el) el.textContent = new Date().getFullYear();
-                    })();
-                </script>
-            </footer>
         </div>
         <!-- End #container -->
         <!-- === IFRAME PLAYER CONTAINER (Anime Viewer) === -->
@@ -1519,6 +2156,8 @@
                 const closePlayerBtn = document.getElementById('close-player-btn');
                 const backToSearchBtn = document.getElementById('back-to-search-btn');
                 const youtubePlayerContainer = document.getElementById('youtube-player-container');
+                const tabsNav = document.querySelector('.tabs-nav');
+                const tabContents = document.querySelectorAll('.tab-content');
                 // YouTube player will attach here
 
                 // --- STATE VARIABLES ---
@@ -1671,6 +2310,79 @@
                     const secs = Math.floor(seconds % 60);
                     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
                 }
+
+                // ============================
+                // === LOCATION & WEATHER FUNCTIONS ===
+                // ============================
+                async function loadLocationAndWeather() {
+                    const locationElement = document.getElementById('location');
+                    const weatherElement = document.getElementById('weather');
+
+                    if (!locationElement || !weatherElement) return;
+
+                    // 1. Get Location
+                    if (!navigator.geolocation) {
+                        locationElement.textContent = 'Browser does not support location.';
+                        weatherElement.style.display = 'none';
+                        return;
+                    }
+
+                    navigator.geolocation.getCurrentPosition(async (position) => {
+                        const { latitude, longitude } = position.coords;
+
+                        // 2. Fetch Weather & Location Info
+                        try {
+                            // Using Open-Meteo API (no key required)
+                            const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+                            if (!weatherResponse.ok) throw new Error('Weather API Error');
+                            const weatherData = await weatherResponse.json();
+                            
+                            // Using a free reverse geocoding API to get city name
+                            const locationResponse = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                            if (!locationResponse.ok) throw new Error('Location API Error');
+                            const locationData = await locationResponse.json();
+
+                            const city = locationData.address.city || locationData.address.town || locationData.address.village || 'Vị trí không xác định';
+                            const temperature = weatherData.current_weather.temperature;
+                            const weatherCode = weatherData.current_weather.weathercode;
+
+                            // Simple weather code to icon mapping
+                            const weatherIcons = {
+                                0: 'sunny-outline', // Clear sky
+                                1: 'partly-sunny-outline', // Mainly clear
+                                2: 'partly-sunny-outline', // partly cloudy
+                                3: 'cloud-outline', // overcast
+                                45: 'fog-outline', // Fog
+                                48: 'fog-outline', // depositing rime fog
+                                51: 'rainy-outline', // Drizzle light
+                                53: 'rainy-outline', // Drizzle moderate
+                                55: 'rainy-outline', // Drizzle dense
+                                61: 'rainy-outline', // Rain slight
+                                63: 'rainy-outline', // Rain moderate
+                                65: 'rainy-outline', // Rain heavy
+                                80: 'rainy-outline', // Showers slight
+                                81: 'rainy-outline', // Showers moderate
+                                82: 'rainy-outline', // Showers violent
+                                95: 'thunderstorm-outline', // Thunderstorm
+                            };
+                            const iconName = weatherIcons[weatherCode] || 'cloud-outline';
+
+                            locationElement.innerHTML = `<ion-icon name="location-outline"></ion-icon> ${city}`;
+                            weatherElement.innerHTML = `<ion-icon name="${iconName}"></ion-icon> ${temperature}°C`;
+
+                        } catch (error) {
+                            console.error("Error getting weather/location data:", error);
+                            locationElement.textContent = 'Unable to get data.';
+                            weatherElement.style.display = 'none';
+                        }
+
+                    }, (error) => {
+                        console.error("Positioning error:", error.message);
+                        locationElement.innerHTML = `<ion-icon name="alert-circle-outline"></ion-icon> Please grant location permission.`;
+                        weatherElement.style.display = 'none';
+                    });
+                }
+
 
                 // ============================
                 // === YOUTUBE API FUNCTIONS ===
@@ -2461,7 +3173,7 @@
                     const f = document.createDocumentFragment();
                     if (!tasks.length) {
                         const e = document.createElement('li');
-                        e.textContent = 'Chưa có việc nào...';
+                        e.textContent = 'No tasks yet...';
                         e.style.cssText = 'justify-content:center;opacity:0.6;border-left:none;padding:var(--space-sm)';
                         f.appendChild(e);
                     } else {
@@ -2658,7 +3370,7 @@
                 async function loadAnimeData() {
                     console.log("⏳ Loading anime data...");
                     if (resultsContainer)
-                        resultsContainer.innerHTML = '<p class="placeholder-text">Đang tải dữ liệu anime...</p>';
+                        resultsContainer.innerHTML = '<p class="placeholder-text">Loading anime data...</p>';
                     if (searchInput) {
                         searchInput.placeholder = "Đang tải...";
                         searchInput.disabled = true;
@@ -2674,9 +3386,9 @@
                         if (allEpisodeRecords.length > 0) {
                             console.log("✅ Anime data loaded.");
                             if (resultsContainer)
-                                resultsContainer.innerHTML = '<p class="placeholder-text">Nhập tên anime...</p>';
+                                resultsContainer.innerHTML = '<p class="placeholder-text">Enter anime name...</p>';
                             if (searchInput) {
-                                searchInput.placeholder = "Tìm kiếm anime...";
+                                searchInput.placeholder = "Search for anime...";
                                 searchInput.disabled = false;
                             }
                             if (searchButton)
@@ -2684,14 +3396,14 @@
                         } else {
                             console.warn("⚠️ No valid records parsed.");
                             if (resultsContainer)
-                                resultsContainer.innerHTML = '<p class="placeholder-text error">Không có dữ liệu.</p>';
+                                resultsContainer.innerHTML = '<p class="placeholder-text error">No data available.</p>';
                             if (searchInput)
                                 searchInput.placeholder = "Lỗi data";
                         }
                     } catch (e) {
                         console.error("❌ Load/Parse anime error:", e);
                         if (resultsContainer)
-                            resultsContainer.innerHTML = `<p class="placeholder-text error">Lỗi tải dữ liệu.</p>`;
+                            resultsContainer.innerHTML = `<p class="placeholder-text error">Data loading error.</p>`;
                         if (searchInput) {
                             searchInput.placeholder = "Lỗi tải";
                             searchInput.disabled = true;
@@ -2705,7 +3417,7 @@
                         return;
                     resultsContainer.innerHTML = '';
                     if (!uniqueNames.length) {
-                        resultsContainer.innerHTML = searchInput?.value.trim() ? '<p class="placeholder-text">Không tìm thấy.</p>' : '<p class="placeholder-text">Nhập tên anime...</p>';
+                        resultsContainer.innerHTML = searchInput?.value.trim() ? '<p class="placeholder-text">Không tìm thấy.</p>' : '<p class="placeholder-text">Enter anime name...</p>';
                         return;
                     }
                     const f = document.createDocumentFragment();
@@ -2739,14 +3451,14 @@
                     const s = searchInput.value.trim().toLowerCase();
                     if (!allEpisodeRecords.length) {
                         if (resultsContainer && s)
-                            resultsContainer.innerHTML = '<p class="placeholder-text error">Data chưa sẵn sàng.</p>';
+                            resultsContainer.innerHTML = '<p class="placeholder-text error">Data not ready.</p>';
                         else if (resultsContainer)
-                            resultsContainer.innerHTML = '<p class="placeholder-text">Nhập tên anime...</p>';
+                            resultsContainer.innerHTML = '<p class="placeholder-text">Enter anime name...</p>';
                         return;
                     }
                     if (!s) {
                         if (resultsContainer)
-                            resultsContainer.innerHTML = '<p class="placeholder-text">Nhập tên anime...</p>';
+                            resultsContainer.innerHTML = '<p class="placeholder-text">Enter anime name...</p>';
                         if (episodeListContainer)
                             episodeListContainer.style.display = 'none';
                         return;
@@ -2787,7 +3499,7 @@
                     records.forEach(r => {
                         const link = r.link?.trim();
                         const epName = r.episodeName?.trim();
-                        const isValidLink = link && link !== '#' && link !== 'Không tìm thấy URL' && link.startsWith('http');
+                        const isValidLink = link && link !== '#' && link !== 'URL not found' && link.startsWith('http');
                         if (!epName)
                             return;
                         const i = document.createElement('li');
@@ -2890,6 +3602,8 @@
                     }
                 }
 
+
+                
                 // ============================
                 // === INITIALIZATION ===
                 // ============================
@@ -2902,6 +3616,7 @@
                 loadTasks();
                 loadAnimeData();
                 loadYouTubeAPI();
+                loadLocationAndWeather();
                 // Trigger YT API load
 
                 // Init Music Player Listeners
@@ -2918,10 +3633,10 @@
                     // Enable play button
                     updatePrevNextButtonStates();
                     if (trackTitleElement)
-                        trackTitleElement.textContent = "Sẵn sàng phát nhạc";
+                        trackTitleElement.textContent = "Music Player Ready";
                 } else {
                     if (trackTitleElement)
-                        trackTitleElement.textContent = "Playlist trống";
+                        trackTitleElement.textContent = "Playlist is empty";
                     disableAllControls();
                 }
 
@@ -2959,6 +3674,33 @@
                     todoForm.addEventListener('submit', addTask);
                 if (requestPermissionBtn)
                     requestPermissionBtn.addEventListener('click', handleRequestPermission);
+                
+                // Init Tab Listeners
+                if (tabsNav) {
+                    tabsNav.addEventListener('click', (e) => {
+                        if (e.target && e.target.matches('.tab-link')) {
+                            const targetId = e.target.dataset.tab;
+                            
+                            // Update button active state
+                            tabsNav.querySelectorAll('.tab-link').forEach(btn => btn.classList.remove('active'));
+                            e.target.classList.add('active');
+
+                            // Update content active state
+                            tabContents.forEach(content => {
+                                content.classList.toggle('active', content.id === targetId);
+
+                                // Initialize Pomodoro when first opened
+                                if (content.id === 'pomodoro-content' && content.classList.contains('active') && !content.dataset.loaded) {
+                                    content.dataset.loaded = 'true';
+                                    if (window.initPomodoroTimer) {
+                                        window.initPomodoroTimer();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+
 
                 // Init Entrance Animations
                 try {
@@ -2983,6 +3725,11 @@
                             translateY: [10, 0],
                             duration: 400
                         }, '-=450').add({
+                            targets: '#location-weather',
+                            opacity: [0, 1],
+                            translateY: [10, 0],
+                            duration: 400
+                        }, '-=400').add({
                             targets: '#todo-section',
                             opacity: [0, 1],
                             translateY: [20, 0],
@@ -3098,9 +3845,482 @@
                 if (typeof anime !== 'undefined')
                     console.log("ℹ️ Anime.js v:", anime.version);
 
+                // --- FOOTER POSITION LOGIC ---
+                function handleFooterPosition() {
+                    const container = document.getElementById('container');
+                    const leftColumn = document.querySelector('.left-column');
+                    const footer = document.querySelector('footer');
+
+                    // Exit if elements aren't found
+                    if (!container || !leftColumn || !footer) {
+                        console.warn("Footer positioning script couldn't find required elements.");
+                        return;
+                    }
+
+                    if (window.innerWidth <= 768) {
+                        // MOBILE view: Move footer to be a direct child of #container
+                        if (footer.parentNode !== container) {
+                            container.appendChild(footer);
+                        }
+                    } else {
+                        // DESKTOP view: Move footer back into .left-column
+                        if (footer.parentNode !== leftColumn) {
+                            leftColumn.appendChild(footer); // Appending puts it at the end, which is correct
+                        }
+                    }
+                }
+
+                // Initial check on load
+                handleFooterPosition();
+                // Add listener for window resize
+                window.addEventListener('resize', handleFooterPosition);
+
+
             }
             );
             // --- DOMContentLoaded End ---
+        </script>
+        <script>
+            // --- POMODORO TIMER SCRIPT ---
+let pomodoroTimerInterval;
+let pomodoroTotalSeconds;
+let pomodoroSecondsLeft;
+let pomodoroCurrentMode = 'work'; // 'work', 'short-break', 'long-break'
+let pomodoroCount = 0; // Pomodoros in current cycle (resets after 4)
+let pomodoroIsPaused = true;
+let pomodoroNotificationPermission = 'Notification' in window ? Notification.permission : 'unsupported';
+let pomodoroDailyPomodoros = 0;
+let pomodoroToday = new Date().toDateString();
+// The pomodoroInitialized flag is now managed by content.dataset.loaded in index.html
+
+const pomodoroSounds = {
+    end: new Audio('https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/timer.mp3'), // Placeholder sound
+    //click: new Audio('https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/timer.mp3') // Placeholder sound
+};
+
+const POMODORO_DEFAULT_TIMES = {
+    work: 25 * 60,
+    'short-break': 5 * 60,
+    'long-break': 15 * 60
+};
+
+const POMODORO_MODE_COLORS = {
+    work: {
+        color: '#dc3545',
+        rgb: '220,53,69'
+    }, // Red
+    'short-break': {
+        color: '#28a745',
+        rgb: '40,167,69'
+    }, // Green
+    'long-break': {
+        color: '#007bff',
+        rgb: '0,123,255'
+    } // Blue
+};
+
+// --- Helper Functions ---
+function pomodoroFormatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+}
+
+function updatePomodoroDisplay() {
+    const timerDisplay = document.getElementById('timer-display');
+    const pomodoroSection = document.getElementById('pomodoro-section');
+    const timerModeElement = pomodoroSection?.querySelector('.timer-mode');
+    const pomodoroProgressBar = document.getElementById('pomodoro-progress-bar');
+    const pomodoroCountElement = document.getElementById('pomodoro-count');
+
+    if (timerDisplay) timerDisplay.textContent = pomodoroFormatTime(pomodoroSecondsLeft);
+    if (pomodoroProgressBar) {
+        const percentage = (pomodoroSecondsLeft / pomodoroTotalSeconds) * 100;
+        pomodoroProgressBar.style.width = `${percentage}%`;
+    }
+    if (pomodoroCountElement) pomodoroCountElement.textContent = `Pomodoros: ${pomodoroCount % 4}/${4} (${pomodoroDailyPomodoros} today)`;
+    
+    if (timerModeElement) {
+        timerModeElement.textContent = pomodoroCurrentMode.replace('-', ' ').toUpperCase();
+        pomodoroSection?.querySelector('.pomodoro-display')?.classList.remove('work', 'short-break', 'long-break');
+        pomodoroSection?.querySelector('.pomodoro-display')?.classList.add(pomodoroCurrentMode);
+    }
+}
+
+function pomodoroPlaySound(type = 'end') {
+    const soundVolumeInput = document.getElementById('sound-volume');
+    if (pomodoroSounds[type]) {
+        pomodoroSounds[type].volume = parseFloat(soundVolumeInput?.value || '0.8');
+        pomodoroSounds[type].currentTime = 0; // Rewind to start
+        pomodoroSounds[type].play().catch(e => console.warn("Pomodoro sound playback failed:", e));
+    }
+}
+
+function pomodoroShowNotification(title, body) {
+    if (pomodoroNotificationPermission === 'granted') {
+        new Notification(title, {
+            body: body,
+            icon: 'https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg'
+        });
+    }
+}
+
+function updatePomodoroDocumentTitle() {
+    document.title = `${pomodoroFormatTime(pomodoroSecondsLeft)} - ${pomodoroCurrentMode.toUpperCase()} | Pomodoro`;
+}
+
+function setPomodoroColors() {
+    document.documentElement.style.setProperty('--pomodoro-work-color', POMODORO_MODE_COLORS.work.color);
+    document.documentElement.style.setProperty('--pomodoro-work-color-rgb', POMODORO_MODE_COLORS.work.rgb);
+    document.documentElement.style.setProperty('--pomodoro-short-break-color', POMODORO_MODE_COLORS['short-break'].color);
+    document.documentElement.style.setProperty('--pomodoro-short-break-color-rgb', POMODORO_MODE_COLORS['short-break'].rgb);
+    document.documentElement.style.setProperty('--pomodoro-long-break-color', POMODORO_MODE_COLORS['long-break'].color);
+    document.documentElement.style.setProperty('--pomodoro-long-break-color-rgb', POMODORO_MODE_COLORS['long-break'].rgb);
+}
+
+// --- Timer Logic ---
+function startPomodoroTimer() {
+    const startPauseBtn = document.getElementById('start-pause-btn');
+    const skipBtn = document.getElementById('skip-btn');
+    const autoStartBreaksCheckbox = document.getElementById('auto-start-breaks');
+    const autoStartPomodorosCheckbox = document.getElementById('auto-start-pomodoros');
+
+    if (!pomodoroIsPaused) return;
+
+    pomodoroIsPaused = false;
+    if (startPauseBtn) {
+        startPauseBtn.innerHTML = '<ion-icon name="pause-outline"></ion-icon> Pause';
+        startPauseBtn.setAttribute('aria-label', 'Pause Pomodoro');
+    }
+    if (skipBtn) skipBtn.style.display = 'inline-flex';
+
+    pomodoroTimerInterval = setInterval(() => {
+        pomodoroSecondsLeft--;
+        updatePomodoroDisplay();
+        updatePomodoroDocumentTitle();
+
+        if (pomodoroSecondsLeft <= 0) {
+            clearInterval(pomodoroTimerInterval);
+            pomodoroPlaySound('end');
+            pomodoroShowNotification('Pomodoro Timer', `Time for ${pomodoroCurrentMode === 'work' ? 'a break!' : 'work!'}`);
+            handlePomodoroTimerEnd();
+        }
+    }, 1000);
+}
+
+function pausePomodoroTimer() {
+    const startPauseBtn = document.getElementById('start-pause-btn');
+    const skipBtn = document.getElementById('skip-btn');
+
+    pomodoroIsPaused = true;
+    clearInterval(pomodoroTimerInterval);
+    if (startPauseBtn) {
+        startPauseBtn.innerHTML = '<ion-icon name="play-outline"></ion-icon> Start';
+        startPauseBtn.setAttribute('aria-label', 'Start Pomodoro');
+    }
+    if (skipBtn) skipBtn.style.display = 'none';
+    updatePomodoroDocumentTitle();
+}
+
+function resetPomodoroTimer() {
+    pausePomodoroTimer();
+    pomodoroCount = 0;
+    pomodoroSecondsLeft = getPomodoroUserDuration('work');
+    pomodoroTotalSeconds = pomodoroSecondsLeft;
+    pomodoroCurrentMode = 'work';
+    updatePomodoroDisplay();
+    updatePomodoroDocumentTitle();
+    document.title = 'Loif .Ch | Profile Sci-Fi: Nhạc (MP3 &YouTube), To-Do &Anime'; // Reset to original title
+    const skipBtn = document.getElementById('skip-btn');
+    if (skipBtn) skipBtn.style.display = 'none';
+    savePomodoroState();
+}
+
+function handlePomodoroTimerEnd() {
+    const autoStartBreaksCheckbox = document.getElementById('auto-start-breaks');
+    const autoStartPomodorosCheckbox = document.getElementById('auto-start-pomodoros');
+
+    if (pomodoroCurrentMode === 'work') {
+        pomodoroCount++;
+        pomodoroDailyPomodoros++;
+        if (pomodoroCount % 4 === 0) {
+            pomodoroCurrentMode = 'long-break';
+            pomodoroSecondsLeft = getPomodoroUserDuration('long-break');
+        } else {
+            pomodoroCurrentMode = 'short-break';
+            pomodoroSecondsLeft = getPomodoroUserDuration('short-break');
+        }
+    } else {
+        pomodoroCurrentMode = 'work';
+        pomodoroSecondsLeft = getPomodoroUserDuration('work');
+    }
+    pomodoroTotalSeconds = pomodoroSecondsLeft;
+    updatePomodoroDisplay();
+    savePomodoroState();
+
+    if ((pomodoroCurrentMode === 'work' && autoStartPomodorosCheckbox?.checked) ||
+        ((pomodoroCurrentMode === 'short-break' || pomodoroCurrentMode === 'long-break') && autoStartBreaksCheckbox?.checked)) {
+        startPomodoroTimer();
+    } else {
+        pausePomodoroTimer();
+    }
+}
+
+function skipPomodoroCurrentMode() {
+    pomodoroPlaySound('click'); // Play sound first
+    
+    if (!pomodoroIsPaused) {
+        clearInterval(pomodoroTimerInterval);
+    }
+    
+    // Always allow skip, whether paused or not
+    handlePomodoroTimerEnd();
+}
+
+// --- Settings and UI ---
+function getPomodoroUserDuration(mode) {
+    const workDurationInput = document.getElementById('work-duration');
+    const shortBreakDurationInput = document.getElementById('short-break-duration');
+    const longBreakDurationInput = document.getElementById('long-break-duration');
+    let duration;
+    switch (mode) {
+        case 'work':
+            duration = parseInt(workDurationInput?.value) || 25;
+            break;
+        case 'short-break':
+            duration = parseInt(shortBreakDurationInput?.value) || 5;
+            break;
+        case 'long-break':
+            duration = parseInt(longBreakDurationInput?.value) || 15;
+            break;
+        default:
+            duration = 25;
+    }
+    return duration * 60;
+}
+
+function updatePomodoroSettings() {
+    // Apply new durations only if timer is paused
+    if (pomodoroIsPaused) {
+        if (pomodoroCurrentMode === 'work') {
+            pomodoroSecondsLeft = getPomodoroUserDuration('work');
+        } else if (pomodoroCurrentMode === 'short-break') {
+            pomodoroSecondsLeft = getPomodoroUserDuration('short-break');
+        } else if (pomodoroCurrentMode === 'long-break') {
+            pomodoroSecondsLeft = getPomodoroUserDuration('long-break');
+        }
+        pomodoroTotalSeconds = pomodoroSecondsLeft;
+        updatePomodoroDisplay();
+    }
+    savePomodoroState();
+}
+
+function togglePomodoroDarkMode() {
+    document.body.classList.toggle('light-mode');
+    savePomodoroState();
+}
+
+function setPomodoroVolume() {
+    const soundVolumeInput = document.getElementById('sound-volume');
+    const volume = parseFloat(soundVolumeInput?.value || '0.8');
+    for (const key in pomodoroSounds) {
+        if (pomodoroSounds.hasOwnProperty(key)) {
+            pomodoroSounds[key].volume = volume;
+        }
+    }
+    savePomodoroState();
+}
+
+// --- State Management (localStorage) ---
+function savePomodoroState() {
+    const workDurationInput = document.getElementById('work-duration');
+    const shortBreakDurationInput = document.getElementById('short-break-duration');
+    const longBreakDurationInput = document.getElementById('long-break-duration');
+    const autoStartBreaksCheckbox = document.getElementById('auto-start-breaks');
+    const autoStartPomodorosCheckbox = document.getElementById('auto-start-pomodoros');
+    const soundVolumeInput = document.getElementById('sound-volume');
+
+    if (!window.localStorage) return;
+    const state = {
+        secondsLeft: pomodoroSecondsLeft,
+        currentMode: pomodoroCurrentMode,
+        pomodoroCount: pomodoroCount,
+        isPaused: pomodoroIsPaused,
+        workDuration: workDurationInput?.value,
+        shortBreakDuration: shortBreakDurationInput?.value,
+        longBreakDuration: longBreakDurationInput?.value,
+        autoStartBreaks: autoStartBreaksCheckbox?.checked,
+        autoStartPomodoros: autoStartPomodorosCheckbox?.checked,
+        soundVolume: soundVolumeInput?.value,
+        isLightMode: document.body.classList.contains('light-mode'),
+        dailyPomodoros: pomodoroDailyPomodoros,
+        lastDay: pomodoroToday
+    };
+    localStorage.setItem('pomodoroState', JSON.stringify(state));
+}
+
+function loadPomodoroState() {
+    const workDurationInput = document.getElementById('work-duration');
+    const shortBreakDurationInput = document.getElementById('short-break-duration');
+    const longBreakDurationInput = document.getElementById('long-break-duration');
+    const autoStartBreaksCheckbox = document.getElementById('auto-start-breaks');
+    const autoStartPomodorosCheckbox = document.getElementById('auto-start-pomodoros');
+    const soundVolumeInput = document.getElementById('sound-volume');
+
+    if (!window.localStorage) return;
+    const savedState = localStorage.getItem('pomodoroState');
+    if (savedState) {
+        const state = JSON.parse(savedState);
+        pomodoroSecondsLeft = state.secondsLeft;
+        pomodoroCurrentMode = state.currentMode;
+        pomodoroCount = state.pomodoroCount;
+        pomodoroIsPaused = state.isPaused;
+        
+        if (workDurationInput) workDurationInput.value = state.workDuration || '25';
+        if (shortBreakDurationInput) shortBreakDurationInput.value = state.shortBreakDuration || '5';
+        if (longBreakDurationInput) longBreakDurationInput.value = state.longBreakDuration || '15';
+        if (autoStartBreaksCheckbox) autoStartBreaksCheckbox.checked = state.autoStartBreaks || false;
+        if (autoStartPomodorosCheckbox) autoStartPomodorosCheckbox.checked = state.autoStartPomodoros || false;
+        if (soundVolumeInput) soundVolumeInput.value = state.soundVolume !== undefined ? state.soundVolume : '0.8';
+        
+        if (state.isLightMode) {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+
+        if (state.lastDay !== pomodoroToday) {
+            pomodoroDailyPomodoros = 0;
+            pomodoroToday = new Date().toDateString();
+        } else {
+            pomodoroDailyPomodoros = state.dailyPomodoros;
+        }
+        
+        pomodoroTotalSeconds = getPomodoroUserDuration(pomodoroCurrentMode);
+        
+        if (pomodoroSecondsLeft > pomodoroTotalSeconds) {
+            pomodoroSecondsLeft = pomodoroTotalSeconds;
+        }
+
+        if (!pomodoroIsPaused && (
+            (pomodoroCurrentMode === 'work' && autoStartPomodorosCheckbox?.checked) || 
+            ((pomodoroCurrentMode === 'short-break' || pomodoroCurrentMode === 'long-break') && autoStartBreaksCheckbox?.checked)
+        )) {
+            startPomodoroTimer();
+        } else {
+            pausePomodoroTimer();
+        }
+    } else {
+        resetPomodoroTimer();
+    }
+    setPomodoroVolume();
+    updatePomodoroDisplay();
+}
+
+function pomodoroRequestNotificationPermission() {
+    if (!('Notification' in window)) {
+        pomodoroNotificationPermission = 'unsupported';
+        console.warn("Notifications not supported in this browser.");
+        return;
+    }
+    if (Notification.permission === 'default') {
+        Notification.requestPermission().then(permission => {
+            pomodoroNotificationPermission = permission;
+            if (permission === 'denied') {
+                console.warn("Notification permission denied.");
+            }
+        });
+    } else {
+        pomodoroNotificationPermission = Notification.permission;
+    }
+}
+
+// --- Main Initialization Function ---
+function initPomodoroTimer() {
+    // The initialization is now controlled by index.html using content.dataset.loaded
+    console.log("Initializing Pomodoro Timer...");
+
+    const startPauseBtn = document.getElementById('start-pause-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const skipBtn = document.getElementById('skip-btn');
+    const workDurationInput = document.getElementById('work-duration');
+    const shortBreakDurationInput = document.getElementById('short-break-duration');
+    const longBreakDurationInput = document.getElementById('long-break-duration');
+    const autoStartBreaksCheckbox = document.getElementById('auto-start-breaks');
+    const autoStartPomodorosCheckbox = document.getElementById('auto-start-pomodoros');
+    const soundVolumeInput = document.getElementById('sound-volume');
+    const toggleDarkModeBtn = document.getElementById('toggle-dark-mode-btn');
+
+    setPomodoroColors();
+    loadPomodoroState();
+    pomodoroRequestNotificationPermission();
+    // Settings collapse toggle
+    const settingsToggle = document.getElementById('settings-toggle');
+    const settingsContent = document.querySelector('.pomodoro-settings-content');
+    const toggleIcon = settingsToggle?.querySelector('.settings-toggle-icon');
+    
+    if (settingsToggle && settingsContent) {
+        settingsToggle.addEventListener('click', () => {
+            settingsContent.classList.toggle('collapsed');
+            toggleIcon?.classList.toggle('collapsed');
+            
+            // Save collapse state
+            const isCollapsed = settingsContent.classList.contains('collapsed');
+            localStorage.setItem('pomodoroSettingsCollapsed', isCollapsed);
+        });
+        
+        // Restore collapse state
+        const savedCollapsed = localStorage.getItem('pomodoroSettingsCollapsed');
+        if (savedCollapsed === 'true') {
+            settingsContent.classList.add('collapsed');
+            toggleIcon?.classList.add('collapsed');
+        }
+    }
+
+    if (startPauseBtn) startPauseBtn.addEventListener('click', () => {
+        pomodoroPlaySound('click');
+        if (pomodoroIsPaused) {
+            startPomodoroTimer();
+        } else {
+            pausePomodoroTimer();
+        }
+    });
+
+    if (resetBtn) resetBtn.addEventListener('click', () => {
+        pomodoroPlaySound('click');
+        resetPomodoroTimer();
+    });
+
+    if (skipBtn) skipBtn.addEventListener('click', () => {
+        pomodoroPlaySound('click');
+        skipPomodoroCurrentMode();
+    });
+
+    workDurationInput?.addEventListener('change', updatePomodoroSettings);
+    shortBreakDurationInput?.addEventListener('change', updatePomodoroSettings);
+    longBreakDurationInput?.addEventListener('change', updatePomodoroSettings);
+    autoStartBreaksCheckbox?.addEventListener('change', savePomodoroState);
+    autoStartPomodorosCheckbox?.addEventListener('change', savePomodoroState);
+    soundVolumeInput?.addEventListener('input', setPomodoroVolume);
+    toggleDarkModeBtn?.addEventListener('click', togglePomodoroDarkMode);
+    
+    // Save state before unload
+    window.addEventListener('beforeunload', savePomodoroState);
+
+    // Reset daily pomodoro count at midnight
+    setInterval(() => {
+        const newDay = new Date().toDateString();
+        if (newDay !== pomodoroToday) {
+            pomodoroToday = newDay;
+            pomodoroDailyPomodoros = 0;
+            savePomodoroState();
+        }
+    }, 1000 * 60 * 60); // Check every hour
+}
+
+// Expose the init function globally for index.html to call
+window.initPomodoroTimer = initPomodoroTimer;
+
         </script>
     </body>
 </html>
