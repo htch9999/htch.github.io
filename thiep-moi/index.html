@@ -1,0 +1,583 @@
+<link rel="stylesheet" href="/thiep-moi/public/datum/assets/css/backend.css?v=1.0.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/thiep-moi/public/css/invite.css?v=1.0">
+<style>
+.share-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.copy-btn{padding:8px 12px;border:1px solid #e3e3e3;border-radius:8px;background:#fff;cursor:pointer}
+.invite-card .invite-name{word-break:break-word}
+</style>
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Nguyễn Trọng Vụ – 12G, THPT Khoái Châu | Thiệp mời kỷ yếu</title>
+  <meta name="description" content="Trân trọng mời bạn đến tham dự lễ chụp tốt nghiệp của mình!">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Open Graph để share đẹp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nguyễn Trọng Vụ – 12G, THPT Khoái Châu">
+  <meta property="og:description" content="Trân trọng mời bạn đến tham dự lễ chụp tốt nghiệp của mình!">
+  <meta property="og:image" content="/thiep-moi/uploads/avatars/avt.jpg"><!--   <meta property="og:url" content="https://thiep.kyyeutnt.vn/xem-thiep/5632"> -->
+</head>
+
+<body>
+<style>
+#invite-content {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.door-wrap {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 9999;
+  display: flex;
+  overflow: hidden;
+}
+
+.door-door {
+  width: 50%;
+  height: 100%;
+  transition: transform 1.8s ease-in-out;
+}
+
+.door-wrap.open .left {
+  transform: translateX(-100%);
+}
+
+.door-wrap.open .right {
+  transform: translateX(100%);
+}
+
+.door-wrap.open + #invite-content {
+  opacity: 1;
+}
+/* Wishes Section */
+.wishes-container {
+  margin-top: 30px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.wish-card {
+  background: linear-gradient(135deg, #fff9f0 0%, #ffefd5 100%);
+  border: 2px solid #d4af37;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.wish-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+}
+
+.wish-card::before {
+  content: '❝';
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 40px;
+  color: #d4af37;
+  opacity: 0.3;
+  font-family: Georgia, serif;
+}
+
+.wish-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-left: 30px;
+}
+
+.wish-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #8b4513;
+  margin: 0;
+}
+
+.wish-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.wish-status.yes {
+  background: #d4edda;
+  color: #155724;
+}
+
+.wish-status.no {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.wish-status.maybe {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.wish-relation {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 10px;
+  padding-left: 30px;
+}
+
+.wish-message {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  border-left: 3px solid #d4af37;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.wishes-loading {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+  font-style: italic;
+}
+
+.wishes-empty {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fff9f0 0%, #ffefd5 100%);
+  border: 2px dashed #d4af37;
+  border-radius: 15px;
+  color: #8b4513;
+  font-style: italic;
+}
+
+/* Custom scrollbar */
+.wishes-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wishes-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.wishes-container::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 10px;
+}
+
+.wishes-container::-webkit-scrollbar-thumb:hover {
+  background: #b8941f;
+}
+/* Button transition */
+.invite-form button[type="submit"] {
+  transition: all 0.3s ease;
+}
+
+.invite-form button[type="submit"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+</style>
+           
+<div class="door-wrap">
+    <img src="/thiep-moi/uploads/icon/trai.jpg" class="door-door left" alt="">
+    <img src="/thiep-moi/uploads/icon/phai.jpg" class="door-door right" alt="">
+</div>
+
+<div id="invite-content" class="invite-content">
+    <div class="row">
+      <div class="col-lg-12"style="padding: 0px;">
+          
+        <div class="card mb-3 hover-shadow-sm" style="border: none;">
+            
+          <div class="card-body text-center invite-card">
+            
+            <h3 class="invite-title">Thiệp mời chụp ảnh</h3>
+            <h2 class="invite-subtitle">Tốt nghiệp</h2>
+
+            <br/>
+            <div class="invite-avatar">
+              <img src="/thiep-moi/uploads/avatars/avt.jpg" alt="avatar" class="avatar" loading="lazy">
+              <img src="/thiep-moi/uploads/icon/icon-mu-tot-nghiep.png" alt="" class="icon-grad-hat" loading="lazy">
+            </div>
+
+            <div class="invite-of">
+              <img class="arrow" src="/thiep-moi/uploads/icon/mui-ten.png" alt="" loading="lazy">
+              <span class="label">của</span>
+            </div>
+
+            <h3 class="invite-name">Nguyễn Trọng Vụ</h3>
+            <p class="invite-badge">12G, THPT Khoái Châu</p>
+
+            <div class="invite-section invite-quote">
+              <img src="/thiep-moi/uploads/icon/mu.png" alt="" class="pin-left" loading="lazy">
+              <div class="center">“Trân trọng mời bạn đến tham dự lễ chụp tốt nghiệp của mình!”</div>
+            </div>
+
+            <br/><br/>
+            <h3 class="section-script invite-title">Thông tin</h3>
+            <h2 class="section-sub">
+              Thời gian & địa điểm              <img src="/thiep-moi/uploads/icon/mu4.png" alt="" class="mu4" loading="lazy">
+            </h2>
+            <div class="invite-info">
+              <div class="invite-image">
+                <div class="img-frame"><img src="/thiep-moi/uploads/avatars/avt.jpg" alt="image" loading="lazy"></div>
+                <img class="cap" src="/thiep-moi/uploads/icon/mu3.png" alt="" loading="lazy">
+              </div>
+            
+              <div class="about-text">
+                <p>Với chúng mình, mỗi ngày đến trường là một cơ hội để cùng nhau viết tiếp những kỷ niệm thật đẹp. 💕</p>
+              </div>
+            </div>
+            <div class="mt-2">
+              <p><b>🕒 Thời gian:</b> Chủ Nhật, ngày 08/02/2026</p>
+
+              <div class="calendar-box">
+                <div class="calendar-header">
+                  <select disabled><option>Tháng 2</option></select>
+                  <select disabled><option>2026</option></select>
+                </div>
+                <div class="calendar-grid">
+                  <div class="weekday">T2</div><div class="weekday">T3</div><div class="weekday">T4</div>
+                  <div class="weekday">T5</div><div class="weekday">T6</div><div class="weekday">T7</div><div class="weekday">CN</div>
+                  <div></div><div></div><div></div><div></div><div></div><div></div><div class=''>1</div><div class=''>2</div><div class=''>3</div><div class=''>4</div><div class=''>5</div><div class=''>6</div><div class=''>7</div><div class='active-day'>8</div><div class=''>9</div><div class=''>10</div><div class=''>11</div><div class=''>12</div><div class=''>13</div><div class=''>14</div><div class=''>15</div><div class=''>16</div><div class=''>17</div><div class=''>18</div><div class=''>19</div><div class=''>20</div><div class=''>21</div><div class=''>22</div><div class=''>23</div><div class=''>24</div><div class=''>25</div><div class=''>26</div><div class=''>27</div><div class=''>28</div>                </div>
+              </div>
+
+              <p><b>▶ Địa chỉ:</b> Sân trường THPT Khoái Châu CS2</p>
+              <a href="https://maps.app.goo.gl/ApMqyfxZySm9fbjZ7" target="_blank" class="invite-button" rel="noopener">XEM CHỈ ĐƯỜNG</a>
+            </div>
+
+             <div class="mt-2">
+              <div class="contact-info mt-3">
+                                  <p><b>Hotline:</b> <a href="tel:0963 462 167">0963 462 167</a></p>
+                            
+                                  <p><b>Facebook:</b>
+                                          <a href="https://www.facebook.com/htch.9999/" target="_blank" rel="noopener">セシリア</a>
+                                      </p>
+                              </div>
+            </div>
+            
+            <h3 class="section-script mt-40 invite-title">Một số ảnh về</h3>
+            <h2 class="section-sub">Quá trình học tập</h2>
+
+                          <div class="gallery">
+                <div class="gallery-main">
+                  <img src="/thiep-moi/uploads/avatars/anh_1.jpg" alt="" loading="lazy">
+                </div>
+                <div class="gallery-row">
+                  <div class="gallery-side-large">
+                    <img src="/thiep-moi/uploads/avatars/anh_2.jpg" alt="" loading="lazy">
+                  </div>
+                  <div class="gallery-col">
+                    <div class="gallery-thumb">
+                      <img src="/thiep-moi/uploads/avatars/anh_3.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="gallery-thumb">
+                      <img src="/thiep-moi/uploads/avatars/anh_4.jpg" alt="" loading="lazy">
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        
+              <h3 class="section-script mt-40 invite-title">Xác nhận tham dự</h3>
+              <h2 class="section-sub">&amp; lời chúc</h2>
+
+              <form id="rsvp-form" class="invite-form" accept-charset="UTF-8">
+                <input type="hidden" name="csrf" value="">
+                <input type="hidden" name="invite_id" value="5632">
+                <input type="text" name="name" placeholder="Tên của bạn là gì?" required><hr>
+                <input type="text" name="relation" placeholder="Bạn là ai của chủ thiệp? (bạn bè, chị em,..)"><hr>
+                
+                <select name="join" id="join" required aria-label="Bạn có tham dự không?">
+                  <option value="">-- Bạn có tham dự không? --</option>
+                  <option value="yes"> Có, mình sẽ đến</option>
+                  <option value="no"> Không thể tham dự</option>
+                  <option value="maybe"> Có thể</option>
+                </select><hr>
+                
+                <textarea name="message" rows="4" placeholder="Gửi lời chúc của bạn đến chủ thiệp..." required></textarea><hr>
+                
+                <button type="submit">GỬI LỜI CHÚC</button>
+                <div id="rsvp-alert" class="mt-2" style="display:none"></div>
+              </form>
+
+              <!-- Hiển thị lời chúc -->
+              <div class="mt-40">
+                <h3 class="section-script invite-title">Lời chúc từ bạn bè</h3>
+                <h2 class="section-sub">Cảm ơn mọi người đã gửi lời chúc</h2>
+                <div id="wishes-container" class="wishes-container">
+                  <div class="wishes-loading">Đang tải lời chúc...</div>
+                </div>
+              </div>
+            
+            <div class="center mt-30">
+              <img src="/thiep-moi/uploads/icon/thank-you.png" alt="" width="230" loading="lazy">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+window.addEventListener("load", function() {
+    const doors = document.querySelector(".door-wrap");
+    setTimeout(() => {
+        doors.classList.add("open");
+        setTimeout(() => {
+            doors.style.display = "none";
+        }, 2800);
+    }, 500);
+});
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzc7vLGfCNkKppJyp7-UrvwMVVMUHx-E6bMgg5340hldNVfSJx65IxMj2AwNMxch-YwkA/exec';
+let wishesCache = []; // Cache để tăng tốc
+
+// Đợi DOM load xong
+window.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, initializing...');
+  loadWishes();
+  
+  // Xử lý submit form
+  const form = document.getElementById('rsvp-form');
+  if (form) {
+    form.addEventListener('submit', handleSubmit);
+  }
+  
+  // Auto-refresh mỗi 30 giây
+  setInterval(() => {
+    loadWishes(true); // true = silent reload
+  }, 30000);
+});
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  
+  const formData = {
+    name: this.name.value,
+    relation: this.relation.value || 'Bạn bè',
+    join: this.join.value,
+    message: this.message.value
+  };
+  
+  const submitBtn = this.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  const originalBg = submitBtn.style.background;
+  const originalColor = submitBtn.style.color;
+  
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Đang gửi...';
+  submitBtn.style.background = '#ffc107';
+  submitBtn.style.color = '#000';
+  
+  try {
+    const response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+      body: JSON.stringify(formData)
+    });
+    
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      // Thêm lời chúc mới vào đầu danh sách ngay lập tức
+      if (result.newWish) {
+        wishesCache.unshift(result.newWish);
+        displayWishes();
+      }
+      
+      // Hiệu ứng thành công trên nút
+      submitBtn.style.background = '#28a745';
+      submitBtn.style.color = '#fff';
+      submitBtn.innerHTML = '✓ Gửi thành công!';
+      
+      this.reset();
+      
+      // Reset nút sau 3 giây
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        submitBtn.style.background = originalBg;
+        submitBtn.style.color = originalColor;
+      }, 3000);
+      
+      // Reload toàn bộ sau 2s để đảm bảo đồng bộ
+      setTimeout(() => {
+        loadWishes(true);
+      }, 2000);
+    } else {
+      throw new Error('Submit failed');
+    }
+    
+  } catch (error) {
+    console.error('Submit error:', error);
+    
+    // Fallback: Thêm optimistic update
+    wishesCache.unshift({
+      name: formData.name,
+      relation: formData.relation,
+      join: formData.join,
+      message: formData.message,
+      timestamp: new Date()
+    });
+    displayWishes();
+    
+    // Hiệu ứng thành công (optimistic)
+    submitBtn.style.background = '#28a745';
+    submitBtn.style.color = '#fff';
+    submitBtn.innerHTML = '✓ Gửi thành công!';
+    
+    this.reset();
+    
+    // Reset nút sau 3 giây
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      submitBtn.style.background = originalBg;
+      submitBtn.style.color = originalColor;
+    }, 3000);
+    
+    // Reload sau 3s
+    setTimeout(() => {
+      loadWishes(true);
+    }, 3000);
+  }
+}
+
+function showAlert(type, message) {
+  // Giữ lại function này cho trường hợp cần dùng
+  const alert = document.getElementById('rsvp-alert');
+  if (!alert) return;
+  
+  alert.style.padding = '12px 20px';
+  alert.style.borderRadius = '8px';
+  alert.style.marginTop = '15px';
+  alert.style.fontWeight = '500';
+  
+  if (type === 'success') {
+    alert.style.background = '#d4edda';
+    alert.style.color = '#155724';
+    alert.style.border = '1px solid #c3e6cb';
+  } else {
+    alert.style.background = '#f8d7da';
+    alert.style.color = '#721c24';
+    alert.style.border = '1px solid #f5c6cb';
+  }
+  
+  alert.textContent = message;
+  alert.style.display = 'block';
+  
+  setTimeout(() => {
+    alert.style.display = 'none';
+  }, 5000);
+}
+
+async function loadWishes(silent = false) {
+  const container = document.getElementById('wishes-container');
+  
+  if (!container) {
+    console.error('Container not found');
+    return;
+  }
+  
+  if (!silent) {
+    container.innerHTML = '<div class="wishes-loading">Đang tải lời chúc...</div>';
+  }
+  
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+    
+    const response = await fetch(SCRIPT_URL + '?_=' + Date.now(), {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      wishesCache = result.data || [];
+      displayWishes();
+    } else {
+      if (!silent) {
+        container.innerHTML = '<div class="wishes-empty">Lỗi: ' + (result.message || 'Unknown error') + '</div>';
+      }
+    }
+  } catch (error) {
+    console.error('Load error:', error);
+    if (!silent) {
+      if (wishesCache.length > 0) {
+        // Hiển thị cache nếu có
+        displayWishes();
+      } else {
+        container.innerHTML = '<div class="wishes-empty">Không thể tải lời chúc. Đang thử lại...</div>';
+        // Retry sau 3s
+        setTimeout(() => loadWishes(), 3000);
+      }
+    }
+  }
+}
+
+function displayWishes() {
+  const container = document.getElementById('wishes-container');
+  if (!container) return;
+  
+  if (wishesCache.length > 0) {
+    container.innerHTML = wishesCache.map(wish => createWishCard(wish)).join('');
+  } else {
+    container.innerHTML = '<div class="wishes-empty">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! 💝</div>';
+  }
+}
+
+function createWishCard(wish) {
+  const statusText = {
+    'yes': 'Sẽ tham dự',
+    'no': 'Không thể đến',
+    'maybe': 'Có thể'
+  };
+  
+  return `
+    <div class="wish-card">
+      <div class="wish-header">
+        <h4 class="wish-name">${escapeHtml(wish.name)}</h4>
+        <span class="wish-status ${wish.join}">${statusText[wish.join] || wish.join}</span>
+      </div>
+      ${wish.relation ? `<div class="wish-relation">${escapeHtml(wish.relation)}</div>` : ''}
+      <div class="wish-message">${escapeHtml(wish.message)}</div>
+    </div>
+  `;
+}
+
+function escapeHtml(text) {
+  if (!text) return '';
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return String(text).replace(/[&<>"']/g, m => map[m]);
+}
+</script>
+</html>
