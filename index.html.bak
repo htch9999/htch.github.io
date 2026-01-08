@@ -5,21 +5,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <!-- /// META TIÊU ĐỀ & MÔ TẢ /// -->
-        <title>Loif .Ch | Profile Sci-Fi: Nhạc (MP3 &amp;YouTube), To-Do &amp;Anime</title>
-        <meta name="description" content="Profile cá nhân độc đáo của HTCH: Nghe nhạc MP3/YouTube, quản lý To-Do list hẹn giờ và khám phá thế giới Anime.">
-        <meta name="author" content="htch9999 - Loif.Ch">
-        <!-- /// META TỪ KHÓA SEO /// -->
-        <meta name="keywords" content="HTCH, Profile cá nhân, Porfolio, Web Developer, Phát nhạc YouTube, YouTube Player API, Music Player, Audio Player, Autoplay music, Real-time Clock, To-Do List, Quản lý công việc, Notification API, Anime Search, Tìm kiếm Anime, Xem Anime Online, Sci-fi profile">
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-        <meta name="googlebot" content="index, follow">
-        <!-- /// META CANONICAL URL /// -->
+        <title>🌷 Loif Chan (htch9999) | Profile</title>
+        <meta name="description" content="🌷">
+        <meta name="author" content="htch9999 - Loif-Chan">
+
         <link rel="canonical" href="https://htch9999.github.io/">
-        <!-- !! Quan trọng: Thay bằng URL chính thức của bạn !! -->
-        <!-- /// META ICON (FAVICON) /// -->
+
         <link rel="icon" href="https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg" type="image/jpeg">
         <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg">
         <!-- /// META OPEN GRAPH /// -->
-        <meta property="og:title" content="HTCH - Profile Sci-Fi: Nhạc MP3/YouTube, To-Do & Tìm Anime">
+        <meta property="og:title" content="HTCH - Profile">
         <meta property="og:description" content="Khám phá profile HTCH: Playlist nhạc MP3 và YouTube tự động, To-Do list hẹn giờ và công cụ tìm kiếm, xem anime tiện lợi.">
         <meta property="og:type" content="profile">
         <meta property="og:url" content="https://htch9999.github.io/">
@@ -30,8 +25,8 @@
         <meta property="profile:username" content="htch9999">
         <!-- /// META TWITTER CARD /// -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="HTCH - Profile: Nhạc (MP3/YouTube), To-Do & Anime">
-        <meta name="twitter:description" content="Kết nối HTCH! Nghe nhạc MP3/YouTube, quản lý công việc, tìm và xem anime yêu thích ngay trên profile độc đáo này.">
+        <meta name="twitter:title" content="HTCH - Profile">
+        <meta name="twitter:description" content="Kết nối với HTCH! Nghe nhạc MP3/YouTube, quản lý công việc, tìm và xem anime yêu thích ngay trên profile độc đáo này.">
         <meta name="twitter:image" content="https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg">
         <meta name="twitter:site" content="@htch9999">
         <!-- Thay nếu có -->
@@ -55,32 +50,65 @@
             }
 
             :root {
-                --color-bg-dark: #0a0a0a;
+                /* === DARK MODE PALETTE === */
+                --color-bg-dark: #0d0d1a;
+                --color-bg-secondary: #1a1a2e;
+                --color-bg-tertiary: #16213e;
+                
+                /* Primary Colors - Neon Lime Green */
                 --color-primary: #aeff62;
-                --color-secondary: #c2ff88;
-                --color-accent: #d0f871;
-                --color-text-primary: #f1f1f1;
-                --color-text-secondary: #a1a1a1;
-                --color-primary-rgb: 225, 29, 72;
-                /* Will be set by JS */
+                --color-primary-rgb: 174, 255, 98;
+                --color-primary-light: #c2ff88;
+                --color-primary-glow: rgba(174, 255, 98, 0.3);
+                
+                /* Accent Colors */
+                --color-secondary: #00ffff;
+                --color-accent: #ff006e;
+                --color-accent-secondary: #8338ec;
+                
+                /* Text Colors */
+                --color-text-primary: #f5f5f7;
+                --color-text-secondary: #a8a8b3;
+                --color-text-tertiary: #7e7e8e;
+                
+                /* Glass Effect Variables */
+                --glass-blur: 25px;
+                --glass-opacity-primary: 0.15;
+                --glass-opacity-secondary: 0.08;
+                --glass-border-color: rgba(174, 255, 98, 0.25);
+                
+                /* Glitch Colors */
                 --color-glitch-1: #00ffff;
-                --color-glitch-2: #ff00ff;
+                --color-glitch-2: #ff006e;
+                
+                /* Typography */
                 --font-primary: 'Inter', sans-serif;
                 --font-secondary: 'Orbitron', sans-serif;
+                
+                /* Grid & Layout */
                 --grid-size: 30px;
-                --grid-line-color: rgba(var(--color-primary-rgb), 0.08);
+                --grid-line-color: rgba(174, 255, 98, 0.06);
                 --grid-line-width: 1px;
-                --transition-speed-fast: 0.2s;
-                --transition-speed-normal: 0.4s;
-                --border-radius-sm: 4px;
-                --border-radius-md: 8px;
-                --border-radius-lg: 16px;
-                --border-radius-circle: 50%;
+                
+                /* Spacing Scale */
                 --space-xxs: 0.25rem;
                 --space-xs: 0.5rem;
                 --space-sm: 0.85rem;
                 --space-md: 1.25rem;
                 --space-lg: 2rem;
+                --space-xl: 2.5rem;
+                
+                /* Border Radius */
+                --border-radius-sm: 6px;
+                --border-radius-md: 12px;
+                --border-radius-lg: 20px;
+                --border-radius-xl: 28px;
+                --border-radius-circle: 50%;
+                
+                /* Transitions */
+                --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+                --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             html {
@@ -93,10 +121,10 @@
                 color: var(--color-text-primary);
                 background-color: var(--color-bg-dark);
                 /* Thay URL_HINH_CUA_BAN bằng link hình/GIF của bạn */
-                background-image: url('https://raw.githubusercontent.com/htch9999/htch.github.io/main/assets/bg.webp');
+                background-image: url('https://raw.githubusercontent.com/htch9999/htch.github.io/main/assets/bg.jpeg');
                 background-size: cover;
                 background-position: center;
-                background-attachment: fixed;
+                background-attachment: scroll;
                 background-repeat: no-repeat;
                 min-height: 100vh;
                 display: flex;
@@ -132,21 +160,133 @@
                 }
             }
 
-            /* === MAIN CONTAINER === */
+            /* === MAIN CONTAINER - COMPLETE GLASSMORPHISM REDESIGN === */
             #container {
-                background-color: rgba(16, 16, 16, 0.411);
-                backdrop-filter: blur(12px) saturate(180%);
-                -webkit-backdrop-filter: blur(12px) saturate(180%);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: var(--border-radius-lg);
-                padding: var(--space-md);
-                width: 80%;
+                /* Multi-layer gradient background */
+                background: linear-gradient(135deg, 
+                    rgba(13, 13, 26, 0.6) 0%,
+                    rgba(26, 26, 46, 0.4) 50%,
+                    rgba(13, 13, 26, 0.5) 100%);
+                
+                /* Enhanced glass effect */
+                backdrop-filter: blur(var(--glass-blur)) saturate(180%) brightness(0.95);
+                -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%) brightness(0.95);
+                
+                /* Premium border with glow */
+                border: 1px solid var(--glass-border-color);
+                border-radius: var(--border-radius-xl);
+                padding: var(--space-lg);
+                
+                /* Size & layout */
+                width: 110%;
+                max-width: 1600px;
                 height: auto;
-                /* Chiều cao = 70% chiều rộng */
+                margin: auto;
                 text-align: center;
-                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(var(--color-primary-rgb), 0.15);
+                
+                /* Multi-layer shadow for depth */
+                box-shadow: 
+                    0 20px 60px rgba(0, 0, 0, 0.7),
+                    0 0 60px rgba(174, 255, 98, 0.1),
+                    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+                
+                /* Positioning & effects */
                 position: relative;
                 overflow: hidden;
+                transform-style: preserve-3d;
+                opacity: 0;
+                transform: translateY(30px);
+                display: flex;
+                flex-direction: row;
+                gap: 0;
+                
+                /* Smooth transitions */
+                transition: all var(--transition-normal) ease;
+            }
+
+            /* Animated background glow effect */
+            #container::before {
+                content: '';
+                position: absolute;
+                inset: -1px;
+                background: radial-gradient(circle at 30% 30%, 
+                    rgba(174, 255, 98, 0.15) 0%,
+                    transparent 50%);
+                border-radius: var(--border-radius-xl);
+                opacity: 0;
+                animation: glowPulse 4s ease-in-out infinite;
+                pointer-events: none;
+                z-index: -1;
+            }
+
+            @keyframes glowPulse {
+                0%, 100% { opacity: 0; }
+                50% { opacity: 1; }
+            }
+
+            /* === COMPONENT ANIMATIONS === */
+            @keyframes fadeInSlideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes fadeInScale {
+                from {
+                    opacity: 0;
+                    transform: scale(0.95);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes pulseGlow {
+                0%, 100% {
+                    box-shadow: 0 0 10px rgba(174, 255, 98, 0.3);
+                }
+                50% {
+                    box-shadow: 0 0 20px rgba(174, 255, 98, 0.5);
+                }
+            }
+
+            #container:hover {
+                border-color: rgba(174, 255, 98, 0.4);
+                box-shadow: 
+                    0 25px 70px rgba(0, 0, 0, 0.8),
+                    0 0 80px rgba(174, 255, 98, 0.15),
+                    inset 0 1px 2px rgba(255, 255, 255, 0.25),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+            
                 transform-style: preserve-3d;
                 opacity: 0;
                 transform: translateY(20px);
@@ -158,27 +298,61 @@
             .left-column, .right-column {
                 display: flex;
                 flex-direction: column;
-                gap: var(--space-sm);
-                text-align: center; /* Maintain center alignment */
+                gap: var(--space-md);
+                text-align: center;
             }
 
             .left-column {
-                flex: 1;
-                padding-right: var(--space-md);
-                border-right: 1px solid rgba(var(--color-primary-rgb), 0.15);
+                flex: 0 0 400px;
+                padding-right: var(--space-lg);
+                border-right: 1px solid rgba(174, 255, 98, 0.15);
+                background: linear-gradient(180deg, 
+                    rgba(174, 255, 98, 0.05) 0%, 
+                    transparent 100%);
+                border-radius: var(--border-radius-lg);
+                padding: var(--space-md);
+                transition: all var(--transition-normal) ease;
+            }
+
+            .left-column:hover {
+                background: linear-gradient(180deg, 
+                    rgba(174, 255, 98, 0.08) 0%, 
+                    transparent 100%);
+                border-color: rgba(174, 255, 98, 0.25);
             }
 
             .right-column {
-                flex: 2;
-                padding-left: var(--space-md);
+                flex: 1;
+                padding-left: var(--space-lg);
+                background: linear-gradient(180deg, 
+                    rgba(51, 136, 204, 0.03) 0%, 
+                    transparent 100%);
+                border-radius: var(--border-radius-lg);
+                padding: var(--space-md);
+                transition: all var(--transition-normal) ease;
             }
 
-            /* === TABS STYLES === */
+            .right-column:hover {
+                background: linear-gradient(180deg, 
+                    rgba(51, 136, 204, 0.06) 0%, 
+                    transparent 100%);
+            }
+
+            /* === TABS STYLES - PREMIUM GLASSMORPHISM === */
             .tabs-nav {
                 display: flex;
                 gap: var(--space-xs);
-                border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.1);
-                margin-bottom: var(--space-sm);
+                border-bottom: 2px solid rgba(174, 255, 98, 0.15);
+                margin-bottom: var(--space-md);
+                background: linear-gradient(90deg, 
+                    rgba(174, 255, 98, 0.08) 0%, 
+                    transparent 100%);
+                padding: var(--space-sm) var(--space-md);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-radius: var(--border-radius-lg);
+                transition: all var(--transition-normal) ease;
+                animation: fadeInSlideUp 0.6s ease-out;
             }
 
             .tab-link {
@@ -186,23 +360,32 @@
                 border: none;
                 color: var(--color-text-secondary);
                 font-family: var(--font-secondary);
-                font-size: 0.9rem;
-                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.95rem;
+                font-weight: 500;
+                padding: var(--space-xs) var(--space-md);
                 cursor: pointer;
-                transition: all 0.2s ease-in-out;
-                border-bottom: 2px solid transparent;
+                transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+                border-bottom: 3px solid transparent;
+                border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
                 position: relative;
-                top: 1px;
+                top: 2px;
+                letter-spacing: 0.5px;
+                animation: fadeInSlideUp 0.5s ease-out backwards;
             }
 
             .tab-link:hover {
-                color: var(--color-secondary);
+                color: var(--color-primary);
+                background: rgba(174, 255, 98, 0.08);
+                border-radius: var(--border-radius-sm);
+                transform: translateY(-2px);
             }
 
             .tab-link.active {
                 color: var(--color-primary);
                 border-bottom-color: var(--color-primary);
-                text-shadow: 0 0 4px rgba(var(--color-primary-rgb), 0.3);
+                text-shadow: 0 0 15px rgba(174, 255, 98, 0.6);
+                background: rgba(174, 255, 98, 0.12);
+                box-shadow: 0 -2px 15px rgba(174, 255, 98, 0.15);
             }
 
             .tab-content {
@@ -253,6 +436,135 @@
                 animation: rotateGlow 5s linear infinite;
                 opacity: 0.7;
             }
+
+.profile-heart-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    z-index: 2;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.profile-heart-badge::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+    z-index: -1;
+    opacity: 0.3;
+    clip-path: polygon(
+        50% 10%,
+        61% 3%,
+        73% 0%,
+        84% 3%,
+        92% 10%,
+        97% 20%,
+        99% 32%,
+        97% 44%,
+        91% 55%,
+        83% 65%,
+        73% 75%,
+        61% 85%,
+        50% 95%,
+        39% 85%,
+        27% 75%,
+        17% 65%,
+        9% 55%,
+        3% 44%,
+        1% 32%,
+        3% 20%,
+        8% 10%,
+        16% 3%,
+        27% 0%,
+        39% 3%
+    );
+    filter: blur(8px);
+}
+
+.profile-heart-badge::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 165, 0, 0.3) 100%);
+    border: 3.5px solid #FFD700;
+    box-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.7),
+        0 2px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    z-index: -1;
+    clip-path: polygon(
+        50% 10%,
+        61% 3%,
+        73% 0%,
+        84% 3%,
+        92% 10%,
+        97% 20%,
+        99% 32%,
+        97% 44%,
+        91% 55%,
+        83% 65%,
+        73% 75%,
+        61% 85%,
+        50% 95%,
+        39% 85%,
+        27% 75%,
+        17% 65%,
+        9% 55%,
+        3% 44%,
+        1% 32%,
+        3% 20%,
+        8% 10%,
+        16% 3%,
+        27% 0%,
+        39% 3%
+    );
+}
+
+.profile-heart-badge img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    animation: heartBeat 2.5s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.profile-heart-badge:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.profile-heart-badge:hover::before {
+    filter: blur(12px);
+    opacity: 0.5;
+}
+
+.profile-heart-badge:hover::after {
+    border-width: 3px;
+    box-shadow: 
+        0 0 30px rgba(255, 215, 0, 1),
+        0 4px 15px rgba(0, 0, 0, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.6);
+}
+
+.profile-heart-badge:hover img {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) 
+           drop-shadow(0 0 15px rgba(200, 150, 255, 0.6));
+    animation: heartBeatFast 0.8s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(1.08); }
+    20%, 40% { transform: scale(1); }
+}
+
+@keyframes heartBeatFast {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
 
             @keyframes rotateGlow {
                 from {
@@ -374,14 +686,214 @@
                 color: var(--color-accent);
             }
 
-
-            /* === TO-DO LIST STYLES === */
-            #todo-section {
+            /* === INFO WIDGET SECTION === */
+            #info-widget-section {
+                margin-top: var(--space-sm);
                 border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
                 padding-top: var(--space-sm);
                 opacity: 0;
+                transform: translateY(10px);
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+
+            .info-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: var(--space-xs);
+            }
+
+            .info-card {
+                background: linear-gradient(145deg, 
+                    rgba(174, 255, 98, 0.12) 0%,
+                    rgba(51, 136, 204, 0.06) 50%,
+                    rgba(174, 255, 98, 0.04) 100%);
+                border: 1.5px solid rgba(174, 255, 98, 0.3);
+                border-radius: var(--border-radius-lg);
+                padding: var(--space-md);
+                transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(20px) saturate(150%);
+                -webkit-backdrop-filter: blur(20px) saturate(150%);
+                box-shadow: 
+                    0 8px 24px rgba(0, 0, 0, 0.25),
+                    0 0 25px rgba(174, 255, 98, 0.12),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+                animation: fadeInScale 0.6s ease-out backwards;
+            }
+
+            /* Compact info card - 2 rows layout */
+            .info-card.compact-info {
+                padding: var(--space-sm) var(--space-md);
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-xs);
+                width: 120%;
+                left: -10%;
+            }
+
+            .info-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                gap: var(--space-sm);
+                width: 100%;
+            }
+
+            .info-item {
+                display: flex;
+                align-items: center;
+                gap: var(--space-xs);
+                flex: 1;
+                text-align: center;
+                justify-content: center;
+                min-width: 0;
+            }
+
+            .info-icon {
+                font-size: 1.4rem;
+                color: var(--color-primary);
+                flex-shrink: 0;
+            }
+
+            .info-value {
+                font-size: 0.85rem;
+                color: var(--color-text-primary);
+                font-weight: 600;
+                font-family: var(--font-primary);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .info-separator {
+                width: 1.5px;
+                height: 24px;
+                background: linear-gradient(180deg, 
+                    transparent 0%,
+                    rgba(174, 255, 98, 0.3) 50%,
+                    transparent 100%);
+                flex-shrink: 0;
+            }
+
+            .info-row-separator {
+                width: 100%;
+                height: 1px;
+                background: linear-gradient(90deg, 
+                    transparent 0%,
+                    rgba(174, 255, 98, 0.3) 50%,
+                    transparent 100%);
+            }
+
+            .info-card::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 100% 0%, 
+                    rgba(51, 136, 204, 0.1) 0%,
+                    transparent 70%);
+                opacity: 0;
+                transition: opacity var(--transition-fast) ease;
+                pointer-events: none;
+            }
+
+.info-card:hover {
+    background: linear-gradient(145deg, 
+        rgba(174, 255, 98, 0.18) 0%,
+        rgba(51, 136, 204, 0.1) 50%,
+        rgba(174, 255, 98, 0.08) 100%);
+    border-color: rgba(174, 255, 98, 0.45);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        0 0 35px rgba(174, 255, 98, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+            .info-card:hover .info-icon {
+                text-shadow: 0 0 10px rgba(174, 255, 98, 0.5);
+            }
+
+            .info-card:hover .info-value {
+                color: var(--color-primary);
+            }
+
+            .info-card:hover::before {
+                opacity: 1;
+            }
+
+            /* Old card styling - keeping for compatibility if needed */
+            .card-icon {
+                display: none;
+            }
+
+            .card-content {
+                display: none;
+            }
+
+            .card-label {
+                display: none;
+            }
+
+            .card-value {
+                display: none;
+            }
+
+            /* Card-specific styling - deprecated */
+            .location-card .card-icon {
+                display: none;
+            }
+
+            .weather-card .card-icon {
+                color: var(--color-accent);
+            }
+
+            .date-card .card-icon {
+                color: var(--color-primary);
+            }
+
+            /* Light mode adjustments */
+            body.light-mode .info-card {
+                background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(var(--color-primary-rgb), 0.05) 100%);
+                border-color: rgba(var(--color-primary-rgb), 0.2);
+            }
+
+            body.light-mode .info-card:hover {
+                background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.15) 0%, rgba(var(--color-primary-rgb), 0.08) 100%);
+                border-color: rgba(var(--color-primary-rgb), 0.3);
+            }
+
+            body.light-mode .card-icon {
+                background-color: rgba(var(--color-primary-rgb), 0.12);
+            }
+
+            body.light-mode .card-label {
+                color: var(--color-text-secondary);
+            }
+
+            /* === TO-DO LIST STYLES - PREMIUM GLASS === */
+            #todo-section {
+                border-top: 1px solid rgba(174, 255, 98, 0.2);
+                border-radius: var(--border-radius-lg);
+                padding: var(--space-md);
+                opacity: 0;
                 transform: translateY(20px);
-                /* Animation */
+                background: linear-gradient(180deg, 
+                    rgba(174, 255, 98, 0.08) 0%,
+                    rgba(51, 136, 204, 0.04) 100%);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                transition: all var(--transition-normal) ease;
+            }
+
+            #todo-section:hover {
+                background: linear-gradient(180deg, 
+                    rgba(174, 255, 98, 0.12) 0%,
+                    rgba(51, 136, 204, 0.06) 100%);
+                border-color: rgba(174, 255, 98, 0.3);
             }
 
             .sci-fi-heading {
@@ -409,14 +921,30 @@
 
             #todo-form input[type="text"], #todo-form input[type="time"] {
                 flex-grow: 1;
-                padding: var(--space-xs) var(--space-sm);
-                background-color: rgba(var(--color-primary-rgb), 0.05);
-                border: 1px solid rgba(var(--color-primary-rgb), 0.25);
-                border-radius: var(--border-radius-sm);
+                padding: var(--space-sm) var(--space-md);
+                background: rgba(174, 255, 98, 0.08);
+                border: 1.5px solid rgba(174, 255, 98, 0.25);
+                border-radius: var(--border-radius-md);
                 color: var(--color-text-primary);
                 font-family: var(--font-primary);
-                font-size: 0.85rem;
+                font-size: 0.9rem;
                 min-width: 100px;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                transition: all var(--transition-fast) ease;
+            }
+
+            #todo-form input[type="text"]:focus, #todo-form input[type="time"]:focus {
+                background: rgba(174, 255, 98, 0.12);
+                border-color: rgba(174, 255, 98, 0.45);
+                box-shadow: 0 0 20px rgba(174, 255, 98, 0.25),
+                            inset 0 0 4px rgba(174, 255, 98, 0.1);
+                outline: none;
+            }
+
+            #todo-form input::placeholder {
+                color: var(--color-text-tertiary);
+                opacity: 0.7;
             }
 
             #todo-form input[type="time"] {
@@ -444,32 +972,51 @@
             }
 
             #add-todo-btn, #request-permission-btn {
-                padding: var(--space-xs) var(--space-sm);
-                background-color: rgba(var(--color-primary-rgb), 0.2);
-                border: 1px solid var(--color-primary);
+                padding: var(--space-sm) var(--space-md);
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.25) 0%,
+                    rgba(51, 136, 204, 0.15) 100%);
+                border: 1.5px solid var(--color-primary);
                 color: var(--color-primary);
                 font-family: var(--font-secondary);
-                font-weight: 500;
-                font-size: 0.9rem;
-                border-radius: var(--border-radius-sm);
+                font-weight: 600;
+                font-size: 0.95rem;
+                border-radius: var(--border-radius-md);
                 cursor: pointer;
-                transition: all var(--transition-speed-fast) ease;
+                transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                gap: var(--space-xxs);
-                align-self: flex-start;
-                height: 36px;
-            }
-
-            #add-todo-btn ion-icon {
-                font-size: 1.1em;
+                gap: var(--space-xs);
+                height: 42px;
+                min-width: 100px;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 
+                    0 6px 15px rgba(0, 0, 0, 0.25),
+                    0 0 20px rgba(174, 255, 98, 0.1),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+                letter-spacing: 0.5px;
+                animation: fadeInScale 0.5s ease-out backwards;
             }
 
             #add-todo-btn:hover, #request-permission-btn:hover {
-                background-color: var(--color-primary);
-                color: var(--color-bg-dark);
-                box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.4);
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.35) 0%,
+                    rgba(51, 136, 204, 0.25) 100%);
+                color: #000;
+                border-color: var(--color-primary-light);
+                box-shadow: 
+                    0 10px 30px rgba(174, 255, 98, 0.3),
+                    0 0 40px rgba(174, 255, 98, 0.2),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+                transform: translateY(-3px);
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+                /* Loại bỏ dòng animation: pulseGlow 1.5s ease-in-out; */
+            }
+
+            #add-todo-btn:active {
+                transform: translateY(-1px);
             }
 
             #request-permission-btn {
@@ -503,22 +1050,42 @@
             }
 
             #todo-list li {
-                background-color: rgba(255, 255, 255, 0.02);
-                border-left: 3px solid var(--color-primary);
-                padding: var(--space-xs) var(--space-sm);
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.12) 0%,
+                    rgba(51, 136, 204, 0.08) 100%);
+                border-left: 4px solid var(--color-primary);
+                border: 1px solid rgba(174, 255, 98, 0.2);
+                border-left: 4px solid var(--color-primary);
+                padding: var(--space-sm) var(--space-md);
                 margin-bottom: var(--space-xs);
-                border-radius: var(--border-radius-sm);
+                border-radius: var(--border-radius-md);
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                gap: var(--space-sm);
-                /*opacity: 0; transform: translateX(-10px);  Animation managed by JS now */
-                transition: background-color var(--transition-speed-fast), opacity 0.3s ease, transform 0.3s ease, border-left-color var(--transition-speed-fast);
+                gap: var(--space-md);
+                transition: all var(--transition-normal) cubic-bezier(0.34, 1.56, 0.64, 1);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                box-shadow: 
+                    0 4px 12px rgba(0, 0, 0, 0.15),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            }
+
+            #todo-list li:hover {
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.18) 0%,
+                    rgba(51, 136, 204, 0.12) 100%);
+                border-color: rgba(174, 255, 98, 0.35);
+                border-left-color: var(--color-primary);
+                box-shadow: 
+                    0 6px 20px rgba(174, 255, 98, 0.1),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+                transform: translateX(4px);
             }
 
             #todo-list li.completed {
                 border-left-color: var(--color-text-secondary);
-                opacity: 0.5;
+                opacity: 0.6;
             }
 
             #todo-list li.completed .todo-text {
@@ -595,21 +1162,41 @@
                 color: #4caf50;
             }
 
-            /* === AUDIO PLAYER === */
+            /* === AUDIO PLAYER - PREMIUM GLASS EFFECT === */
             #audio-player {
-                background-color: rgba(var(--color-primary-rgb), 0.05);
-                border: 1px solid rgba(var(--color-primary-rgb), 0.2);
-                border-radius: var(--border-radius-md);
-                padding: var(--space-sm);
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.12) 0%,
+                    rgba(51, 136, 204, 0.06) 50%,
+                    rgba(174, 255, 98, 0.05) 100%);
+                border: 1.5px solid rgba(174, 255, 98, 0.3);
+                border-radius: var(--border-radius-lg);
+                padding: var(--space-md);
                 opacity: 0;
-                transform: translateY(10px);
-                /* Animation */
-                box-shadow: inset 0 1px 5px rgba(var(--color-primary-rgb), 0.1);
+                transform: translateY(20px);
+                backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+                -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+                box-shadow: 
+                    0 8px 32px rgba(0, 0, 0, 0.3),
+                    0 0 30px rgba(174, 255, 98, 0.1),
+                    inset 0 1px 2px rgba(255, 255, 255, 0.15);
                 display: flex;
                 flex-direction: column;
-                gap: var(--space-sm);
+                gap: var(--space-md);
                 position: relative;
-                /* Added */
+                transition: all var(--transition-normal) ease;
+            }
+
+            #audio-player:hover {
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.15) 0%,
+                    rgba(51, 136, 204, 0.08) 50%,
+                    rgba(174, 255, 98, 0.08) 100%);
+                border-color: rgba(174, 255, 98, 0.45);
+                box-shadow: 
+                    0 12px 48px rgba(0, 0, 0, 0.4),
+                    0 0 50px rgba(174, 255, 98, 0.15),
+                    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
             }
 
             #audio-player .track-info {
@@ -693,7 +1280,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: color var(--transition-speed-fast) ease, transform var(--transition-speed-fast) ease, background-color var(--transition-speed-fast) ease;
+                transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
                 line-height: 1;
                 border-radius: var(--border-radius-circle);
             }
@@ -757,32 +1344,38 @@
 
             #search-wrapper {
                 display: flex;
-                gap: var(--space-xs);
+                gap: var(--space-sm);
                 position: relative;
             }
 
             #anime-search-input {
                 flex-grow: 1;
-                padding: var(--space-xs) var(--space-sm);
-                padding-right: 40px;
-                background-color: rgba(var(--color-primary-rgb), 0.05);
-                border: 1px solid rgba(var(--color-primary-rgb), 0.25);
-                border-radius: var(--border-radius-sm);
+                padding: var(--space-sm) var(--space-md);
+                padding-right: 45px;
+                background: rgba(174, 255, 98, 0.1);
+                border: 1.5px solid rgba(174, 255, 98, 0.3);
+                border-radius: var(--border-radius-md);
                 color: var(--color-text-primary);
                 font-family: var(--font-primary);
-                font-size: 0.9rem;
-                transition: border-color var(--transition-speed-fast), box-shadow var(--transition-speed-fast);
+                font-size: 0.95rem;
+                transition: all var(--transition-fast) ease;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                animation: fadeInSlideUp 0.5s ease-out;
             }
 
             #anime-search-input:focus {
                 outline: none;
                 border-color: var(--color-primary);
-                box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.3);
+                background: rgba(174, 255, 98, 0.15);
+                box-shadow: 0 0 25px rgba(174, 255, 98, 0.35),
+                            inset 0 0 4px rgba(174, 255, 98, 0.1);
+                animation: pulseGlow 1.5s ease-in-out;
             }
 
             #anime-search-input::placeholder {
-                color: var(--color-text-secondary);
-                opacity: 0.7;
+                color: var(--color-text-tertiary);
+                opacity: 0.6;
             }
 
             #anime-search-input:disabled {
@@ -797,20 +1390,37 @@
 
             #search-button {
                 position: absolute;
-                right: 1px;
-                top: 1px;
-                bottom: 1px;
-                background: none;
-                border: none;
+                right: 2px;
+                top: 2px;
+                bottom: 2px;
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.2) 0%,
+                    rgba(51, 136, 204, 0.1) 100%);
+                border: 1px solid rgba(174, 255, 98, 0.25);
                 color: var(--color-text-secondary);
-                font-size: 1.4rem;
+                font-size: 1.5rem;
                 cursor: pointer;
-                padding: 0 var(--space-xs);
-                border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-                transition: color var(--transition-speed-fast);
+                padding: 0 var(--space-md);
+                border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+                transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: inset -1px 0 1px rgba(255, 255, 255, 0.1);
+                animation: slideInRight 0.4s ease-out;
+            }
+
+            #search-button:hover, #search-button:focus {
+                color: var(--color-primary);
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.3) 0%,
+                    rgba(51, 136, 204, 0.2) 100%);
+                border-color: var(--color-primary);
+                box-shadow: inset -1px 0 1px rgba(255, 255, 255, 0.15),
+                            0 0 15px rgba(174, 255, 98, 0.2);
+                /* Loại bỏ dòng animation */
             }
 
             #search-button:disabled {
@@ -824,16 +1434,31 @@
             }
 
             #anime-results-container, #anime-episode-list-container {
-                background-color: rgba(255, 255, 255, 0.02);
-                border: 1px solid rgba(var(--color-primary-rgb), 0.1);
-                border-radius: var(--border-radius-md);
-                padding: var(--space-sm);
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.1) 0%,
+                    rgba(51, 136, 204, 0.06) 100%);
+                border: 1.5px solid rgba(174, 255, 98, 0.25);
+                border-radius: var(--border-radius-lg);
+                padding: var(--space-md);
                 min-height: 60px;
-                max-height: 250px;
+                max-height: 280px;
                 overflow-y: auto;
                 scrollbar-width: thin;
-                scrollbar-color: var(--color-primary) rgba(var(--color-primary-rgb), 0.1);
-                transition: all 0.3s ease;
+                scrollbar-color: var(--color-primary) rgba(174, 255, 98, 0.2);
+                transition: all var(--transition-normal) ease;
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                box-shadow: 
+                    0 6px 20px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+                animation: fadeInScale 0.5s ease-out backwards;
+            }
+
+            #anime-results-container:hover, #anime-episode-list-container:hover {
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.15) 0%,
+                    rgba(51, 136, 204, 0.08) 100%);
+                border-color: rgba(174, 255, 98, 0.35);
             }
 
             #anime-results-container::-webkit-scrollbar, #anime-episode-list-container::-webkit-scrollbar {
@@ -874,30 +1499,39 @@
             }
 
             .search-result-item, .episode-item {
-                background-color: rgba(var(--color-primary-rgb), 0.08);
-                border-left: 3px solid var(--color-accent);
-                padding: var(--space-xs) var(--space-sm);
-                border-radius: var(--border-radius-sm);
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.12) 0%,
+                    rgba(51, 136, 204, 0.08) 100%);
+                border-left: 4px solid var(--color-secondary);
+                border: 1px solid rgba(174, 255, 98, 0.25);
+                border-left: 4px solid var(--color-secondary);
+                padding: var(--space-sm) var(--space-md);
+                border-radius: var(--border-radius-md);
                 cursor: pointer;
-                transition: all var(--transition-speed-fast) ease;
-                font-size: 0.9rem;
+                transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+                font-size: 0.95rem;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 text-align: left;
-            }
-
-            .episode-item[style*="cursor: not-allowed"] {
-                border-left-color: var(--color-text-secondary);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
 
             .search-result-item:hover, .episode-item:not([style*="cursor: not-allowed"]):hover, .search-result-item:focus, .episode-item:not([style*="cursor: not-allowed"]):focus {
-                background-color: rgba(var(--color-primary-rgb), 0.2);
+                background: linear-gradient(135deg, 
+                    rgba(174, 255, 98, 0.2) 0%,
+                    rgba(51, 136, 204, 0.15) 100%);
                 border-left-color: var(--color-primary);
-                transform: translateX(4px);
+                border-color: rgba(174, 255, 98, 0.4);
+                transform: translateX(6px);
                 outline: none;
-                box-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.3);
+                box-shadow: 
+                    0 4px 16px rgba(174, 255, 98, 0.15),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1);
             }
+            
 
             .placeholder-text {
                 color: var(--color-text-secondary);
@@ -1191,6 +1825,52 @@
                     max-height: 350px;
                 }
             }
+
+            @media (max-width: 900px) {
+                .info-item {
+                    flex: 0 1 auto;
+                }
+
+                .info-value {
+                    font-size: 0.8rem;
+                }
+
+                .info-icon {
+                    font-size: 1.2rem;
+                }
+
+                .info-separator {
+                    height: 20px;
+                }
+            }
+
+            @media (max-width: 600px) {
+                .info-row {
+                    gap: var(--space-xs);
+                }
+
+                .info-item {
+                    gap: 0.25rem;
+                }
+
+                .info-icon {
+                    font-size: 1rem;
+                }
+
+                .info-value {
+                    font-size: 0.7rem;
+                }
+
+                .info-separator {
+                    height: 16px;
+                    width: 1px;
+                }
+
+                .info-card.compact-info {
+                    padding: var(--space-xs) var(--space-sm);
+                }
+            }
+
             @media (min-width: 500px) {
                 #todo-form {
                     flex-direction: row;
@@ -1378,54 +2058,90 @@
                 white-space: nowrap;
                 border: 0;
             }
-            /* === POMODORO TIMER STYLES === */
+            /* === POMODORO TIMER STYLES - PREMIUM GLASS === */
 #pomodoro-section {
-    border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
-    padding-top: var(--space-sm);
-    opacity: 1 !important; /* Changed from 0 */
-    transform: translateY(0) !important; /* Changed from 20px */
+    border-top: 1.5px solid rgba(174, 255, 98, 0.2);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-md);
     align-items: center;
+    background: linear-gradient(180deg, 
+        rgba(174, 255, 98, 0.08) 0%,
+        rgba(51, 136, 204, 0.04) 100%);
+    padding: var(--space-lg);
+    border-radius: var(--border-radius-lg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .pomodoro-display {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-xs);
+    gap: var(--space-md);
     width: 100%;
-    background-color: rgba(var(--color-primary-rgb), 0.05);
-    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
-    border-radius: var(--border-radius-md);
-    padding: var(--space-md);
+    background: linear-gradient(135deg, 
+        rgba(174, 255, 98, 0.15) 0%,
+        rgba(51, 136, 204, 0.08) 100%);
+    border: 1.5px solid rgba(174, 255, 98, 0.3);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-lg);
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 0 15px rgba(var(--color-primary-rgb), 0.15);
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(174, 255, 98, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pomodoro-display:hover {
+    background: linear-gradient(135deg, 
+        rgba(174, 255, 98, 0.2) 0%,
+        rgba(51, 136, 204, 0.12) 100%);
+    border-color: rgba(174, 255, 98, 0.4);
+    box-shadow: 
+        0 12px 32px rgba(0, 0, 0, 0.25),
+        0 0 40px rgba(174, 255, 98, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .timer-mode {
     font-family: var(--font-secondary);
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--color-primary);
-    letter-spacing: 1px;
-    text-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.5);
-    padding: 0 var(--space-xs);
-    border-radius: var(--border-radius-sm);
-    transition: all 0.3s ease;
-    min-width: 80px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 10px rgba(174, 255, 98, 0.6);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius-md);
+    background: rgba(174, 255, 98, 0.12);
+    border: 1px solid rgba(174, 255, 98, 0.3);
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 120px;
     text-align: center;
+    font-weight: 600;
+}
+
+.timer-mode:hover {
+    background: rgba(174, 255, 98, 0.2);
+    transform: scale(1.05);
 }
 
 .timer-value {
     font-family: var(--font-secondary);
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 800;
     color: var(--color-text-primary);
-    text-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.7);
-    letter-spacing: 2px;
-    margin: var(--space-xs) 0;
+    text-shadow: 0 0 20px rgba(174, 255, 98, 0.8);
+    letter-spacing: 3px;
+    margin: 0;
+    transition: all var(--transition-normal) ease;
 }
 
 .progress-bar-container {
@@ -1459,38 +2175,56 @@
 }
 
 .pomodoro-controls button {
-    padding: var(--space-xs) var(--space-sm);
-    background-color: rgba(var(--color-primary-rgb), 0.15);
-    border: 1px solid var(--color-primary);
+    padding: var(--space-sm) var(--space-md);
+    background: linear-gradient(135deg, 
+        rgba(174, 255, 98, 0.3) 0%,
+        rgba(51, 136, 204, 0.2) 100%);
+    border: 1.5px solid var(--color-primary);
     color: var(--color-primary);
     font-family: var(--font-secondary);
-    font-weight: 500;
-    font-size: 0.9rem;
-    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--border-radius-md);
     cursor: pointer;
-    transition: all var(--transition-speed-fast) ease;
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-xxs);
-    height: 38px;
-    min-width: 90px;
+    gap: var(--space-sm);
+    height: 44px;
+    min-width: 110px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.25),
+        0 0 20px rgba(174, 255, 98, 0.12),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.5px;
 }
 
 .pomodoro-controls button:hover, .pomodoro-controls button:focus {
-    background-color: var(--color-primary);
-    color: var(--color-bg-dark);
-    box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.6);
+    background: linear-gradient(135deg, 
+        var(--color-primary) 0%,
+        rgba(174, 255, 98, 0.85) 100%);
+    color: #000;
+    box-shadow: 
+        0 10px 30px rgba(174, 255, 98, 0.35),
+        0 0 50px rgba(174, 255, 98, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
     outline: none;
+    transform: translateY(-3px);
+    border-color: var(--color-primary-light);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .pomodoro-controls button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: rgba(var(--color-primary-rgb), 0.05);
+    background: rgba(174, 255, 98, 0.08);
     color: var(--color-text-secondary);
-    border-color: rgba(var(--color-primary-rgb), 0.1);
+    border-color: rgba(174, 255, 98, 0.15);
     box-shadow: none;
+    transform: none;
 }
 
 .pomodoro-controls button ion-icon {
@@ -1499,38 +2233,22 @@
 
 .pomodoro-settings {
     width: 100%;
-    border-top: 1px dashed rgba(var(--color-primary-rgb), 0.15);
+    border-top: 1px dashed rgba(var(--color-primary-rgb), 0.2);
     padding-top: var(--space-sm);
     margin-top: var(--space-sm);
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
     text-align: left;
-    max-height: 250px;
+    max-height: 450px;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) rgba(var(--color-primary-rgb), 0.1);
-}
-
-.pomodoro-settings::-webkit-scrollbar {
-    width: 5px;
-}
-
-.pomodoro-settings::-webkit-scrollbar-track {
-    background: rgba(var(--color-primary-rgb), 0.08);
-    border-radius: 3px;
-}
-
-.pomodoro-settings::-webkit-scrollbar-thumb {
-    background-color: var(--color-primary);
-    border-radius: 3px;
-    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
-}
-
-.pomodoro-settings h3 {
-    text-align: center;
-    margin-bottom: var(--space-xxs);
-    font-size: 0.95rem;
+    scrollbar-color: var(--color-primary) rgba(var(--color-primary-rgb), 0.2);
+    background: linear-gradient(180deg, rgba(var(--color-primary-rgb), 0.05) 0%, transparent 100%);
+    padding: var(--space-sm);
+    border-radius: var(--border-radius-md);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .pomodoro-settings .setting-group {
@@ -1538,9 +2256,17 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-xxs) var(--space-xs);
-    background-color: rgba(var(--color-primary-rgb), 0.03);
+    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.08) 0%, rgba(var(--color-primary-rgb), 0.03) 100%);
     border-radius: var(--border-radius-sm);
-    border: 1px solid rgba(var(--color-primary-rgb), 0.1);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all var(--transition-speed-fast) ease;
+}
+
+.pomodoro-settings .setting-group:hover {
+    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.12) 0%, rgba(var(--color-primary-rgb), 0.06) 100%);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
 }
 
 .pomodoro-settings label {
@@ -1553,14 +2279,24 @@
 .pomodoro-settings input[type="range"] {
     width: 70px;
     padding: 4px 8px;
-    background-color: rgba(var(--color-primary-rgb), 0.08);
-    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    background: rgba(var(--color-primary-rgb), 0.1);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.3);
     border-radius: var(--border-radius-sm);
     color: var(--color-primary);
     font-family: var(--font-primary);
     font-size: 0.8rem;
     text-align: center;
     -moz-appearance: textfield;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all var(--transition-speed-fast) ease;
+}
+
+.pomodoro-settings input[type="number"]:focus,
+.pomodoro-settings input[type="range"]:focus {
+    background: rgba(var(--color-primary-rgb), 0.15);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.2);
 }
 
 .pomodoro-settings input[type="number"]::-webkit-outer-spin-button,
@@ -1797,16 +2533,134 @@
 }
 
 body.light-mode {
-    --color-bg-dark: #f0f0f0;
-    --color-text-primary: #333;
-    --color-text-secondary: #666;
+    --color-bg-dark: #f5f5f7;
+    --color-text-primary: #1d1d1f;
+    --color-text-secondary: #424245;
+    --color-text-tertiary: #717174;
     --grid-line-color: rgba(0, 0, 0, 0.05);
 }
-body.light-mode #pomodoro-progress-bar, body.light-mode .progress-bar {
-    filter: brightness(0.8);
+
+body.light-mode #container {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.75) 0%,
+        rgba(245, 250, 255, 0.6) 100%);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.1),
+        0 0 60px rgba(174, 255, 98, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    border-color: rgba(174, 255, 98, 0.3);
 }
+
+body.light-mode .left-column {
+    background: linear-gradient(180deg, 
+        rgba(174, 255, 98, 0.1) 0%, 
+        transparent 100%);
+}
+
+body.light-mode .right-column {
+    background: linear-gradient(180deg, 
+        rgba(51, 136, 204, 0.06) 0%, 
+        transparent 100%);
+}
+
+body.light-mode #audio-player {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(250, 250, 255, 0.65) 100%);
+    border-color: rgba(174, 255, 98, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
+                0 0 30px rgba(174, 255, 98, 0.08);
+}
+
+body.light-mode #audio-player:hover {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(250, 250, 255, 0.75) 100%);
+    border-color: rgba(174, 255, 98, 0.45);
+}
+
+body.light-mode .info-card {
+    background: linear-gradient(145deg, 
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(250, 250, 255, 0.6) 100%);
+    border-color: rgba(174, 255, 98, 0.4);
+}
+
+body.light-mode .info-card:hover {
+    background: linear-gradient(145deg, 
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(250, 250, 255, 0.75) 100%);
+    border-color: rgba(174, 255, 98, 0.55);
+}
+
+body.light-mode .card-icon {
+    background: linear-gradient(135deg, 
+        rgba(174, 255, 98, 0.35) 0%,
+        rgba(51, 136, 204, 0.2) 100%);
+    border-color: rgba(174, 255, 98, 0.4);
+}
+
+body.light-mode #pomodoro-progress-bar, body.light-mode .progress-bar {
+    filter: brightness(0.85);
+}
+
 body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-controls button:focus {
-    color: var(--color-text-primary);
+    color: #000;
+}
+
+body.light-mode #todo-list li {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(250, 250, 255, 0.5) 100%);
+    border-color: rgba(174, 255, 98, 0.3);
+}
+
+body.light-mode #todo-list li:hover {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(250, 250, 255, 0.65) 100%);
+}
+
+body.light-mode #todo-list li:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(245, 245, 255, 0.55) 100%);
+}
+/* Shuffle and Repeat button styles */
+#shuffle-btn, #repeat-btn {
+    position: relative;
+}
+
+#shuffle-btn.active, #repeat-btn.active {
+    color: var(--color-primary) !important;
+}
+
+#shuffle-btn.active::after, #repeat-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-primary);
+}
+
+/* Repeat one indicator */
+#repeat-btn.repeat-one ion-icon {
+    position: relative;
+}
+
+#repeat-btn.repeat-one::before {
+    content: '1';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    pointer-events: none;
 }
         </style>
     </head>
@@ -1816,13 +2670,50 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                 <div id="profile">
                     <div id="profile-image-wrapper">
                         <img id="avatar" src="https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg" alt="Ảnh đại diện anime của HTCH"/>
+                            <div class="profile-heart-badge">
+                            <a
+                                data-url="https://htch.is-a.dev/nguyet/index.html?id=eyJtZXNzYWdlIjoiRGFvIEFuaCBOZ3V5ZXQsVOG7myBUaMawxqFuZyBD4bqtdSzEkMOgbyDDgW5oIE5ndXnhu4d0LFThu5sgVGjDrWNoIEPhuq11LFThu5sgWcOqdSBD4bqtdSxU4bubIE3hur9uIEPhuq11LEkgTG92ZSBZb3UiLCJtdXNpYyI6Im0ubXAzIn0="
+                                onclick="location.href=this.dataset.url"
+                                style="cursor:pointer"
+                                title="Don't forget to love yourself">
+                            
+                                <img src="https://raw.githubusercontent.com/twitter/twemoji/master/assets/svg/1f49c.svg">
+                            </a>
+                            </div>
+
                     </div>
                     <p id="username" data-text="@htch9999">@htch9999</p>
                     <div id="clock">00:00:00</div>
-                    <div id="location-weather">
-                        <div id="location"><ion-icon name="location-outline"></ion-icon> Đang tải vị trí...</div>
-                        <div id="weather"><ion-icon name="cloud-outline"></ion-icon> Đang tải thời tiết...</div>
+
+                    <!-- /// TIME, WEATHER, LOCATION & DATE WIDGET /// -->
+                    <div id="info-widget-section">
+                        <div class="info-card compact-info">
+                            <!-- Dòng 1: Lịch -->
+                            <div class="info-row">
+                                <div class="info-item">
+                                    <ion-icon name="calendar-outline" class="info-icon"></ion-icon>
+                                    <span class="info-value" id="current-date">Loading...</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Separator giữa 2 dòng -->
+                            <div class="info-row-separator"></div>
+                            
+                            <!-- Dòng 2: Thời tiết và Vị trí -->
+                            <div class="info-row">
+                                <div class="info-item">
+                                    <ion-icon name="cloud-outline" class="info-icon"></ion-icon>
+                                    <span class="info-value" id="weather-text">Loading...</span>
+                                </div>
+                                <div class="info-separator"></div>
+                                <div class="info-item">
+                                    <ion-icon name="location-outline" class="info-icon"></ion-icon>
+                                    <span class="info-value" id="location-text">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- /// END TIME, WEATHER, LOCATION & DATE WIDGET /// -->
                 </div>
                 <!-- /// AUDIO PLAYER /// -->
                 <div id="audio-player">
@@ -1834,6 +2725,9 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                     </div>
                     <div class="controls">
                         <div class="main-controls">
+                            <button id="shuffle-btn" aria-label="Shuffle" title="Shuffle">
+                                <ion-icon name="shuffle-outline"></ion-icon>
+                            </button>
                             <button id="prev-btn" aria-label="Bài trước" disabled>
                                 <ion-icon name="play-skip-back-outline"></ion-icon>
                             </button>
@@ -1842,6 +2736,9 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                             </button>
                             <button id="next-btn" aria-label="Bài tiếp theo" disabled>
                                 <ion-icon name="play-skip-forward-outline"></ion-icon>
+                            </button>
+                            <button id="repeat-btn" aria-label="Repeat" title="Repeat Off">
+                                <ion-icon name="repeat-outline"></ion-icon>
                             </button>
                         </div>
                     </div>
@@ -2096,29 +2993,13 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                     title: 'Royalty'
                 }, {
                     type: 'youtube',
-                    videoId: 'KgayxOF4Y7E',
-                    title: 'PASSO BEM SOLTO'
-                }, {
-                    type: 'youtube',
                     videoId: 'kZD8Ba6uuYg',
                     title: 'Run To You'
                 }, {
                     type: 'youtube',
                     videoId: '5L9z63AwVsw',
                     title: '超燃主题曲来袭！'
-                }, {
-                    type: 'youtube',
-                    videoId: 'KgayxOF4Y7E',
-                    title: 'PASSO BEM SOLTO'
-                }, {
-                    type: 'youtube',
-                    videoId: 'KgayxOF4Y7E',
-                    title: 'PASSO BEM SOLTO'
-                }, {
-                    type: 'youtube',
-                    videoId: 'KgayxOF4Y7E',
-                    title: 'PASSO BEM SOLTO'
-                },
+                }
                 ];
 
                 // --- GET DOM ELEMENTS ---
@@ -2176,11 +3057,171 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                 let youtubePlayerReady = false;
                 let youtubeProgressInterval = null;
                 let currentPlayerType = 'none';
+                let isShuffleOn = false;
+                let repeatMode = 'off'; // 'off', 'all', 'one'
+                let shuffledPlaylist = [];
+                let originalPlaylist = [];
                 // 'url', 'youtube', 'none'
 
                 // ============================
                 // === HELPER FUNCTIONS ===
                 // ============================
+                // === SHUFFLE & REPEAT FUNCTIONS ===
+                function shuffleArray(array) {
+                    const shuffled = [...array]; // Tạo bản sao
+                    for (let i = shuffled.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                    }
+                    return shuffled;
+                }
+
+                function toggleShuffle() {
+                    const shuffleBtn = document.getElementById('shuffle-btn');
+                    isShuffleOn = !isShuffleOn;
+                    
+                    if (isShuffleOn) {
+                        console.log("🔀 Shuffle ON");
+                        
+                        // Lưu playlist gốc NẾU chưa có
+                        if (originalPlaylist.length === 0) {
+                            originalPlaylist = [...playlist];
+                        }
+                        
+                        // Lấy bài đang phát hiện tại
+                        const currentTrack = currentTrackIndex >= 0 ? playlist[currentTrackIndex] : null;
+                        
+                        // Shuffle các bài còn lại (trừ bài đang phát)
+                        const otherTracks = playlist.filter((_, idx) => idx !== currentTrackIndex);
+                        const shuffled = shuffleArray(otherTracks);
+                        
+                        // Xây dựng playlist mới: bài hiện tại + các bài đã shuffle
+                        const newPlaylist = currentTrack ? [currentTrack, ...shuffled] : shuffled;
+                        
+                        // Cập nhật playlist
+                        playlist.length = 0;
+                        playlist.push(...newPlaylist);
+                        
+                        // Reset index về 0 (bài hiện tại)
+                        if (currentTrack) {
+                            currentTrackIndex = 0;
+                        }
+                        
+                        shuffleBtn?.classList.add('active');
+                    } else {
+                        console.log("➡️ Shuffle OFF");
+                        
+                        // Khôi phục playlist gốc
+                        if (originalPlaylist.length > 0) {
+                            const currentTrack = currentTrackIndex >= 0 ? playlist[currentTrackIndex] : null;
+                            
+                            // Tìm vị trí gốc của bài đang phát
+                            let originalIndex = 0;
+                            if (currentTrack) {
+                                originalIndex = originalPlaylist.findIndex(t => 
+                                    (t.videoId && t.videoId === currentTrack.videoId) || 
+                                    (t.url && t.url === currentTrack.url) ||
+                                    (t.title && t.title === currentTrack.title)
+                                );
+                                if (originalIndex < 0) originalIndex = 0;
+                            }
+                            
+                            // Khôi phục playlist gốc
+                            playlist.length = 0;
+                            playlist.push(...originalPlaylist);
+                            currentTrackIndex = originalIndex;
+                            
+                            // Xóa bản sao gốc
+                            originalPlaylist = [];
+                        }
+                        
+                        shuffleBtn?.classList.remove('active');
+                    }
+                    
+                    updatePrevNextButtonStates();
+                    savePlayerState();
+                }
+
+                function toggleRepeat() {
+                    const repeatBtn = document.getElementById('repeat-btn');
+                    const icon = repeatBtn?.querySelector('ion-icon');
+                    
+                    // Cycle: off -> all -> one -> off
+                    if (repeatMode === 'off') {
+                        repeatMode = 'all';
+                        repeatBtn?.classList.add('active');
+                        repeatBtn?.classList.remove('repeat-one');
+                        repeatBtn?.setAttribute('title', 'Repeat All');
+                        console.log("🔁 Repeat ALL");
+                    } else if (repeatMode === 'all') {
+                        repeatMode = 'one';
+                        repeatBtn?.classList.add('active', 'repeat-one');
+                        repeatBtn?.setAttribute('title', 'Repeat One');
+                        if (icon) icon.setAttribute('name', 'repeat-outline');
+                        console.log("🔂 Repeat ONE");
+                    } else {
+                        repeatMode = 'off';
+                        repeatBtn?.classList.remove('active', 'repeat-one');
+                        repeatBtn?.setAttribute('title', 'Repeat Off');
+                        console.log("➡️ Repeat OFF");
+                    }
+                    
+                    savePlayerState();
+                }
+
+                function savePlayerState() {
+                    if (!window.localStorage) return;
+                    try {
+                        localStorage.setItem('musicPlayerState', JSON.stringify({
+                            isShuffleOn,
+                            repeatMode,
+                            currentTrackIndex,
+                            volume: audio?.volume ?? 0.8
+                        }));
+                    } catch (e) {
+                        console.error("Save player state error:", e);
+                    }
+                }
+
+                function loadPlayerState() {
+                    if (!window.localStorage) return;
+                    try {
+                        const saved = localStorage.getItem('musicPlayerState');
+                        if (!saved) return; // Không có state -> không load gì cả
+                        
+                        const state = JSON.parse(saved);
+                        
+                        // Load repeat mode
+                        repeatMode = state.repeatMode || 'off';
+                        const repeatBtn = document.getElementById('repeat-btn');
+                        if (repeatMode !== 'off' && repeatBtn) {
+                            repeatBtn.classList.add('active');
+                            if (repeatMode === 'one') {
+                                repeatBtn.classList.add('repeat-one');
+                                repeatBtn.setAttribute('title', 'Repeat One');
+                            } else {
+                                repeatBtn.setAttribute('title', 'Repeat All');
+                            }
+                        }
+                        
+                        // Load shuffle state (KHÔNG tự động shuffle, chỉ hiển thị trạng thái)
+                        isShuffleOn = state.isShuffleOn || false;
+                        const shuffleBtn = document.getElementById('shuffle-btn');
+                        if (isShuffleOn && shuffleBtn) {
+                            shuffleBtn.classList.add('active');
+                        }
+                        
+                        // Load volume
+                        if (state.volume !== undefined && audio) {
+                            audio.volume = state.volume;
+                        }
+                        
+                        console.log("✅ Player state loaded:", { isShuffleOn, repeatMode });
+                    } catch (e) {
+                        console.error("Load player state error:", e);
+                    }
+                }
+
                 function generateId() {
                     return Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
                 }
@@ -2900,15 +3941,36 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                         console.warn("Cannot Pause: No player type.");
                 }
 
-                function playNextTrack(triggeredByEnd=false) {
-                    if (!playlist || playlist.length === 0)
+                function playNextTrack(triggeredByEnd = false) {
+                    if (!playlist || playlist.length === 0) return;
+                    
+                    // Repeat One mode
+                    if (repeatMode === 'one' && triggeredByEnd) {
+                        seekToStart();
+                        if (currentPlayerType === 'youtube' && youtubePlayer) {
+                            youtubePlayer.playVideo();
+                        } else if (currentPlayerType === 'url' && audio) {
+                            audio.play();
+                        }
                         return;
+                    }
+                    
+                    // Single track handling
                     if (playlist.length === 1 && !triggeredByEnd) {
                         seekToStart();
                         return;
                     }
+                    
                     const shouldContinuePlay = isPlaying || triggeredByEnd;
-                    const nextIndex = (currentTrackIndex + 1) % playlist.length;
+                    let nextIndex = (currentTrackIndex + 1) % playlist.length;
+                    
+                    // Stop at end if repeat is off
+                    if (repeatMode === 'off' && nextIndex === 0 && triggeredByEnd) {
+                        pauseAudio();
+                        seekToStart();
+                        return;
+                    }
+                    
                     playAfterLoad = shouldContinuePlay;
                     loadTrack(nextIndex);
                 }
@@ -3042,6 +4104,106 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                             clearInterval(clockInterval);
                     }
                 }
+
+                // === INFO WIDGET FUNCTIONS ===
+                function updateCurrentDate() {
+                    try {
+                        const now = new Date();
+                        const dateStr = now.toLocaleDateString('en-US', { 
+                            weekday: 'short', 
+                            year: 'numeric', 
+                            month: 'short', 
+                            day: 'numeric' 
+                        });
+                        
+                        const dateEl = document.getElementById('current-date');
+                        if (dateEl) dateEl.textContent = dateStr;
+                    } catch (e) {
+                        console.error('Date update error:', e);
+                    }
+                }
+
+                function updateLocationDisplay() {
+                    try {
+                        const locationEl = document.getElementById('location-text');
+                        if (!locationEl) return;
+                        
+                        // Try geolocation API
+                        if ('geolocation' in navigator) {
+                            navigator.geolocation.getCurrentPosition(
+                                (position) => {
+                                    const lat = position.coords.latitude;
+                                    const lon = position.coords.longitude;
+                                    
+                                    // Use reverse geocoding API (OpenStreetMap Nominatim is free)
+                                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                                        .then(r => r.json())
+                                        .then(data => {
+                                            const city = data.address?.city || data.address?.town || data.address?.county || 'Unknown';
+                                            const country = data.address?.country || '';
+                                            locationEl.textContent = city + (country ? `, ${country}` : '');
+                                        })
+                                        .catch(err => {
+                                            console.error('Geocoding error:', err);
+                                            locationEl.textContent = 'Unable to load';
+                                        });
+                                },
+                                (error) => {
+                                    console.log('Geolocation error:', error);
+                                    locationEl.textContent = 'Location denied';
+                                }
+                            );
+                        } else {
+                            locationEl.textContent = 'Not supported';
+                        }
+                    } catch (e) {
+                        console.error('Location update error:', e);
+                        const locationEl = document.getElementById('location-text');
+                        if (locationEl) locationEl.textContent = 'Error';
+                    }
+                }
+
+                function updateWeatherDisplay() {
+                    try {
+                        const weatherEl = document.getElementById('weather-text');
+                        if (!weatherEl) return;
+                        
+                        if ('geolocation' in navigator) {
+                            navigator.geolocation.getCurrentPosition(
+                                (position) => {
+                                    const lat = position.coords.latitude;
+                                    const lon = position.coords.longitude;
+                                    
+                                    // Use Open-Meteo weather API (free, no key required)
+                                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,relative_humidity_2m&temperature_unit=celsius`)
+                                        .then(r => r.json())
+                                        .then(data => {
+                                            if (data.current) {
+                                                const temp = Math.round(data.current.temperature_2m);
+                                                const humidity = data.current.relative_humidity_2m;
+                                                weatherEl.textContent = `${temp}°C, ${humidity}%`;
+                                            }
+                                        })
+                                        .catch(err => {
+                                            console.error('Weather API error:', err);
+                                            weatherEl.textContent = 'Unable to load';
+                                        });
+                                },
+                                (error) => {
+                                    console.log('Geolocation error:', error);
+                                    weatherEl.textContent = 'Location denied';
+                                }
+                            );
+                        } else {
+                            weatherEl.textContent = 'Not supported';
+                        }
+                    } catch (e) {
+                        console.error('Weather update error:', e);
+                        const weatherEl = document.getElementById('weather-text');
+                        if (weatherEl) weatherEl.textContent = 'Error';
+                    }
+                }
+
                 function scheduleNotification(t) {
                     if (!t.notifyTime || t.completed || !(t.notifyTime instanceof Date) || isNaN(t.notifyTime))
                         return;
@@ -3613,6 +4775,12 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                     updateClock();
                     clockInterval = setInterval(updateClock, 1000);
                 }
+                
+                // Initialize Info Widget (Date, Location, Weather)
+                updateCurrentDate();
+                updateLocationDisplay();
+                updateWeatherDisplay();
+                
                 loadTasks();
                 loadAnimeData();
                 loadYouTubeAPI();
@@ -3627,6 +4795,7 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                 if (prevBtn)
                     prevBtn.addEventListener('click', playPrevTrack);
 
+                
                 if (playlist && playlist.length > 0) {
                     if (playPauseBtn)
                         playPauseBtn.disabled = false;
@@ -3639,6 +4808,38 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                         trackTitleElement.textContent = "Playlist is empty";
                     disableAllControls();
                 }
+                
+                // Init Shuffle & Repeat buttons
+                const shuffleBtn = document.getElementById('shuffle-btn');
+                const repeatBtn = document.getElementById('repeat-btn');
+
+                if (shuffleBtn) {
+                    shuffleBtn.addEventListener('click', toggleShuffle);
+                }
+
+                if (repeatBtn) {
+                    repeatBtn.addEventListener('click', toggleRepeat);
+                }
+
+                // Load saved player state TRƯỚC
+                loadPlayerState();
+
+                // ✅ AUTO-SHUFFLE chỉ khi LẦN ĐẦU truy cập
+                const hasVisited = localStorage.getItem('musicPlayerState');
+                if (!hasVisited && playlist && playlist.length > 1) {
+                    console.log("🎲 First visit - Auto shuffling...");
+                    
+                    // Kích hoạt shuffle (gọi hàm toggleShuffle 1 lần)
+                    // Vì isShuffleOn đang = false, toggle sẽ bật nó lên
+                    if (!isShuffleOn) {
+                        toggleShuffle();
+                    }
+                    
+                    console.log("✅ Auto-shuffle complete!");
+                }
+
+                // Load saved player state
+                loadPlayerState();
 
                 // Init Other Listeners
                 if (searchInput) {
@@ -3726,6 +4927,11 @@ body.light-mode .pomodoro-controls button:hover, body.light-mode .pomodoro-contr
                             duration: 400
                         }, '-=450').add({
                             targets: '#location-weather',
+                            opacity: [0, 1],
+                            translateY: [10, 0],
+                            duration: 400
+                        }, '-=400').add({
+                            targets: '#info-widget-section',
                             opacity: [0, 1],
                             translateY: [10, 0],
                             duration: 400
@@ -4030,7 +5236,7 @@ function resetPomodoroTimer() {
     pomodoroCurrentMode = 'work';
     updatePomodoroDisplay();
     updatePomodoroDocumentTitle();
-    document.title = 'Loif .Ch | Profile Sci-Fi: Nhạc (MP3 &YouTube), To-Do &Anime'; // Reset to original title
+    document.title = 'Loif Chan | Profile'; // Reset to original title
     const skipBtn = document.getElementById('skip-btn');
     if (skipBtn) skipBtn.style.display = 'none';
     savePomodoroState();
