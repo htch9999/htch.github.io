@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
         <!-- /// META TIÊU ĐỀ & MÔ TẢ /// -->
         <title>🌷 Loif Chan (htch9999) | Profile</title>
         <meta name="description" content="🌷">
@@ -12,6 +12,7 @@
         <link rel="canonical" href="https://htch9999.github.io/">
 
         <link rel="icon" href="https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg" type="image/jpeg">
+        <link rel="preload" href="https://raw.githubusercontent.com/htch9999/htch.github.io/main/assets/bg.jpeg" as="image">
         <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/htch9999/htch.github.io/refs/heads/main/assets/htch.jpg">
         <!-- /// META OPEN GRAPH /// -->
         <meta property="og:title" content="HTCH - Profile">
@@ -116,25 +117,76 @@
                 scroll-behavior: smooth;
             }
 
-            body {
-                font-family: var(--font-primary);
-                color: var(--color-text-primary);
-                background-color: var(--color-bg-dark);
-                /* Thay URL_HINH_CUA_BAN bằng link hình/GIF của bạn */
-                background-image: url('https://raw.githubusercontent.com/htch9999/htch.github.io/main/assets/bg.jpeg');
-                background-size: cover;
-                background-position: center;
-                background-attachment: scroll;
-                background-repeat: no-repeat;
-                min-height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: var(--space-sm);
-                overflow-x: hidden;
-                position: relative;
-                line-height: 1.6;
-            }
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-dark);
+    background-image: url('https://raw.githubusercontent.com/htch9999/htch.github.io/main/assets/bg.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: scroll; /* scroll thay vì fixed cho mobile */
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* iOS Safari fix */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-sm);
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+/* Mobile-specific background fix */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll; /* Force scroll on mobile */
+        background-size: cover;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* iOS Safari specific fix */
+@supports (-webkit-touch-callout: none) {
+    body {
+        min-height: -webkit-fill-available;
+        background-attachment: scroll;
+    }
+}
+
+/* Fallback gradient khi ảnh không load */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg, 
+        var(--color-bg-dark) 0%, 
+        var(--color-bg-secondary) 50%, 
+        var(--color-bg-tertiary) 100%
+    );
+    z-index: -2; /* Đằng sau scanlines */
+    pointer-events: none;
+}
+
+/* Scanlines overlay - giữ nguyên nhưng đảm bảo z-index đúng */
+body::after { /* Thay body::before của scanlines hiện tại thành ::after */
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><path fill="%23cccccc" fill-opacity="0.02" d="M0 0h2v2H0zM2 2h2v2H0z"></path></svg>');
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: -1;
+    animation: scanlines 15s linear infinite;
+}
 
             body::before {
                 content: '';
@@ -206,7 +258,7 @@
             }
 
             /* Animated background glow effect */
-            #container::before {
+            /* #container::before {
                 content: '';
                 position: absolute;
                 inset: -1px;
@@ -218,7 +270,7 @@
                 animation: glowPulse 4s ease-in-out infinite;
                 pointer-events: none;
                 z-index: -1;
-            }
+            } */
 
             @keyframes glowPulse {
                 0%, 100% { opacity: 0; }
@@ -286,13 +338,7 @@
                     0 0 80px rgba(174, 255, 98, 0.15),
                     inset 0 1px 2px rgba(255, 255, 255, 0.25),
                     inset 0 -1px 2px rgba(0, 0, 0, 0.4);
-            
-                transform-style: preserve-3d;
-                opacity: 0;
-                transform: translateY(20px);
-                display: flex;
-                flex-direction: row;
-                gap: 0;
+                /* ❌ XÓA các dòng transform và opacity sai */
             }
 
             .left-column, .right-column {
@@ -2081,7 +2127,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-md);
+    /* gap: var(--space-md); */
     width: 100%;
     background: linear-gradient(135deg, 
         rgba(174, 255, 98, 0.15) 0%,
@@ -2662,6 +2708,291 @@ body.light-mode #todo-list li:hover {
     color: var(--color-primary);
     pointer-events: none;
 }
+
+@media (hover: none) and (pointer: coarse) {
+    /* Disable hover effects on touch devices */
+    #container:hover {
+        border-color: rgba(174, 255, 98, 0.25);
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.7),
+            0 0 60px rgba(174, 255, 98, 0.1),
+            inset 0 1px 2px rgba(255, 255, 255, 0.2),
+            inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Prevent touch callouts */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+    
+    /* Smoother touch scrolling */
+    #todo-list,
+    #anime-results-container,
+    #anime-episode-list-container {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* === DEARTEXT GENERATOR STYLES === */
+#deartext-section {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.deartext-container {
+    background: linear-gradient(135deg, 
+        rgba(174, 255, 98, 0.12) 0%,
+        rgba(51, 136, 204, 0.06) 100%);
+    border: 1.5px solid rgba(174, 255, 98, 0.3);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-lg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(174, 255, 98, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+#deartext-lines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.deartext-line {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.deartext-line input {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(174, 255, 98, 0.08);
+    border: 1.5px solid rgba(174, 255, 98, 0.25);
+    border-radius: var(--border-radius-md);
+    color: var(--color-text-primary);
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    transition: all var(--transition-fast) ease;
+}
+
+.deartext-line input:focus {
+    background: rgba(174, 255, 98, 0.12);
+    border-color: rgba(174, 255, 98, 0.45);
+    box-shadow: 0 0 20px rgba(174, 255, 98, 0.25);
+    outline: none;
+}
+
+.deartext-line input::placeholder {
+    color: var(--color-text-tertiary);
+    opacity: 0.7;
+}
+
+.deartext-line button {
+    padding: var(--space-sm);
+    background: rgba(255, 77, 77, 0.15);
+    border: 1.5px solid rgba(255, 77, 77, 0.3);
+    color: #ff4d4d;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-size: 1rem; */
+    width: 36px;
+    height: 36px;
+}
+
+.deartext-line button:hover {
+    background: rgba(255, 77, 77, 0.25);
+    border-color: #ff4d4d;
+    transform: scale(1.05);
+}
+
+.deartext-select {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(174, 255, 98, 0.08);
+    border: 1.5px solid rgba(174, 255, 98, 0.25);
+    border-radius: var(--border-radius-md);
+    color: var(--color-text-primary);
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition-fast) ease;
+}
+
+.deartext-select:focus {
+    background: rgba(174, 255, 98, 0.12);
+    border-color: rgba(174, 255, 98, 0.45);
+    box-shadow: 0 0 20px rgba(174, 255, 98, 0.25);
+    outline: none;
+}
+
+.deartext-select option {
+    background: #ffffff;
+    color: #1f1f1f;
+}
+
+.deartext-select option:checked {
+    background: rgb(216, 216, 216);
+    color : #1f1f1f;
+}
+
+.deartext-btn {
+    padding: var(--space-sm) var(--space-md);
+    background: linear-gradient(135deg, 
+        rgba(174, 255, 98, 0.25) 0%,
+        rgba(51, 136, 204, 0.15) 100%);
+    border: 1.5px solid var(--color-primary);
+    color: var(--color-primary);
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 
+        0 6px 15px rgba(0, 0, 0, 0.25),
+        0 0 20px rgba(174, 255, 98, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.deartext-btn:hover {
+    background: linear-gradient(135deg, 
+        rgba(174, 255, 98, 0.35) 0%,
+        rgba(51, 136, 204, 0.25) 100%);
+    color: #ffffff;
+    border-color: var(--color-primary-light);
+    box-shadow: 
+        0 10px 30px rgba(174, 255, 98, 0.3),
+        0 0 40px rgba(174, 255, 98, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.deartext-btn ion-icon {
+    font-size: 1.2em;
+}
+
+.deartext-btn.generate-btn {
+    width: 100%;
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    font-size: 1rem;
+}
+
+.deartext-output {
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    background: linear-gradient(135deg, 
+        rgba(51, 136, 204, 0.15) 0%,
+        rgba(174, 255, 98, 0.08) 100%);
+    border: 1.5px solid rgba(51, 136, 204, 0.3);
+    border-radius: var(--border-radius-md);
+    word-break: break-all;
+}
+
+.deartext-output strong {
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-secondary);
+}
+
+.deartext-output a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast) ease;
+}
+
+.deartext-output a:hover {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .deartext-container {
+        padding: var(--space-md);
+    }
+    
+    .deartext-line {
+        gap: var(--space-xs);
+    }
+    
+    .deartext-line button {
+        width: 32px;
+        height: 32px;
+    }
+}
+.deartext-output-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
+}
+
+.deartext-output-wrapper a {
+    flex: 1;
+    word-break: break-all;
+}
+
+.copy-link-btn {
+    padding: var(--space-xs);
+    background: rgba(174, 255, 98, 0.15);
+    border: 1.5px solid rgba(174, 255, 98, 0.3);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+.copy-link-btn ion-icon {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+}
+
+.copy-link-btn:hover {
+    background: rgba(174, 255, 98, 0.25);
+    border-color: var(--color-primary);
+    transform: scale(1.1);
+}
+
+.copy-link-btn.copied {
+    background: rgba(76, 175, 80, 0.25);
+    border-color: #4caf50;
+}
+
+.copy-link-btn.copied ion-icon {
+    color: #4caf50;
+}
+
+input::placeholder {
+    color: rgb(255, 255, 255) !important;
+}
+
         </style>
     </head>
     <body>
@@ -2746,7 +3077,7 @@ body.light-mode #todo-list li:hover {
                     <div id="youtube-player-container"></div>
                 </div>
                 <!-- /// END AUDIO PLAYER /// -->
-
+                <br><br><br>
                 <!-- /// SOCIAL LINKS /// -->
                 <div id="social-links" aria-label="Liên kết mạng xã hội khác">
                     <a href="https://github.com/htch9999" target="_blank" rel="noopener noreferrer" aria-label="HTCH trên Github" title="Github">
@@ -2775,10 +3106,10 @@ body.light-mode #todo-list li:hover {
                     <button class="tab-link active" data-tab="todo-content" aria-controls="todo-content">To-Do List</button>
                     <button class="tab-link" data-tab="anime-content" aria-controls="anime-content">Discover Anime (VietSub)</button>
                     <button class="tab-link" data-tab="pomodoro-content" aria-controls="pomodoro-content">Pomodoro Timer</button>
+                    <button class="tab-link" data-tab="deartext-content">DearText Generator</button>
                 </div>
 
                 <div id="todo-content" class="tab-content active" role="tabpanel">
-                    <!-- /// TO-DO LIST SECTION /// -->
                     <section id="todo-section" aria-labelledby="todo-heading">
                         <h2 id="todo-heading" class="sci-fi-heading" style="display:none;">TO DO LIST</h2>
                         <form id="todo-form" aria-label="Add new tasks">
@@ -2799,7 +3130,6 @@ body.light-mode #todo-list li:hover {
                             Allow Notifications
                         </button>
                     </section>
-                    <!-- /// END TO-DO LIST /// -->
                 </div>
 
                 <div id="anime-content" class="tab-content" role="tabpanel">
@@ -2886,12 +3216,45 @@ body.light-mode #todo-list li:hover {
                                 <label for="sound-volume">Sound Volume:</label>
                                 <input type="range" id="sound-volume" min="0" max="1" step="0.1" value="0.8">
                             </div>
-<!--                             <div class="setting-group">
+                                <!-- <div class="setting-group">
                                     <button id="toggle-dark-mode-btn">Toggle Dark Mode</button>
                                 </div> -->
                         </div> <!-- Close pomodoro-settings-content -->
-                    </div> <!-- Close pomodoro-settings -->
-                </section>
+                        </div> <!-- Close pomodoro-settings -->
+                    </section>
+                </div>
+
+                <div id="deartext-content" class="tab-content" role="tabpanel">
+                    <!-- === DEARTEXT GENERATOR SECTION === -->
+                    <section id="deartext-section" aria-labelledby="deartext-heading">
+                        <h2 id="deartext-heading" class="sci-fi-heading" style="display:none;">DEARTEXT GENERATOR</h2>
+                        
+                        <div class="deartext-container">
+                            <h3 class="sci-fi-heading" style="font-size: 0.95rem; margin-bottom: var(--space-md);">💌 Thông điệp</h3>
+                            <div id="deartext-lines"></div>
+                            <button id="add-line-btn" class="deartext-btn">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                                Thêm dòng
+                            </button>
+
+                            <h3 class="sci-fi-heading" style="font-size: 0.95rem; margin: var(--space-md) 0 var(--space-sm) 0;">🎵 Nhạc nền</h3>
+                            <select id="deartext-music" class="deartext-select">
+                                <option value="m.mp3">Một Đời - 14 Casper & Bon Nghiêm</option>
+                                <option value="l.mp3">Lễ Đường - KAI ĐINH</option>
+                                <option value="h.mp3">Happy Birthday To You - AMEE x Hoàng Dũng x Obito x Hứa Kim Tuyền</option>
+                                <option value="t.mp3">Từng Ngày Yêu Em - buitruonglinh</option>
+                                <option value="s.mp3">Star river in your eyes - Dylanf</option>
+                            </select>
+
+                            <button id="generate-link-btn" class="deartext-btn generate-btn">
+                                <ion-icon name="sparkles-outline"></ion-icon>
+                                Tạo Link
+                            </button>
+
+                            <div id="deartext-output" class="deartext-output" style="display: none;"></div>
+                        </div>
+                    </section>
+                    <!-- === END DEARTEXT GENERATOR SECTION === -->
                 </div>
 
             </div>
@@ -4018,12 +4381,16 @@ body.light-mode #todo-list li:hover {
                 }
 
                 if (progressContainer) {
-                    // Progress bar click handler
-                    progressContainer.addEventListener('click', (e) => {
-                        if (playPauseBtn?.disabled)
-                            return;
+                    // Add both touch and click handlers
+                    const handleProgressSeek = (e) => {
+                        if (playPauseBtn?.disabled) return;
+                        
+                        // Prevent default to avoid conflicts
+                        e.preventDefault();
+                        
                         let duration = 0;
                         let playerAvailable = false;
+                        
                         if (currentPlayerType === 'youtube' && youtubePlayerReady && typeof youtubePlayer.getDuration === 'function') {
                             duration = youtubePlayer.getDuration();
                             playerAvailable = duration > 0;
@@ -4031,25 +4398,33 @@ body.light-mode #todo-list li:hover {
                             duration = audio.duration;
                             playerAvailable = true;
                         }
-                        if (!playerAvailable || duration <= 0)
-                            return;
+                        
+                        if (!playerAvailable || duration <= 0) return;
+                        
                         try {
                             const r = progressContainer.getBoundingClientRect();
-                            if (e.clientX < r.left || e.clientX > r.right)
-                                return;
-                            const c = Math.max(0, Math.min(1, (e.clientX - r.left) / progressContainer.offsetWidth));
+                            // Support both touch and mouse events
+                            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                            
+                            if (clientX < r.left || clientX > r.right) return;
+                            
+                            const c = Math.max(0, Math.min(1, (clientX - r.left) / progressContainer.offsetWidth));
                             const t = c * duration;
-                            if (progressBar)
-                                progressBar.style.width = `${c * 100}%`;
-                            if (currentPlayerType === 'youtube')
+                            
+                            if (progressBar) progressBar.style.width = `${c * 100}%`;
+                            
+                            if (currentPlayerType === 'youtube') 
                                 youtubePlayer.seekTo(t, true);
-                            else
+                            else 
                                 audio.currentTime = t;
                         } catch (err) {
                             console.error("Seek error:", err);
                         }
-                    }
-                    );
+                    };
+                    
+                    // Add both touch and click listeners
+                    progressContainer.addEventListener('click', handleProgressSeek);
+                    progressContainer.addEventListener('touchend', handleProgressSeek);
                 }
 
                 function enableMainControls() {
@@ -5048,6 +5423,192 @@ body.light-mode #todo-list li:hover {
                 );
 
                 console.log("✅ Initialization v13.0 complete!");
+                // === DEARTEXT GENERATOR FUNCTIONALITY ===
+                function initDearTextGenerator() {
+                    const linesContainer = document.getElementById('deartext-lines');
+                    const addLineBtn = document.getElementById('add-line-btn');
+                    const generateBtn = document.getElementById('generate-link-btn');
+                    const outputDiv = document.getElementById('deartext-output');
+                    const musicSelect = document.getElementById('deartext-music');
+
+                    if (!linesContainer || !addLineBtn || !generateBtn || !outputDiv || !musicSelect) {
+                        console.warn("DearText Generator elements not found");
+                        return;
+                    }
+
+                    function addDearTextLine(value = "") {
+                        const lineDiv = document.createElement('div');
+                        lineDiv.className = 'deartext-line';
+
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.placeholder = 'Nhập nội dung...';
+                        input.value = value;
+                        input.classList.add('deartext-input');
+
+
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.innerHTML = `
+                        <ion-icon name="close-circle-outline" style="width:20px;height:20px;"></ion-icon>
+                        `;
+                        deleteBtn.onclick = () => {
+                            if (linesContainer.children.length > 1) {
+                                lineDiv.remove();
+                            } else {
+                                alert('Phải có ít nhất 1 dòng!');
+                            }
+                        };
+
+                        lineDiv.appendChild(input);
+                        lineDiv.appendChild(deleteBtn);
+                        linesContainer.appendChild(lineDiv);
+
+                        // Animate new line
+                        if (typeof anime !== 'undefined') {
+                            anime({
+                                targets: lineDiv,
+                                opacity: [0, 1],
+                                translateX: [-20, 0],
+                                duration: 300,
+                                easing: 'easeOutQuad'
+                            });
+                        }
+                    }
+
+                    function generateDearTextLink() {
+                        const inputs = [...linesContainer.querySelectorAll('input')];
+                        const texts = inputs.map(i => i.value.trim()).filter(Boolean);
+
+                        if (!texts.length) {
+                            alert('Chưa có nội dung!');
+                            return;
+                        }
+
+                        const music = musicSelect.value;
+
+                        const payload = {
+                            message: texts.join(','),
+                            music: music
+                        };
+
+                        try {
+                            const base64 = btoa(
+                                unescape(
+                                    encodeURIComponent(JSON.stringify(payload))
+                                )
+                            );
+
+                            const link = `https://htch.is-a.dev/nguyet/index.html?id=${base64}`;
+
+                            outputDiv.innerHTML = `
+                                <strong>✨ Link tạo được:</strong>
+                                <div class="deartext-output-wrapper">
+                                    <a href="${link}" target="_blank" rel="noopener noreferrer">${link}</a>
+                                    <button class="copy-link-btn" onclick="copyDearTextLink('${link}')" title="Copy link">
+                                        <ion-icon name="copy-outline"></ion-icon>
+                                    </button>
+                                </div>
+                            `;
+                            outputDiv.style.display = 'block';
+
+                            // Animate output
+                            if (typeof anime !== 'undefined') {
+                                anime({
+                                    targets: outputDiv,
+                                    opacity: [0, 1],
+                                    translateY: [10, 0],
+                                    duration: 400,
+                                    easing: 'easeOutQuad'
+                                });
+                            }
+                        } catch (error) {
+                            console.error('Generate link error:', error);
+                            alert('Lỗi tạo link! Vui lòng thử lại.');
+                        }
+                    }
+
+                    // Event listeners
+                    addLineBtn.addEventListener('click', () => addDearTextLine());
+                    generateBtn.addEventListener('click', generateDearTextLink);
+
+                    // Add initial line
+                    addDearTextLine();
+
+                    console.log("✅ DearText Generator initialized");
+                }
+
+                // Copy link function (global scope)
+                window.copyDearTextLink = function(link) {
+                    const btn = event.currentTarget;
+                    const icon = btn.querySelector('ion-icon');
+                    
+                    // Try modern clipboard API first
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(link).then(() => {
+                            showCopySuccess(btn, icon);
+                        }).catch(err => {
+                            console.error('Clipboard API failed:', err);
+                            fallbackCopy(link, btn, icon);
+                        });
+                    } else {
+                        // Fallback for older browsers
+                        fallbackCopy(link, btn, icon);
+                    }
+                };
+
+                function fallbackCopy(text, btn, icon) {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    
+                    try {
+                        document.execCommand('copy');
+                        showCopySuccess(btn, icon);
+                    } catch (err) {
+                        console.error('Fallback copy failed:', err);
+                        alert('Không thể copy! Vui lòng copy thủ công.');
+                    } finally {
+                        document.body.removeChild(textarea);
+                    }
+                }
+
+                function showCopySuccess(btn, icon) {
+                    // Change icon and style
+                    btn.classList.add('copied');
+                    icon.setAttribute('name', 'checkmark-circle-outline');
+                    
+                    // Optional: Show tooltip
+                    const originalTitle = btn.title;
+                    btn.title = 'Đã copy!';
+                    
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        icon.setAttribute('name', 'copy-outline');
+                        btn.title = originalTitle;
+                    }, 2000);
+                }
+
+                // Initialize DearText when tab is first opened
+                const deartextContent = document.getElementById('deartext-content');
+                if (deartextContent) {
+                    const observer = new MutationObserver((mutations) => {
+                        mutations.forEach((mutation) => {
+                            if (mutation.target.classList.contains('active') && !deartextContent.dataset.initialized) {
+                                deartextContent.dataset.initialized = 'true';
+                                initDearTextGenerator();
+                            }
+                        });
+                    });
+
+                    observer.observe(deartextContent, {
+                        attributes: true,
+                        attributeFilter: ['class']
+                    });
+                }
                 if (typeof anime !== 'undefined')
                     console.log("ℹ️ Anime.js v:", anime.version);
 
