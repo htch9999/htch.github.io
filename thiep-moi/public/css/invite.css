@@ -102,7 +102,7 @@
     }
 /* ===== Card chính ===== */
 .invite-card{
-  background: var(--bg-card) url(/uploads/icon/backgrounds.jpg);
+  background: var(--bg-card) url(/thiep-moi/uploads/icon/backgrounds.jpg);
   background-size: contain;
   border:1px solid var(--border);
   padding:50px;
