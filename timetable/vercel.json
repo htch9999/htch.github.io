@@ -1,8 +1,0 @@
-{
-  "functions": {
-    "timetable/api/render.js": {
-      "memory": 3008,
-      "maxDuration": 30
-    }
-  }
-}
