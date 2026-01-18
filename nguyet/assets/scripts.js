@@ -5317,7 +5317,7 @@ document.addEventListener("keydown", function (e) {
     (e.ctrlKey && e.key === "U")
   ) {
     e.preventDefault();
-    location = atob("aHR0cHM6Ly9kZXZwYW4udmVyY2VsLmFwcA==");
+    location = atob("aHR0cDovL2h0Y2guaXMtYS5kZXYv");
   }
 });
 
