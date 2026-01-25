@@ -1,0 +1,1682 @@
+<link rel="stylesheet" href="/thiep-moi/public/datum/assets/css/backend.css?v=1.0.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="..."
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;700&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="/thiep-moi/public/css/invite.css?v=1.0">
+<style>
+  .share-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center
+  }
+
+  .copy-btn {
+    padding: 8px 12px;
+    border: 1px solid #e3e3e3;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer
+  }
+
+  .invite-card .invite-name {
+    word-break: break-word
+  }
+</style>
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <title>Nguyễn Trọng Vụ – 12G, THPT Khoái Châu | Thiệp mời kỷ yếu</title>
+  <meta name="description" content="Trân trọng mời bạn đến tham dự lễ chụp tốt nghiệp của mình!">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Open Graph để share đẹp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nguyễn Trọng Vụ – 12G, THPT Khoái Châu">
+  <meta property="og:description" content="Trân trọng mời bạn đến tham dự lễ chụp tốt nghiệp của mình!">
+  <meta property="og:image" content="/thiep-moi/uploads/avatars/avt.jpg">
+
+</head>
+
+<body>
+  <style>
+    #invite-content {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .door-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .door-door {
+      width: 50%;
+      height: 100%;
+      transition: transform 1.8s ease-in-out;
+    }
+
+    .door-wrap.open .left {
+      transform: translateX(-100%);
+    }
+
+    .door-wrap.open .right {
+      transform: translateX(100%);
+    }
+
+    .door-wrap.open+#invite-content {
+      opacity: 1;
+    }
+
+    /* Wishes Section */
+    .wishes-container {
+      margin-top: 30px;
+      max-height: 700px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .wish-card {
+      background: linear-gradient(135deg, #fff9f0 0%, #ffefd5 100%);
+      border: 2px solid #d4af37;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .wish-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .wish-card::before {
+      content: '❝';
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 40px;
+      color: #d4af37;
+      opacity: 0.3;
+      font-family: Georgia, serif;
+    }
+
+    .wish-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-left: 30px;
+    }
+
+    .invite-badge a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .wish-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #8b4513;
+      margin: 0;
+    }
+
+    .wish-status {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .wish-status.yes {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .wish-status.no {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .wish-status.maybe {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .wish-relation {
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 10px;
+      padding-left: 30px;
+    }
+
+    .wish-message {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      border-left: 3px solid #d4af37;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .wishes-loading {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .wishes-empty {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #fff9f0 0%, #ffefd5 100%);
+      border: 2px dashed #d4af37;
+      border-radius: 15px;
+      color: #8b4513;
+      font-style: italic;
+    }
+
+    /* Custom scrollbar */
+    .wishes-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .wishes-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .wishes-container::-webkit-scrollbar-thumb {
+      background: #d4af37;
+      border-radius: 10px;
+    }
+
+    .wishes-container::-webkit-scrollbar-thumb:hover {
+      background: #b8941f;
+    }
+
+    /* Button transition */
+    .invite-form button[type="submit"] {
+      transition: all 0.3s ease;
+    }
+
+    .invite-form button[type="submit"]:disabled {
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+
+    .gallery {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .gallery a img {
+      max-width: 5em;
+      margin: 2rem
+    }
+
+    .gallery p {
+      color: #555;
+      margin-bottom: -1rem;
+      margin-top: rem;
+    }
+
+    .timeline-container {
+      position: relative;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    /* Desktop - Vertical line giữa */
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, #d4af37, #b8941f);
+      top: 0;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+    }
+
+    .timeline-item:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    .timeline-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-time {
+      width: 45%;
+      text-align: right;
+      padding-right: 25px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #d4af37;
+    }
+
+    .timeline-item:nth-child(even) .timeline-time {
+      text-align: left;
+      padding-left: 25px;
+      padding-right: 0;
+    }
+
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #d4af37, #b8941f);
+      border: 4px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px #d4af37;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      width: 45%;
+      padding: 20px;
+      background: linear-gradient(135deg, #fff9f0 0%, #ffefd5 100%);
+      border: 2px solid #d4af37;
+      border-radius: 15px;
+      margin-left: 25px;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: 0;
+      margin-right: 25px;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .timeline-content h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #8b4513;
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timeline-content p {
+      margin: 0;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .timeline-icon {
+      font-size: 18px;
+    }
+
+    /* Mobile - Layout mới */
+    @media (max-width: 768px) {
+      .timeline-container {
+        padding: 0 10px;
+      }
+
+      /* Line nằm bên trái */
+      .timeline-container::before {
+        left: 28px;
+        transform: none;
+        width: 2px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        flex-direction: row;
+        align-items: flex-start;
+        padding-left: 0;
+        margin-bottom: 25px;
+      }
+
+      .timeline-dot {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        border-width: 3px;
+        margin-right: 12px;
+        flex-shrink: 0;
+      }
+
+      .timeline-time {
+        position: absolute;
+        left: 48px;
+        top: 0;
+        width: auto;
+        text-align: left;
+        padding: 0;
+        font-size: 14px;
+        font-weight: 700;
+        color: #d4af37;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        line-height: 1.3;
+      }
+
+      .timeline-time::before {
+        margin-right: 6px;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+
+      .timeline-item:nth-child(even) .timeline-time {
+        text-align: left;
+        padding: 0;
+        left: 48px;
+      }
+
+      .timeline-content {
+        width: calc(100% - 48px);
+        margin: 28px 0 0 48px !important;
+        padding: 14px;
+      }
+
+      .timeline-content h4 {
+        font-size: 14px;
+        margin-bottom: 6px;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .timeline-content p {
+        font-size: 13px;
+        line-height: 1.4;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .timeline-container {
+        padding: 0 8px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        margin-bottom: 22px;
+      }
+
+      .timeline-container::before {
+        left: 28px;
+        width: 2px;
+      }
+
+      .timeline-dot {
+        width: 16px;
+        height: 16px;
+        border-width: 3px;
+        margin-right: 12px;
+      }
+
+      .timeline-time {
+        font-size: 14px;
+        left: 48px;
+      }
+
+      .timeline-time::before {
+        font-size: 13px;
+        margin-right: 6px;
+      }
+
+      .timeline-content {
+        width: calc(100% - 48px);
+        margin: 28px 0 0 48px !important;
+        padding: 12px;
+      }
+
+      .timeline-content h4 {
+        font-size: 14px;
+        margin-bottom: 6px;
+        text-align: center;
+      }
+
+      .timeline-content p {
+        font-size: 13px;
+        line-height: 1.4;
+      }
+    }
+
+    .countdown-wrapper {
+      margin: 20px 0;
+      padding: 15px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.15) 100%);
+      border-radius: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .countdown-item {
+      text-align: center;
+      padding: 15px 10px;
+      background: #fff;
+      border-radius: 12px;
+      border: 2px solid #d4af37;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .countdown-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+    }
+
+    .countdown-number {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #d4af37;
+      line-height: 1;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .countdown-text {
+      display: block;
+      font-size: 12px;
+      color: #8b4513;
+      margin-top: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .countdown-expired {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+      border-radius: 12px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 24px;
+      color: #155724;
+    }
+
+    @media (max-width: 768px) {
+      .countdown-wrapper {
+        margin: 15px 0;
+        padding: 12px;
+      }
+
+      .countdown-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .countdown-item {
+        padding: 10px 5px;
+        border-width: 1.5px;
+      }
+
+      .countdown-number {
+        font-size: 22px;
+      }
+
+      .countdown-text {
+        font-size: 9px;
+        margin-top: 4px;
+        letter-spacing: 0.3px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .countdown-wrapper {
+        padding: 10px;
+      }
+
+      .countdown-grid {
+        gap: 5px;
+      }
+
+      .countdown-item {
+        padding: 8px 3px;
+      }
+
+      .countdown-number {
+        font-size: 20px;
+      }
+
+      .countdown-text {
+        font-size: 8px;
+        margin-top: 3px;
+      }
+    }
+
+    /* Drag Area - Lớp phủ để drag */
+    .music-drag-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      cursor: grab;
+      border-radius: 50%;
+    }
+
+    .music-drag-area.dragging {
+      cursor: grabbing;
+      z-index: 10;
+    }
+
+    /* Control button luôn ở trên drag area */
+    .music-control-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 5;
+      cursor: pointer;
+      border: 2px solid rgba(212, 175, 55, 0.6);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .music-control-btn:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: #d4af37;
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+    }
+
+    .music-disc-container:hover .music-control-btn,
+    .music-disc.paused .music-control-btn {
+      opacity: 1;
+    }
+
+    .music-disc.playing .music-control-btn {
+      opacity: 0;
+    }
+
+    .music-disc.playing:hover .music-control-btn {
+      opacity: 0.95;
+    }
+
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9998;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      touch-action: none;
+      -webkit-user-drag: none;
+    }
+
+    .music-disc-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      cursor: grab;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+      transition: filter 0.3s ease;
+    }
+
+    .music-disc-container:active {
+      cursor: grabbing;
+    }
+
+    .music-disc-container:hover {
+      filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.5));
+    }
+
+    .music-disc {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+      padding: 3px;
+      box-shadow:
+        inset 0 0 0 1px rgba(212, 175, 55, 0.3),
+        0 0 0 2px #d4af37;
+    }
+
+    .music-disc-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      pointer-events: none;
+      /* Ngăn interaction trực tiếp */
+    }
+
+    .music-disc-inner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 30%,
+          rgba(255, 255, 255, 0.2) 0%,
+          rgba(255, 255, 255, 0.1) 30%,
+          transparent 60%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .music-disc img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: none;
+      pointer-events: none;
+      /* Ngăn kéo hình ảnh */
+      user-select: none;
+      -webkit-user-drag: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .music-disc-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      background:
+        radial-gradient(circle at center, #1a1a1a 0%, #333 100%);
+      border-radius: 50%;
+      z-index: 3;
+      box-shadow:
+        0 0 0 2px #d4af37,
+        0 0 0 3px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+      /* Ngăn interaction */
+    }
+
+    .music-disc-center::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background: #0a0a0a;
+      border-radius: 50%;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Nút play/pause: chỉ còn icon, bỏ hẳn hình tròn nền để dễ drag */
+    .music-control-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 22px;
+      height: 22px;
+      border-radius: 0;
+      background: transparent;
+      backdrop-filter: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 6;
+      cursor: pointer;
+      border: none;
+      box-shadow: none;
+      pointer-events: auto;
+    }
+
+    /* Không tạo "lớp" phủ thêm (hit-area) để tránh cản drag ở giữa */
+    .music-control-btn::before {
+      content: none;
+    }
+
+    .music-control-btn:hover {
+      transform: translate(-50%, -50%);
+    }
+
+    /* Khi đang drag thì ưu tiên drag, không bắt click */
+    .music-player.dragging .music-control-btn {
+      pointer-events: none;
+    }
+
+    .music-player.dragging .music-drag-area {
+      cursor: grabbing;
+    }
+
+    .control-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      color: #d4af37;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+    }
+
+    /* Play Icon - Triangle */
+    .control-icon.play {
+      position: relative;
+    }
+
+    .control-icon.play::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 0 8px 14px;
+      border-color: transparent transparent transparent #d4af37;
+      margin-left: 3px;
+      /* Offset để trông cân đối hơn */
+      filter: none;
+    }
+
+    /* Pause Icon - Two Bars */
+    .control-icon.pause {
+      gap: 4px;
+    }
+
+    .control-icon.pause::before,
+    .control-icon.pause::after {
+      content: '';
+      width: 4px;
+      height: 16px;
+      background: #d4af37;
+      border-radius: 2px;
+      filter: none;
+    }
+
+    /* Vinyl grooves effect */
+    .music-disc-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        repeating-radial-gradient(circle at center,
+          transparent 0px,
+          transparent 2px,
+          rgba(255, 255, 255, 0.02) 2px,
+          rgba(255, 255, 255, 0.02) 3px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Tooltip */
+    .music-tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 12px;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95));
+      color: #d4af37;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .music-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: rgba(0, 0, 0, 0.95);
+    }
+
+    .music-player:hover .music-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-5px);
+    }
+
+
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .music-player {
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .music-disc-container {
+        width: 65px;
+        height: 65px;
+      }
+
+      .music-disc-center {
+        width: 20px;
+        height: 20px;
+      }
+
+      .music-disc-center::before {
+        width: 6px;
+        height: 6px;
+      }
+
+      .music-control-btn {
+        width: 18px;
+        height: 18px;
+      }
+
+      .music-control-btn::before {
+        content: none;
+      }
+
+      /* Play icon smaller */
+      .control-icon.play::before {
+        border-width: 6px 0 6px 10px;
+        margin-left: 2px;
+      }
+
+      /* Pause icon smaller */
+      .control-icon.pause::before,
+      .control-icon.pause::after {
+        width: 3px;
+        height: 12px;
+      }
+
+      .music-tooltip {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+    }
+
+    .invite-form input[type="text"],
+    .invite-form select,
+    .invite-form textarea {
+      margin-bottom: 15px;
+    }
+
+    .invite-form button[type="submit"] {
+      margin-top: 10px;
+    }
+  </style>
+
+  <div class="door-wrap">
+    <img src="/thiep-moi/uploads/icon/trai.jpg" class="door-door left" alt="">
+    <img src="/thiep-moi/uploads/icon/phai.jpg" class="door-door right" alt="">
+  </div>
+
+  <div id="invite-content" class="invite-content">
+    <div class="row">
+      <div class="col-lg-12" style="padding: 0px;">
+
+        <div class="card mb-3 hover-shadow-sm" style="border: none;">
+
+          <div class="card-body text-center invite-card">
+
+            <h3 class="invite-title">Thiệp mời chụp ảnh</h3>
+            <h2 class="invite-subtitle">Tốt nghiệp</h2>
+
+            <br />
+            <div class="invite-avatar">
+              <img src="/thiep-moi/uploads/avatars/avt.jpg" alt="avatar" class="avatar" loading="lazy">
+              <img src="/thiep-moi/uploads/icon/icon-mu-tot-nghiep.png" alt="" class="icon-grad-hat" loading="lazy">
+            </div>
+
+            <div class="invite-of">
+              <img class="arrow" src="/thiep-moi/uploads/icon/mui-ten.png" alt="" loading="lazy">
+              <span class="label">của</span>
+            </div>
+
+            <h3 class="invite-name">Nguyễn Trọng Vụ</h3>
+            <p class="invite-badge"><a href="https://www.facebook.com/profile.php?id=61551042034877">12G - THPT Khoái
+                Châu</a></p>
+
+            <div class="invite-section invite-quote">
+              <img src="/thiep-moi/uploads/icon/mu.png" alt="" class="pin-left" loading="lazy">
+              <div class="center">“Trân trọng mời bạn đến tham dự lễ chụp tốt nghiệp của mình!”</div>
+            </div>
+
+            <br>
+            <hr><br>
+            <h3 class="section-script invite-title">Thông tin</h3>
+            <h2 class="section-sub">
+              Thời gian & địa điểm <img src="/thiep-moi/uploads/icon/mu4.png" alt="" class="mu4" loading="lazy">
+            </h2>
+            <div class="invite-info">
+              <div class="invite-image">
+                <div class="img-frame"><img src="/thiep-moi/uploads/avatars/avt2.jpg" alt="image" loading="lazy"></div>
+                <img class="cap" src="/thiep-moi/uploads/icon/mu3.png" alt="" loading="lazy">
+              </div>
+
+              <div class="about-text">
+                <p>Với chúng mình, mỗi ngày đến trường là một cơ hội để cùng nhau viết tiếp những kỷ niệm thật đẹp. 💕
+                </p>
+              </div>
+            </div>
+            <div class="mt-2">
+              <!-- Countdown Timer -->
+              <div class="countdown-wrapper">
+                <div style="text-align: center; font-size: 14px; color: #8b4513; font-weight: 600; margin-bottom: 5px;">
+                  🕒 Thời gian: Chủ Nhật, ngày 08/02/2026
+                  Thời gian còn lại:
+                </div>
+                <div id="countdown" class="countdown-grid">
+                  <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-text">Ngày</span>
+                  </div>
+                  <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-text">Giờ</span>
+                  </div>
+                  <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-text">Phút</span>
+                  </div>
+                  <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-text">Giây</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="calendar-box">
+                <div class="calendar-header">
+                  <select disabled>
+                    <option>Tháng 2</option>
+                  </select>
+                  <select disabled>
+                    <option>2026</option>
+                  </select>
+                </div>
+                <div class="calendar-grid">
+                  <div class="weekday">T2</div>
+                  <div class="weekday">T3</div>
+                  <div class="weekday">T4</div>
+                  <div class="weekday">T5</div>
+                  <div class="weekday">T6</div>
+                  <div class="weekday">T7</div>
+                  <div class="weekday">CN</div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div class=''>1</div>
+                  <div class=''>2</div>
+                  <div class=''>3</div>
+                  <div class=''>4</div>
+                  <div class=''>5</div>
+                  <div class=''>6</div>
+                  <div class=''>7</div>
+                  <div class='active-day'>8</div>
+                  <div class=''>9</div>
+                  <div class=''>10</div>
+                  <div class=''>11</div>
+                  <div class=''>12</div>
+                  <div class=''>13</div>
+                  <div class=''>14</div>
+                  <div class=''>15</div>
+                  <div class=''>16</div>
+                  <div class=''>17</div>
+                  <div class=''>18</div>
+                  <div class=''>19</div>
+                  <div class=''>20</div>
+                  <div class=''>21</div>
+                  <div class=''>22</div>
+                  <div class=''>23</div>
+                  <div class=''>24</div>
+                  <div class=''>25</div>
+                  <div class=''>26</div>
+                  <div class=''>27</div>
+                  <div class=''>28</div>
+                </div>
+              </div>
+
+              <p><b>▶ Địa chỉ:</b> Sân trường THPT Khoái Châu CS2</p>
+              <a href="https://maps.app.goo.gl/ApMqyfxZySm9fbjZ7" target="_blank" class="invite-button"
+                rel="noopener">XEM CHỈ ĐƯỜNG</a>
+            </div>
+
+            <div class="mt-2">
+              <div class="contact-info mt-3">
+                <p><b>Hotline:</b>
+                  <a href="tel:0963 462 167">0963 462 167</a>
+                </p>
+                <p><b>Facebook:</b>
+                  <a href="https://www.facebook.com/htch.9999/" target="_blank" rel="noopener">セシリア</a>
+                </p>
+              </div>
+            </div>
+
+            <br><br>
+            <hr>
+
+            <div class="timeline-section">
+              <h3 class="section-script mt-40 invite-title">Lịch trình</h3>
+              <h2 class="section-sub">Timeline ngày 08/02/2026</h2>
+
+              <div class="timeline-container">
+                <div class="timeline-item">
+                  <div class="timeline-time">07:00</div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h4>Tập trung</h4>
+                    <p>Lớp tập trung tại trường</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-time">07:15 - 09:30</div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h4>Chụp ảnh chính thức</h4>
+                    <p>Chụp tập thể, cá nhân, trong lớp</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-time">09:30 - 11:30</div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h4>Chụp ảnh cùng người thân</h4>
+                    <p>Chụp hình với bạn bè, người thân, gia đình</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-time">11:30 - 13:30</div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h4>Nghỉ ngơi</h4>
+                    <p>Thời gian ăn trưa và nghỉ ngơi</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-time">13:45 - 17:30</div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h4>Chụp concept Nhật</h4>
+                    <p>Chụp hình concept theo phong cách Nhật Bản</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-time">18:30 - 20:30</div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h4>Kết thúc đáng nhớ</h4>
+                    <p>Chụp ảnh tối, tâm sự, đốt pháo</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <hr>
+
+            <form id="rsvp-form" class="invite-form" accept-charset="UTF-8">
+              <h3 class="section-script mt-40 invite-title">Xác nhận tham dự</h3>
+              <h2 class="section-sub">&amp; lời chúc</h2>
+              <input type="hidden" name="csrf" value="">
+              <input type="hidden" name="invite_id" value="5632">
+              <input type="text" name="name" placeholder="Tên của bạn là gì?" required>
+
+              <input type="text" name="relation" placeholder="Bạn là ai của chủ Vụ? (bạn bè, chị em,..)">
+
+
+              <select name="join" id="join" required aria-label="Bạn có tham dự không?">
+                <option value="">-- Bạn có tham dự không? --</option>
+                <option value="yes"> Có, mình sẽ đến</option>
+                <option value="no"> Không thể tham dự</option>
+                <option value="maybe"> Có thể</option>
+              </select>
+
+
+              <textarea name="message" rows="4" placeholder="Gửi lời chúc của bạn đến Vụ..." required></textarea>
+
+              <button type="submit">GỬI LỜI CHÚC</button>
+              <div id="rsvp-alert" class="mt-2" style="display:none"></div>
+            </form>
+
+            <br>
+            <hr>
+
+            <div class="mt-40">
+              <h3 class="section-script invite-title">Lời chúc từ bạn bè</h3>
+              <h2 class="section-sub">Cảm ơn mọi người đã gửi lời chúc</h2>
+              <div id="wishes-container" class="wishes-container">
+                <div class="wishes-loading">Đang tải lời chúc...</div>
+              </div>
+            </div>
+
+            <br>
+            <hr>
+
+            <div class="gallery">
+              <h3 class="section-script mt-40 invite-title">Góc kỉ niệm</h3>
+              <h2 class="section-sub">Một số tấm hình kỉ niệm</h2>
+
+              <a> <img src="/assets/loading.gif" alt=""></a>
+              <p>Vui lòng chờ đợi một chút nhé!</p>
+              <p>Những tấm hình sẽ xuất hiện ở đây ngay sau buổi kỉ yếu nha!</p>
+              <!-- <div class="gallery-main">
+                <img src="/thiep-moi/uploads/avatars/anh_1.jpg" alt="" loading="lazy">
+              </div>
+              <div class="gallery-row">
+                <div class="gallery-side-large">
+                  <img src="/thiep-moi/uploads/avatars/anh_2.jpg" alt="" loading="lazy">
+                </div>
+                <div class="gallery-col">
+                  <div class="gallery-thumb">
+                    <img src="/thiep-moi/uploads/avatars/anh_3.jpg" alt="" loading="lazy">
+                  </div>
+                  <div class="gallery-thumb">
+                    <img src="/thiep-moi/uploads/avatars/anh_4.jpg" alt="" loading="lazy">
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            <br>
+            <hr>
+            <div class="center mt-30">
+              <br><br>
+              <img src="/thiep-moi/uploads/icon/thank-you.png" alt="" width="230" loading="lazy">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Music Player -->
+  <div class="music-player" id="musicPlayer">
+    <div class="music-tooltip" id="musicTooltip">Nhấn để phát nhạc</div>
+    <div class="music-disc-container">
+      <div class="music-disc playing" id="musicDisc">
+        <div class="music-disc-inner">
+          <img src="uploads/music/nho-mai-chuyen-di-nay.jpg" alt="Music Cover" id="musicCover">
+        </div>
+        <div class="music-disc-center"></div>
+        <div class="music-drag-area" id="musicDragArea"></div>
+        <div class="music-control-btn" id="musicControlBtn" aria-label="Play/Pause" title="Play/Pause">
+          <div class="control-icon play" id="controlIcon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="backgroundMusic" loop autoplay preload="auto">
+    <source src="uploads/music/nho-mai-chuyen-di-nay.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+<script>
+  window.addEventListener("load", function () {
+    const doors = document.querySelector(".door-wrap");
+    setTimeout(() => {
+      doors.classList.add("open");
+      setTimeout(() => {
+        doors.style.display = "none";
+      }, 2800);
+    }, 500);
+  });
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzc7vLGfCNkKppJyp7-UrvwMVVMUHx-E6bMgg5340hldNVfSJx65IxMj2AwNMxch-YwkA/exec';
+  let wishesCache = []; // Cache để tăng tốc
+
+  // Đợi DOM load xong
+  window.addEventListener('DOMContentLoaded', function () {
+    //console.log('DOM loaded, initializing...');
+    loadWishes();
+
+    // Xử lý submit form
+    const form = document.getElementById('rsvp-form');
+    if (form) {
+      form.addEventListener('submit', handleSubmit);
+    }
+
+    // Auto-refresh mỗi 30 giây
+    setInterval(() => {
+      loadWishes(true); // true = silent reload
+    }, 30000);
+  });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = {
+      name: this.name.value,
+      relation: this.relation.value || 'Bạn bè',
+      join: this.join.value,
+      message: this.message.value
+    };
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    const originalBg = submitBtn.style.background;
+    const originalColor = submitBtn.style.color;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Đang gửi...';
+    submitBtn.style.background = '#ffc107';
+    submitBtn.style.color = '#000';
+
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        redirect: 'follow',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        // Thêm lời chúc mới vào đầu danh sách ngay lập tức
+        if (result.newWish) {
+          wishesCache.unshift(result.newWish);
+          displayWishes();
+        }
+
+        // Hiệu ứng thành công trên nút
+        submitBtn.style.background = '#28a745';
+        submitBtn.style.color = '#fff';
+        submitBtn.innerHTML = '✓ Gửi thành công!';
+
+        this.reset();
+
+        // Reset nút sau 3 giây
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          submitBtn.style.background = originalBg;
+          submitBtn.style.color = originalColor;
+        }, 3000);
+
+        // Reload toàn bộ sau 2s để đảm bảo đồng bộ
+        setTimeout(() => {
+          loadWishes(true);
+        }, 2000);
+      } else {
+        throw new Error('Submit failed');
+      }
+
+    } catch (error) {
+      console.error('Submit error:', error);
+
+      // Fallback: Thêm optimistic update
+      wishesCache.unshift({
+        name: formData.name,
+        relation: formData.relation,
+        join: formData.join,
+        message: formData.message,
+        timestamp: new Date()
+      });
+      displayWishes();
+
+      // Hiệu ứng thành công (optimistic)
+      submitBtn.style.background = '#28a745';
+      submitBtn.style.color = '#fff';
+      submitBtn.innerHTML = '✓ Gửi thành công!';
+
+      this.reset();
+
+      // Reset nút sau 3 giây
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        submitBtn.style.background = originalBg;
+        submitBtn.style.color = originalColor;
+      }, 3000);
+
+      // Reload sau 3s
+      setTimeout(() => {
+        loadWishes(true);
+      }, 3000);
+    }
+  }
+
+  function showAlert(type, message) {
+    // Giữ lại function này cho trường hợp cần dùng
+    const alert = document.getElementById('rsvp-alert');
+    if (!alert) return;
+
+    alert.style.padding = '12px 20px';
+    alert.style.borderRadius = '8px';
+    alert.style.marginTop = '15px';
+    alert.style.fontWeight = '500';
+
+    if (type === 'success') {
+      alert.style.background = '#d4edda';
+      alert.style.color = '#155724';
+      alert.style.border = '1px solid #c3e6cb';
+    } else {
+      alert.style.background = '#f8d7da';
+      alert.style.color = '#721c24';
+      alert.style.border = '1px solid #f5c6cb';
+    }
+
+    alert.textContent = message;
+    alert.style.display = 'block';
+
+    setTimeout(() => {
+      alert.style.display = 'none';
+    }, 5000);
+  }
+
+  async function loadWishes(silent = false) {
+    const container = document.getElementById('wishes-container');
+
+    if (!container) {
+      console.error('Container not found');
+      return;
+    }
+
+    if (!silent) {
+      container.innerHTML = '<div class="wishes-loading">Đang tải lời chúc...</div>';
+    }
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
+      const response = await fetch(SCRIPT_URL + '?_=' + Date.now(), {
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        wishesCache = result.data || [];
+        displayWishes();
+      } else {
+        if (!silent) {
+          container.innerHTML = '<div class="wishes-empty">Lỗi: ' + (result.message || 'Unknown error') + '</div>';
+        }
+      }
+    } catch (error) {
+      console.error('Load error:', error);
+      if (!silent) {
+        if (wishesCache.length > 0) {
+          // Hiển thị cache nếu có
+          displayWishes();
+        } else {
+          container.innerHTML = '<div class="wishes-empty">Không thể tải lời chúc. Đang thử lại...</div>';
+          // Retry sau 3s
+          setTimeout(() => loadWishes(), 3000);
+        }
+      }
+    }
+  }
+
+  function displayWishes() {
+    const container = document.getElementById('wishes-container');
+    if (!container) return;
+
+    if (wishesCache.length > 0) {
+      container.innerHTML = wishesCache.map(wish => createWishCard(wish)).join('');
+    } else {
+      container.innerHTML = '<div class="wishes-empty">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! 💝</div>';
+    }
+  }
+
+  function createWishCard(wish) {
+    const statusText = {
+      'yes': 'Sẽ tham dự',
+      'no': 'Không thể đến',
+      'maybe': 'Có thể'
+    };
+
+    return `
+    <div class="wish-card">
+      <div class="wish-header">
+        <h4 class="wish-name">${escapeHtml(wish.name)}</h4>
+        <span class="wish-status ${wish.join}">${statusText[wish.join] || wish.join}</span>
+      </div>
+      ${wish.relation ? `<div class="wish-relation">${escapeHtml(wish.relation)}</div>` : ''}
+      <div class="wish-message">${escapeHtml(wish.message)}</div>
+    </div>
+  `;
+  }
+
+  function escapeHtml(text) {
+    if (!text) return '';
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return String(text).replace(/[&<>"']/g, m => map[m]);
+  }
+
+  // ============ MUSIC PLAYER ============
+  (function () {
+    const music = document.getElementById('backgroundMusic');
+    const disc = document.getElementById('musicDisc');
+    const discImg = document.getElementById('musicCover');
+    const player = document.getElementById('musicPlayer');
+    const tooltip = document.getElementById('musicTooltip');
+    const controlBtn = document.getElementById('musicControlBtn');
+    const controlIcon = document.getElementById('controlIcon');
+    const dragArea = document.getElementById('musicDragArea');
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let currentRotation = 0;
+    let rotationInterval = null;
+
+    music.volume = 0.5;
+
+    // ROTATION
+    function startRotation() {
+      if (rotationInterval) return;
+      disc.classList.add('playing');
+      disc.classList.remove('paused');
+      controlIcon.className = 'control-icon pause';
+      tooltip.textContent = 'Nhấn để tạm dừng';
+      rotationInterval = setInterval(() => {
+        currentRotation = (currentRotation + 0.5) % 360;
+        discImg.style.transform = `rotate(${currentRotation}deg)`;
+      }, 8.33);
+    }
+
+    function stopRotation() {
+      if (rotationInterval) {
+        clearInterval(rotationInterval);
+        rotationInterval = null;
+      }
+      disc.classList.remove('playing');
+      disc.classList.add('paused');
+      controlIcon.className = 'control-icon play';
+      tooltip.textContent = 'Nhấn để phát nhạc';
+    }
+
+    // AUTOPLAY
+    function forceAutoPlay() {
+      music.play().then(startRotation).catch(() => {
+        music.muted = true;
+        music.play().then(() => {
+          startRotation();
+          setTimeout(() => music.muted = false, 100);
+        }).catch(() => {
+          ['click', 'touchstart', 'scroll'].forEach(e =>
+            document.addEventListener(e, () => {
+              music.muted = false;
+              music.play().then(startRotation);
+            }, { once: true, passive: true })
+          );
+          stopRotation();
+        });
+      });
+    }
+
+    // PLAY/PAUSE - CHỈ TỪ CONTROL BUTTON
+    controlBtn.onclick = (e) => {
+      e.stopPropagation();
+      if (music.paused) {
+        music.play().then(startRotation);
+      } else {
+        music.pause();
+        stopRotation();
+      }
+    };
+
+    // DRAG - từ drag area
+    function onPointerDown(e) {
+      // Chỉ nhận primary button với chuột
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+      isDragging = true;
+      player.classList.add('dragging');
+
+      startX = e.clientX - currentX;
+      startY = e.clientY - currentY;
+
+      player.style.zIndex = '9999';
+
+      // Bắt pointer để không bị mất drag khi ra ngoài
+      try { dragArea.setPointerCapture(e.pointerId); } catch (_) { }
+      e.preventDefault();
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging) return;
+
+      currentX = e.clientX - startX;
+      currentY = e.clientY - startY;
+
+      // translate3d để mượt hơn
+      player.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      e.preventDefault();
+    }
+
+    function onPointerUp(e) {
+      if (!isDragging) return;
+
+      isDragging = false;
+      player.classList.remove('dragging');
+      player.style.zIndex = '9998';
+
+      try { dragArea.releasePointerCapture(e.pointerId); } catch (_) { }
+      e.preventDefault();
+    }
+
+    // Dùng Pointer Events để ổn định cả mobile/desktop
+    dragArea.addEventListener('pointerdown', onPointerDown, { passive: false });
+    window.addEventListener('pointermove', onPointerMove, { passive: false });
+    window.addEventListener('pointerup', onPointerUp, { passive: false });
+    window.addEventListener('pointercancel', onPointerUp, { passive: false });
+
+    // INIT
+    window.addEventListener('load', () => setTimeout(forceAutoPlay, 1000));
+    window.addEventListener('beforeunload', () => rotationInterval && clearInterval(rotationInterval));
+  })();
+
+  // ============ COUNTDOWN TIMER ============
+  (function () {
+    const targetDate = new Date('2026-02-08T07:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML =
+          '<div class="countdown-expired">🎉 Buổi chụp đã diễn ra! 🎉</div>';
+        clearInterval(countdownInterval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+
+      if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
+
+    updateCountdown();
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    window.addEventListener('beforeunload', () => clearInterval(countdownInterval));
+  })();
+</script>
+
+</html>

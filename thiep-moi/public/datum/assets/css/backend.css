@@ -54,7 +54,7 @@ button,input{overflow:visible}
 button,select{text-transform:none}
 [role=button]{cursor:pointer}
 select{word-wrap:normal}
-[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}
+[type=button],[type=reset],[type=submit],button{-webkit-appearance:button;appearance:button}
 [type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}
 [type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{padding:0;border-style:none}
 input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}
@@ -82,7 +82,7 @@ li.advantage-li-1{display:-webkit-flex}
 h3.h3category {color: white;line-height: 0.8em;font-size: 16px;margin-bottom: 0px;margin-top: 0;}
 progress{vertical-align:baseline}
 [type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}
-[type=search]{outline-offset:-2px;-webkit-appearance:none}
+[type=search]{outline-offset:-2px;-webkit-appearance:none;appearance:none}
 [type=search]::-webkit-search-decoration{-webkit-appearance:none}
 ::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}
 output{display:inline-block}
@@ -3308,11 +3308,11 @@ i.amber-text{color:#3378ff!important}
 .flex-tree>ul>li:after,.flex-tree>ul>li:before{border:0}
 .flex-tree label{font-weight:400}
 .flex-tree label.node{font-weight:700}
-.flex-tree input[type=checkbox]{border:1px solid #b4b9be;background:#fff;color:#555;clear:none;cursor:pointer;display:inline-block;line-height:0;height:16px;margin:-4px 4px 0 0;outline:0;padding:0;text-align:center;vertical-align:middle;width:16px;min-width:16px;-webkit-appearance:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.1);transition:border-color .05s ease-in-out}
+.flex-tree input[type=checkbox]{border:1px solid #b4b9be;background:#fff;color:#555;clear:none;cursor:pointer;display:inline-block;line-height:0;height:16px;margin:-4px 4px 0 0;outline:0;padding:0;text-align:center;vertical-align:middle;width:16px;min-width:16px;-webkit-appearance:none;appearance:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.1);transition:border-color .05s ease-in-out}
 .flex-tree input[type=checkbox]:focus{border-color:#5b9dd9;box-shadow:0 0 2px rgba(30,140,190,.8)}
 .flex-tree input[type=checkbox]:checked{background:#3378ff;border:none}
-.flex-tree input[type=checkbox]:checked:before{float:left;display:inline-block;vertical-align:middle;width:16px;font:400 20px/1 Arial,Helvetica Neue,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;content:"\02713";color:var(--white);margin:1px 0 0;font-size:17px!important}
-.flex-tree input[type=checkbox]:indeterminate:before{float:left;display:inline-block;vertical-align:middle;width:16px;font:400 20px/1 Arial,Helvetica Neue,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;content:"\02043";color:#3378ff;margin:-4px 0 0 -1px}
+.flex-tree input[type=checkbox]:checked:before{display:inline-block;vertical-align:middle;width:16px;font:400 20px/1 Arial,Helvetica Neue,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;content:"\02713";color:var(--white);margin:1px 0 0;font-size:17px!important}
+.flex-tree input[type=checkbox]:indeterminate:before{display:block;width:16px;font:400 20px/1 Arial,Helvetica Neue,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;content:"\02043";color:#3378ff;margin:-4px 0 0 -1px}
 .flex-tree input[type=checkbox].indeterminate{background-color:#eee}
 .ic-square{width:20px;height:20px;background:transparent;border:1px solid #324253;text-align:center;line-height:19px;font-size:12px}
 .tree-box{margin:0}
@@ -3711,21 +3711,21 @@ a.bg-skyblue-light:focus,a.bg-skyblue-light:hover,button.bg-skyblue-light:focus,
 .letter-spacing-1{letter-spacing:.0625rem}
 .letter-spacing-15{letter-spacing:.09375rem}
 .letter-spacing-2{letter-spacing:.125rem}
-.text-ellipsis.short-1{-webkit-line-clamp:1}
+.text-ellipsis.short-1{-webkit-line-clamp:1;line-clamp:1}
 .text-ellipsis.short-1,.text-ellipsis.short-2{overflow:hidden;text-overflow:ellipsis;display:-webkit-box}
-.text-ellipsis.short-2{-webkit-line-clamp:2}
-.text-ellipsis.short-3{-webkit-line-clamp:3}
+.text-ellipsis.short-2{-webkit-line-clamp:2;line-clamp:2}
+.text-ellipsis.short-3{-webkit-line-clamp:3;line-clamp:3}
 .text-ellipsis.short-3,.text-ellipsis.short-4{overflow:hidden;text-overflow:ellipsis;display:-webkit-box}
-.text-ellipsis.short-4{-webkit-line-clamp:4}
-.text-ellipsis.short-5{-webkit-line-clamp:5}
+.text-ellipsis.short-4{-webkit-line-clamp:4;line-clamp:4}
+.text-ellipsis.short-5{-webkit-line-clamp:5;line-clamp:5}
 .text-ellipsis.short-5,.text-ellipsis.short-6{overflow:hidden;text-overflow:ellipsis;display:-webkit-box}
-.text-ellipsis.short-6{-webkit-line-clamp:6}
-.text-ellipsis.short-7{-webkit-line-clamp:7}
+.text-ellipsis.short-6{-webkit-line-clamp:6;line-clamp:6}
+.text-ellipsis.short-7{-webkit-line-clamp:7;line-clamp:7}
 .text-ellipsis.short-7,.text-ellipsis.short-8{overflow:hidden;text-overflow:ellipsis;display:-webkit-box}
-.text-ellipsis.short-8{-webkit-line-clamp:8}
-.text-ellipsis.short-9{-webkit-line-clamp:9}
+.text-ellipsis.short-8{-webkit-line-clamp:8;line-clamp:8}
+.text-ellipsis.short-9{-webkit-line-clamp:9;line-clamp:9}
 .text-ellipsis.short-9,.text-ellipsis.short-10{overflow:hidden;text-overflow:ellipsis;display:-webkit-box}
-.text-ellipsis.short-10{-webkit-line-clamp:10}
+.text-ellipsis.short-10{-webkit-line-clamp:10;line-clamp:10}
 .text-blue{color:#4788ff!important}
 a.text-blue:focus,a.text-blue:hover{color:#0058fa!important}
 .text-indigo{color:#6610f2!important}
@@ -4565,7 +4565,7 @@ h1{font-family:DM Sans,sans-serif;font-weight:600;;color:#213446;font-size:22px}
 h1 a{color:inherit}
 h2{font-family:DM Sans,sans-serif;font-weight:600;;color:#213446;font-size:19px;margin-bottom: 10px;margin-top: 10px;}
 h2 a{color:inherit}
-h3{font-family:DM Sans,sans-serif;font-weight:500;font-size:1.953rem a;font-size-color:inherit}
+h3{font-family:DM Sans,sans-serif;font-weight:500;font-size:1.953rem a; font-size:inherit}
 h3,h4{color:#213446}
 h4{font-family:DM Sans,sans-serif;font-weight:600;font-size:18px;}
 h4 a{color:inherit}
