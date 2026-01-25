@@ -1636,6 +1636,98 @@
     window.addEventListener('pointerup', onPointerUp, { passive: false });
     window.addEventListener('pointercancel', onPointerUp, { passive: false });
 
+    // Media Session API - Tối ưu cho iOS và Android
+    function updateMediaSession() {
+      if ('mediaSession' in navigator) {
+        try {
+          const baseUrl = window.location.origin;
+          const artworkUrl = baseUrl + '/thiep-moi/uploads/music/nho-mai-chuyen-di-nay.jpg';
+          
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: 'Nhớ Mãi Chuyến Đi Này',
+            artist: 'Bùi Công Nam, Wren Evans, Tiến Luật, Diệu Nhi, Cầm | Ca khúc chủ đề MVNCD',
+            album: 'FOREST STUDIO',
+            artwork: [
+              { src: artworkUrl, sizes: '96x96', type: 'image/jpeg' },
+              { src: artworkUrl, sizes: '128x128', type: 'image/jpeg' },
+              { src: artworkUrl, sizes: '192x192', type: 'image/jpeg' },
+              { src: artworkUrl, sizes: '256x256', type: 'image/jpeg' },
+              { src: artworkUrl, sizes: '384x384', type: 'image/jpeg' },
+              { src: artworkUrl, sizes: '512x512', type: 'image/jpeg' }
+            ]
+          });
+
+          // iOS Safari cần try-catch riêng cho từng handler
+          try {
+            navigator.mediaSession.setActionHandler('play', () => {
+              music.play().then(startRotation).catch(() => {});
+            });
+          } catch (e) {}
+
+          try {
+            navigator.mediaSession.setActionHandler('pause', () => {
+              music.pause();
+              stopRotation();
+            });
+          } catch (e) {}
+
+          try {
+            navigator.mediaSession.setActionHandler('seekbackward', () => {
+              music.currentTime = Math.max(music.currentTime - 10, 0);
+            });
+          } catch (e) {}
+
+          try {
+            navigator.mediaSession.setActionHandler('seekforward', () => {
+              music.currentTime = Math.min(music.currentTime + 10, music.duration);
+            });
+          } catch (e) {}
+
+          try {
+            navigator.mediaSession.setActionHandler('seekto', (details) => {
+              if (details.seekTime) {
+                music.currentTime = details.seekTime;
+              }
+            });
+          } catch (e) {}
+
+        } catch (error) {
+          console.error('Media Session error:', error);
+        }
+      }
+    }
+
+    // iOS workaround: Set metadata SAU user interaction đầu tiên
+    let iosMediaSessionSet = false;
+    const setIOSMediaSession = () => {
+      if (!iosMediaSessionSet && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        setTimeout(() => {
+          updateMediaSession();
+          iosMediaSessionSet = true;
+        }, 500);
+      }
+    };
+    
+    // Lắng nghe interaction ĐẦU TIÊN từ user
+    ['touchstart', 'click'].forEach(event => {
+      document.addEventListener(event, setIOSMediaSession, { once: true, passive: true });
+    });
+
+    // Set metadata ngay lập tức cho desktop
+    updateMediaSession();
+    
+    // Update khi các event xảy ra
+    music.addEventListener('play', updateMediaSession);
+    music.addEventListener('loadedmetadata', updateMediaSession);
+    music.addEventListener('canplay', updateMediaSession);
+    music.addEventListener('playing', updateMediaSession);
+    
+    music.addEventListener('pause', () => {
+      if ('mediaSession' in navigator && navigator.mediaSession.playbackState) {
+        navigator.mediaSession.playbackState = 'paused';
+      }
+    });
+
     // INIT
     window.addEventListener('load', () => setTimeout(forceAutoPlay, 1000));
     window.addEventListener('beforeunload', () => rotationInterval && clearInterval(rotationInterval));
@@ -1677,6 +1769,9 @@
 
     window.addEventListener('beforeunload', () => clearInterval(countdownInterval));
   })();
+
+
+
 </script>
 
 </html>
