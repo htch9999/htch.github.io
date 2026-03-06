@@ -1612,23 +1612,37 @@
       tooltip.textContent = 'Nhấn để phát nhạc';
     }
 
-    // AUTOPLAY
-    function forceAutoPlay() {
-      music.play().then(startRotation).catch(() => {
-        music.muted = true;
-        music.play().then(() => {
-          startRotation();
-          setTimeout(() => music.muted = false, 100);
-        }).catch(() => {
-          ['click', 'touchstart', 'scroll'].forEach(e =>
-            document.addEventListener(e, () => {
-              music.muted = false;
-              music.play().then(startRotation);
-            }, { once: true, passive: true })
-          );
-          stopRotation();
-        });
+    // AUTOPLAY - iOS-compatible strategy
+    // Bước 1: Thử phát ngay (desktop / Android thường cho phép)
+    // Bước 2: Nếu bị chặn, đợi touchstart / click đầu tiên của user để phát (iOS)
+    let audioUnlocked = false;
+
+    function tryPlay() {
+      if (audioUnlocked) return;
+      music.play().then(() => {
+        audioUnlocked = true;
+        startRotation();
+      }).catch(() => {
+        // Phát thất bại - đợi tương tác đầu tiên từ user
+        stopRotation();
       });
+    }
+
+    function unlockOnUserGesture() {
+      if (audioUnlocked) return;
+      music.play().then(() => {
+        audioUnlocked = true;
+        startRotation();
+      }).catch(() => { });
+    }
+
+    // Lắng nghe mọi tương tác đầu tiên của người dùng (chạm, click, cuộn)
+    ['touchstart', 'touchend', 'click', 'keydown'].forEach(evt => {
+      document.addEventListener(evt, unlockOnUserGesture, { once: false, passive: true });
+    });
+
+    function forceAutoPlay() {
+      tryPlay();
     }
 
     // PLAY/PAUSE - CHỈ TỪ CONTROL BUTTON
