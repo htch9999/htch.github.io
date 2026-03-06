@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GalaxyLove:RE 2.1</title>
+    <meta
+      name="description"
+      content="GalaxyLove:RE 2.1 - Gửi gắm thông điệp vào dải ngân hà - Remake by @htch9999🌷"
+    />
+    <meta name="keywords" content="GalaxyLove:RE 2.1" />
+    <meta name="author" content="@htch9999🌷" />
+    <link
+      rel="stylesheet"
+      href="./assets/style.css"
+      type="text/css"
+      media="all"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+          "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js",
+          "three/examples/jsm/loaders/FontLoader.js": "https://unpkg.com/three@0.152.2/examples/jsm/loaders/FontLoader.js",
+          "three/examples/jsm/geometries/TextGeometry.js": "https://unpkg.com/three@0.152.2/examples/jsm/geometries/TextGeometry.js"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Dark overlay (fades out on intro) -->
+    <div id="dark-overlay"></div>
+
+    <!-- Landscape warning (portrait mode) -->
+    <div id="landscape-warning">
+      <div class="stars-bg"></div>
+      <div class="warning-content">
+        <div class="rotate-icon"></div>
+        <h1>Xoay ngang điện thoại</h1>
+        <h1>để trải nghiệm tốt nhất ✨</h1>
+        <p>Trang web được thiết kế cho màn hình ngang.</p>
+        <p>
+          Hãy xoay thiết bị của bạn hoặc nhấp vào tinh cầu ở giữa để khám phá bí
+          mật.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main 3D container -->
+    <div id="container"></div>
+
+    <!-- Credits Badge -->
+    <a
+      href="https://www.facebook.com/htch.9999"
+      target="_blank"
+      class="credits-badge"
+    >
+      <span>Remake bởi @htch9999🌷</span>
+    </a>
+
+    <script>
+      // ============================================================
+      // FULL SCREEN HANDLER
+      // ============================================================
+      function setFullScreen() {
+        const height = 0.99 * window.innerHeight + "px";
+        document.documentElement.style.setProperty("height", height);
+        const container = document.getElementById("container");
+        if (container) container.style.height = window.innerHeight + "px";
+      }
+
+      // Run once and on resize/orientation change
+      window.addEventListener("resize", setFullScreen);
+      window.addEventListener("orientationchange", () =>
+        setTimeout(setFullScreen, 200),
+      );
+      setFullScreen();
+
+      // ============================================================
+      // ORIENTATION CHECK
+      // ============================================================
+      function checkOrientation() {
+        if (window.innerWidth < window.innerHeight) {
+          document.body.classList.add("portrait");
+        } else {
+          document.body.classList.remove("portrait");
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", checkOrientation);
+      window.addEventListener("resize", checkOrientation);
+      window.addEventListener("orientationchange", () =>
+        setTimeout(checkOrientation, 200),
+      );
+
+      // ============================================================
+      // TOUCH ZOOM PREVENTION (pinch-to-zoom)
+      // ============================================================
+      const container = document.querySelector("#container");
+      const preventDefault = (e) => e.preventDefault();
+
+      // Chỉ chặn touchmove trên container để tránh cuộn trang khi xoay hành tinh
+      // Không chặn touchstart toàn cục để các nút bấm hoạt động được
+      if (container) {
+        container.addEventListener("touchmove", preventDefault, {
+          passive: false,
+        });
+      }
+    </script>
+
+    <!-- Load main Three.js script as ES module -->
+    <script type="module" src="./assets/scripts.js"></script>
+  </body>
+</html>

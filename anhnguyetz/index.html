@@ -1,0 +1,1602 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galaxy Love Generator✨</title>
+    <meta name="description" content="Galaxy Love Generator✨ - Gửi gắm thông điệp vào dải ngân hà - Remake by @htch9999🌷" />
+    <meta name="keywords" content="Galaxy Love Generator✨" />
+    <meta name="author" content="@htch9999🌷" />
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg-color: #0d0614;
+        --card-bg: rgba(26, 15, 38, 0.45);
+        --card-border: rgba(186, 143, 255, 0.15);
+        --card-border-hover: rgba(186, 143, 255, 0.35);
+        --primary: #a875ff;
+        --primary-glow: rgba(168, 117, 255, 0.4);
+        --secondary: #ff75c3;
+        --text-main: #f0e6ff;
+        --text-muted: #a69bb5;
+        --input-bg: rgba(0, 0, 0, 0.25);
+        --radius: 20px;
+        --radius-sm: 12px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: radial-gradient(
+          ellipse at top center,
+          #241038 0%,
+          var(--bg-color) 70%,
+          #000 100%
+        );
+        min-height: 100vh;
+        color: var(--text-main);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Animated Star Background */
+      .bg-stars {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.7) 1px,
+            transparent 1px
+          ),
+          radial-gradient(circle, rgba(200, 180, 255, 0.5) 1px, transparent 1px);
+        background-size:
+          100px 100px,
+          150px 150px;
+        background-position:
+          0 0,
+          50px 50px;
+        animation: slowPan 60s linear infinite;
+        opacity: 0.6;
+      }
+      @keyframes slowPan {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-300px);
+        }
+      }
+
+      /* Shooting Stars */
+      .shooting-star {
+        position: fixed;
+        z-index: 0;
+        pointer-events: none;
+        width: 150px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0),
+          #fff,
+          rgba(255, 255, 255, 0)
+        );
+        transform: rotate(-45deg);
+        animation: shoot 4s ease-out infinite;
+        opacity: 0;
+      }
+      @keyframes shoot {
+        0% {
+          transform: translateX(200vw) translateY(-50vh) rotate(-45deg);
+          opacity: 1;
+        }
+        20% {
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(-50vw) translateY(150vh) rotate(-45deg);
+          opacity: 0;
+        }
+      }
+      .ss-1 {
+        top: 10%;
+        right: -10%;
+        animation-delay: 1s;
+      }
+      .ss-2 {
+        top: 30%;
+        right: -30%;
+        animation-delay: 3s;
+        animation-duration: 5s;
+        width: 250px;
+      }
+      .ss-3 {
+        top: 60%;
+        left: -10%;
+        animation-delay: 2.5s;
+        transform: rotate(45deg);
+      }
+
+      /* Ambient Orbs */
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        z-index: 0;
+        opacity: 0.4;
+        animation: floatOrb 10s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+      .orb-1 {
+        top: 10%;
+        left: 10%;
+        width: 300px;
+        height: 300px;
+        background: rgba(168, 117, 255, 0.2);
+      }
+      .orb-2 {
+        bottom: 10%;
+        right: 10%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 117, 195, 0.15);
+        animation-delay: -5s;
+      }
+      @keyframes floatOrb {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(40px, -40px);
+        }
+      }
+
+      /* Layout */
+      .container {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 50px 24px 80px;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        animation: slideDown 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .header h1 {
+        font-family: "Mali", cursive;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          #e4c1ff 0%,
+          #a875ff 50%,
+          #ff85c8 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+      }
+      .header p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+      }
+
+      /* Cards */
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius);
+        padding: 36px;
+        margin-bottom: 24px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        transition:
+          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+          border-color 0.3s;
+        animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+      }
+      .card:hover {
+        border-color: var(--card-border-hover);
+        transform: translateY(-2px);
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .card:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      .card:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+
+      .card-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Mali", cursive;
+        font-size: 1.35rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #d8b4ff, #ffb4df);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 24px;
+      }
+      .card-title i {
+        font-size: 1.25rem;
+        -webkit-text-fill-color: #d8b4ff;
+      }
+
+      /* Form Elements */
+      label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #bbaed1;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+      textarea,
+      input[type="text"] {
+        width: 100%;
+        background: var(--input-bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-sm);
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.95rem;
+        padding: 14px 18px;
+        outline: none;
+        transition: all 0.25s;
+        resize: vertical;
+      }
+      textarea:focus,
+      input[type="text"]:focus {
+        border-color: var(--primary);
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 0 4px rgba(168, 117, 255, 0.15);
+      }
+      textarea {
+        min-height: 110px;
+        line-height: 1.5;
+      }
+      .hint {
+        font-size: 0.8rem;
+        color: #867b96;
+        margin-top: 8px;
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .hint i {
+        margin-top: 3px;
+      }
+
+      /* Warn Badge */
+      .warn-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-top: 12px;
+        transition: all 0.3s;
+        opacity: 0;
+        transform: translateY(-5px);
+        display: none;
+      }
+      .warn-badge.show {
+        opacity: 1;
+        transform: translateY(0);
+        display: inline-flex;
+      }
+      .warn-yellow {
+        background: rgba(234, 179, 8, 0.15);
+        color: #fde047;
+        border: 1px solid rgba(234, 179, 8, 0.3);
+      }
+      .warn-red {
+        background: rgba(239, 68, 68, 0.15);
+        color: #fca5a5;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+
+      /* Tabs */
+      .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 24px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 6px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .tab-btn {
+        flex: 1;
+        padding: 12px;
+        border-radius: 12px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-family: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .tab-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .tab-btn.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+      .tab-content {
+        display: none;
+        animation: fadeIn 0.4s ease;
+      }
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Upload Zone */
+      .upload-zone {
+        border: 2px dashed rgba(168, 117, 255, 0.4);
+        border-radius: var(--radius-sm);
+        padding: 40px 20px;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        background: rgba(168, 117, 255, 0.03);
+        transition: all 0.3s;
+      }
+      .upload-zone:hover,
+      .upload-zone.drag-over {
+        border-color: var(--primary);
+        background: rgba(168, 117, 255, 0.08);
+      }
+      .upload-zone input {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+      .upl-icon {
+        font-size: 2.8rem;
+        margin-bottom: 12px;
+        background: linear-gradient(135deg, #a875ff, #ff75c3);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .upload-zone p {
+        color: #d0c5e0;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+      .upload-zone span {
+        color: #867b96;
+        font-size: 0.85rem;
+      }
+
+      /* Gallery */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 14px;
+        margin-top: 20px;
+      }
+      .img-item {
+        aspect-ratio: 1;
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s;
+        background: #000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      .img-item:hover {
+        transform: scale(1.05);
+        border-color: var(--primary);
+        z-index: 2;
+        box-shadow: 0 8px 24px var(--primary-glow);
+      }
+      .img-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .img-item .badge {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #fff;
+        backdrop-filter: blur(4px);
+      }
+      .badge-cloud {
+        background: rgba(168, 117, 255, 0.85);
+      }
+      .badge-local {
+        background: rgba(34, 197, 94, 0.85);
+      }
+      .rm-btn {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(239, 68, 68, 0.9);
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+        backdrop-filter: blur(4px);
+      }
+      .rm-btn:hover {
+        background: #ef4444;
+        transform: scale(1.1);
+      }
+      .upl-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(2px);
+      }
+      .spinner {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        border-top-color: var(--primary);
+        animation: spin 0.8s linear infinite;
+      }
+
+      /* API Key */
+      .api-box {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        align-items: center;
+      }
+      .api-box input {
+        flex: 1;
+      }
+      .api-box a {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        white-space: nowrap;
+        transition: color 0.2s;
+      }
+      .api-box a:hover {
+        color: #c49fff;
+      }
+      .api-status {
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+      }
+
+      /* Music */
+      .music-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .m-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1.5px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 14px 16px;
+        color: #c0b4d4;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-align: left;
+        font-family: inherit;
+        font-size: 0.9rem;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      .m-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+      .m-btn.active {
+        background: linear-gradient(
+          135deg,
+          rgba(168, 117, 255, 0.2),
+          rgba(255, 117, 195, 0.2)
+        );
+        border-color: var(--primary);
+        color: #fff;
+        box-shadow: 0 4px 16px var(--primary-glow);
+      }
+      .divider {
+        width: 100%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 24px 0;
+      }
+
+      /* Output */
+      .output-box {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-sm);
+        padding: 20px;
+        font-family: ui-monospace, Consolas, monospace;
+        font-size: 0.85rem;
+        color: #93c5fd;
+        word-break: break-all;
+        min-height: 64px;
+        display: flex;
+        align-items: center;
+        line-height: 1.5;
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+      .output-empty {
+        color: #64748b;
+        font-style: italic;
+        font-family: inherit;
+      }
+
+      /* Action Buttons */
+      .actions {
+        display: flex;
+        gap: 16px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        flex: 1;
+        min-width: 140px;
+        padding: 16px 24px;
+        border-radius: 16px;
+        border: none;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        text-decoration: none;
+      }
+      .btn-main {
+        background: linear-gradient(135deg, #a875ff, #fd6eb8);
+        color: #fff;
+        box-shadow: 0 8px 24px rgba(168, 117, 255, 0.3);
+      }
+      .btn-main:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(168, 117, 255, 0.45);
+        filter: brightness(1.1);
+      }
+      .btn-sec {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .btn-sec:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-3px);
+      }
+      .btn-go {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #fff;
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+      }
+      .btn-go:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+        filter: brightness(1.1);
+      }
+      .btn-short {
+        background: linear-gradient(135deg, #6366f1, #4f46e5);
+        color: #fff;
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+      }
+      .btn-short:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+        filter: brightness(1.1);
+      }
+      .btn-short:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
+      }
+
+      /* Toast */
+      .toast {
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: rgba(20, 10, 30, 0.9);
+        border: 1px solid var(--primary);
+        color: #fff;
+        padding: 14px 32px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        box-shadow:
+          0 12px 30px rgba(0, 0, 0, 0.5),
+          0 0 20px var(--primary-glow);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        opacity: 0;
+        z-index: 9999;
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+
+      /* Animations */
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Footer Credits */
+      .footer-credits {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        line-height: 1.6;
+      }
+      .footer-credits b {
+        color: var(--primary);
+      }
+      .footer-credits .social-links {
+        margin-top: 12px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        font-size: 1.2rem;
+      }
+      .footer-credits a {
+        color: var(--text-muted);
+        transition: color 0.3s;
+      }
+      .footer-credits a:hover {
+        color: var(--secondary);
+      }
+
+      /* Guide Card */
+      .guide-card {
+        background: linear-gradient(135deg, rgba(168, 117, 255, 0.12), rgba(255, 117, 195, 0.08));
+        border: 1px solid rgba(168, 117, 255, 0.25);
+        border-radius: var(--radius);
+        padding: 30px;
+        margin-bottom: 35px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(168, 117, 255, 0.05);
+        animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .guide-card h3 {
+        font-family: "Mali", cursive;
+        color: #fff;
+        font-size: 1.2rem;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-shadow: 0 0 10px rgba(168, 117, 255, 0.5);
+      }
+      .guide-list {
+        list-style: none;
+      }
+      .guide-list li {
+        color: #d1c8e0;
+        font-size: 0.95rem;
+        margin-bottom: 14px;
+        display: flex;
+        gap: 14px;
+        line-height: 1.5;
+      }
+      .guide-list li:last-child {
+        margin-bottom: 0;
+      }
+      .guide-list li i {
+        color: var(--secondary);
+        background: rgba(255, 117, 195, 0.15);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.75rem;
+        border: 1px solid rgba(255, 117, 195, 0.3);
+      }
+      .guide-list b {
+        color: #fff;
+        font-weight: 700;
+      }
+
+      /* QR Section */
+      #qr-container {
+        margin-top: 20px;
+        text-align: center;
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+      #qr-image {
+        padding: 15px;
+        background: #fff;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        box-shadow: 0 0 20px rgba(168, 117, 255, 0.3);
+      }
+      .btn-qr {
+        background: linear-gradient(135deg, #f472b6, #db2777);
+        color: #fff;
+        box-shadow: 0 8px 24px rgba(244, 114, 182, 0.25);
+      }
+      .btn-qr:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(244, 114, 182, 0.4);
+        filter: brightness(1.1);
+      }
+
+      @media (max-width: 600px) {
+        .card {
+          padding: 24px;
+        }
+        .actions {
+          flex-direction: column;
+        }
+        .api-box {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Canvas for dynamic background -->
+    <canvas
+      id="bg-canvas"
+      style="position: fixed; inset: 0; z-index: 0; pointer-events: none"
+    ></canvas>
+
+    <!-- Ambient Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+      <div class="header">
+        <h1>Galaxy Love Generator✨</h1>
+        <p>Gửi gắm thông điệp vào dải ngân hà</p>
+      </div>
+
+      <!-- 0. INSTRUCTIONS -->
+      <div class="guide-card">
+        <h3><i class="fa-solid fa-wand-sparkles"></i> Cách tạo dải ngân hà của riêng bạn:</h3>
+        <ul class="guide-list">
+          <li><i class="fa-solid fa-1"></i> <span><b>Ảnh tinh cầu:</b> Upload ảnh từ máy hoặc dán link ảnh trực tiếp. (Nên dùng 5-10 ảnh để mượt nhất).</span></li>
+          <li><i class="fa-solid fa-2"></i> <span><b>Lời nhắn gửi:</b> Nhập các đoạn văn bản sẽ bay quanh hành tinh (mỗi dòng là một đoạn mới).</span></li>
+          <li><i class="fa-solid fa-3"></i> <span><b>Âm nhạc:</b> Chọn một bản nhạc nền lãng mạo từ danh sách hoặc dán link .mp3 tùy ý.</span></li>
+          <li><i class="fa-solid fa-4"></i> <span><b>Hoàn tất:</b> Nhấn "Tạo Link", sau đó bạn có thể "Rút gọn" link cho đẹp và "Tạo QR" để chia sẻ!</span></li>
+        </ul>
+      </div>
+
+      <!-- 1. IMAGES -->
+      <div class="card">
+        <div class="card-title">
+          <i class="fa-solid fa-images"></i> Ảnh trái tim
+        </div>
+
+        <div class="tabs">
+          <button
+            class="tab-btn active"
+            id="btn-tab-upload"
+            onclick="switchTab('upload')"
+          >
+            <i class="fa-solid fa-cloud-arrow-up"></i> Upload ảnh
+          </button>
+          <button class="tab-btn" id="btn-tab-url" onclick="switchTab('url')">
+            <i class="fa-solid fa-link"></i> Dán URL
+          </button>
+        </div>
+
+        <div class="tab-content active" id="tab-upload">
+          <label>Cài đặt ImgBB API (Khuyên dùng để chia sẻ link)</label>
+          <p
+            style="
+              font-size: 0.85rem;
+              color: #a69bb5;
+              margin-bottom: 12px;
+              line-height: 1.5;
+            "
+          >
+            <i class="fa-solid fa-cloud" style="color: #a875ff"></i>
+            <b>Lưu ý quan trọng:</b> Nếu bạn chọn Upload file trực tiếp lên trên
+            nền tảng thì những hình ảnh này sẽ được lưu trữ bằng
+            <b>API Mặc Định</b> của nền tảng trong vòng <b>1 Tháng</b>. Nếu bạn
+            muốn lưu giữ vĩnh viễn hình ảnh của riêng bạn trên nền tảng đám mây,
+            thì bạn cân nhắc thay đổi <b>API Key</b> của riêng mình để sử dụng.
+          </p>
+          <div class="api-box">
+            <input
+              type="text"
+              id="imgbb-key"
+              placeholder="Dán API key vào đây..."
+            />
+            <a href="https://api.imgbb.com/" target="_blank"
+              >Lấy key miễn phí <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
+          <div id="key-status" style="margin-bottom: 20px"></div>
+
+          <div class="upload-zone" id="drop-zone">
+            <input type="file" id="file-input" accept="image/*" multiple />
+            <div class="upl-icon"><i class="fa-solid fa-file-image"></i></div>
+            <p>
+              <strong>Nhấn để chọn</strong> hoặc kéo thả ảnh vào đây (Tối đa 20
+              ảnh)
+            </p>
+            <span>Hỗ trợ JPG, PNG, WEBP (Tối đa 32MB)</span>
+          </div>
+
+          <div class="warn-badge" id="img-warn"></div>
+          <div class="gallery" id="gallery"></div>
+        </div>
+
+        <div class="tab-content" id="tab-url">
+          <label>Dán URL ảnh trực tiếp</label>
+          <textarea
+            id="url-input"
+            placeholder="https://i.imgur.com/abc.jpg&#10;https://i.imgur.com/def.png&#10;..."
+          ></textarea>
+          <p class="hint">
+            <i class="fa-solid fa-circle-info"></i
+            ><span
+              >Mỗi dòng 1 URL. Quá 20 ảnh có thể gây giật lag trên thiết bị
+              yếu.</span
+            >
+          </p>
+          <div class="warn-badge" id="url-warn"></div>
+          <div class="gallery" id="url-gallery"></div>
+        </div>
+      </div>
+
+      <!-- 2. TEXTS -->
+      <div class="card">
+        <div class="card-title">
+          <i class="fa-solid fa-pen-nib"></i> Lời nhắn vòng xoay
+        </div>
+        <label>Nội dung chữ (Mỗi dòng là một vòng xoay)</label>
+        <textarea
+          id="text-input"
+          placeholder="Chạm Vào Tinh Cầu&#10;Gửi Ngàn Yêu Thương&#10;✨ Happy Everyday ✨"
+        ></textarea>
+        <p class="hint">
+          <i class="fa-solid fa-wand-magic-sparkles"></i
+          ><span
+            >Hỗ trợ Tiếng Việt & Emoji. Dòng đầu tiên luôn xoay ở vòng trong
+            cùng.</span
+          >
+        </p>
+      </div>
+
+      <!-- 3. MUSIC -->
+      <div class="card">
+        <div class="card-title">
+          <i class="fa-solid fa-music"></i> Nhạc nền vũ trụ
+        </div>
+        <label>Chọn từ playlist</label>
+        <div class="music-grid" id="music-grid"></div>
+
+        <div class="divider"></div>
+        <label>Hoặc sử dụng URL nhạc MP3 tuỳ chỉnh</label>
+        <input
+          type="text"
+          id="custom-music"
+          placeholder="https://domain.com/audio.mp3"
+        />
+        <p class="hint">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Dán link trực tiếp từ Google Drive, Dropbox hoặc Host riêng.</span>
+        </p>
+        <div class="hint" style="margin-top: 15px; background: rgba(168, 117, 255, 0.08); padding: 12px; border-radius: 12px; border: 1px solid rgba(168, 117, 255, 0.2); display: flex; align-items: center; gap: 10px;">
+          <i class="fa-solid fa-envelope-open-text" style="color: var(--primary); font-size: 1.1rem;"></i>
+          <span style="color: #f0e6ff; font-size: 0.9rem; line-height: 1.4;">Bạn muốn thêm nhạc khác vào danh sách? Liên hệ <b>@htch9999</b> để admin hỗ trợ thêm vào hệ thống nhé! 🌷</span>
+        </div>
+      </div>
+
+      <!-- 4. RESULT -->
+      <div class="card">
+        <div class="card-title">
+          <i class="fa-solid fa-link"></i> Link kết quả
+        </div>
+        <div class="output-box" id="output">
+          <span class="output-empty"
+            >Hoàn thành các bước trên và nhấn "Tạo Link"</span
+          >
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-main" onclick="generateLink()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Tạo Link
+          </button>
+          <button class="btn btn-short" id="btn-short" onclick="shortenLink()" style="pointer-events:none; opacity:0.5;">
+            <i class="fa-solid fa-compress"></i> Rút gọn
+          </button>
+          <button class="btn btn-qr" id="btn-qr" onclick="generateQR()" style="pointer-events:none; opacity:0.5;">
+            <i class="fa-solid fa-qrcode"></i> Tạo QR
+          </button>
+          <button class="btn btn-sec" onclick="copyLink()">
+            <i class="fa-regular fa-copy"></i> Copy
+          </button>
+          <a
+            class="btn btn-go"
+            id="btn-go"
+            href="#"
+            target="_blank"
+            style="pointer-events: none; opacity: 0.5"
+          >
+            <i class="fa-solid fa-rocket"></i> Bay lên!
+          </a>
+        </div>
+
+        <div id="qr-container">
+          <p style="margin-bottom:12px; color:#d8b4ff; font-weight:600;">Mã QR của bạn:</p>
+          <img id="qr-image" src="" alt="QR Code" />
+          <p style="font-size:0.8rem; color:#867b96;">Tải về hoặc chụp màn hình để chia sẻ</p>
+        </div>
+      </div>
+
+      <!-- Footer Credits -->
+      <footer class="footer-credits">
+        <p>Phiên bản <b>GalaxyLove:RE 2.1</b></p>
+        <p>Phát triển và thiết kế bởi <b>@htch9999🌷</b></p>
+        <div class="social-links">
+          <a
+            href="https://www.facebook.com/htch.9999/"
+            title="Facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fa-brands fa-facebook"></i
+          ></a>
+          <a
+            href="https://github.com/htch9999"
+            title="Github"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fa-brands fa-github"></i
+          ></a>
+          <a
+            href="https://www.tiktok.com/@loifchan"
+            title="Tiktok"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fa-brands fa-tiktok"></i
+          ></a>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Toast Component -->
+    <div class="toast" id="toast">
+      <i class="fa-solid fa-check-circle" id="toast-icon"></i
+      ><span id="toast-msg">Thành công!</span>
+    </div>
+
+    <script>
+      // --- STATE ---
+      let activeTab = "upload";
+      let imagesList = []; // { id, src, type: 'remote'|'local', name, uploading, error }
+      let selectedMusic = "./a.mp3";
+      let finalUrl = "";
+
+      // --- TABS ---
+      function switchTab(t) {
+        activeTab = t;
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((c) => c.classList.remove("active"));
+        document.getElementById(`btn-tab-${t}`).classList.add("active");
+        document.getElementById(`tab-${t}`).classList.add("active");
+      }
+
+      // --- WARNINGS ---
+      function checkWarnings(count, elementId) {
+        const el = document.getElementById(elementId);
+        if (count > 20) {
+          el.className = "warn-badge warn-red show";
+          el.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Có ${count} ảnh! Vượt giới hạn 20 ảnh, web sẽ rất lag!`;
+        } else if (count > 10) {
+          el.className = "warn-badge warn-yellow show";
+          el.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Có ${count} ảnh. Nên giữ dưới 10 ảnh để mượt nhất.`;
+        } else {
+          el.className = "warn-badge";
+        }
+      }
+
+      // --- API KEY ---
+      const keyInput = document.getElementById("imgbb-key");
+      const keyStatus = document.getElementById("key-status");
+      const DEFAULT_KEY = "43ca005d3a23162f24c242b848545fd8";
+      const savedKey = localStorage.getItem("imgbb_key");
+      keyInput.value = savedKey !== null ? savedKey : DEFAULT_KEY;
+
+      function updateKeyUI() {
+        const val = keyInput.value.trim();
+        if (val) {
+          keyStatus.innerHTML = `<span class="api-status" style="background:rgba(34,197,94,0.15);color:#4ade80"><i class="fa-solid fa-cloud-check"></i> Đã có API Key - Ảnh sẽ tải lên Cloud</span>`;
+        } else {
+          keyStatus.innerHTML = `<span class="api-status" style="background:rgba(234,179,8,0.15);color:#fde047"><i class="fa-solid fa-hard-drive"></i> Chưa có API Key - Ảnh lưu tạm (Không chia sẻ được)</span>`;
+        }
+      }
+      keyInput.addEventListener("input", () => {
+        localStorage.setItem("imgbb_key", keyInput.value.trim());
+        updateKeyUI();
+      });
+      updateKeyUI();
+
+      // --- UPLOAD LOGIC ---
+      const dropZone = document.getElementById("drop-zone");
+      const fileInput = document.getElementById("file-input");
+
+      dropZone.ondragover = (e) => {
+        e.preventDefault();
+        dropZone.classList.add("drag-over");
+      };
+      dropZone.ondragleave = () => dropZone.classList.remove("drag-over");
+      dropZone.ondrop = (e) => {
+        e.preventDefault();
+        dropZone.classList.remove("drag-over");
+        handleFiles(e.dataTransfer.files);
+      };
+      fileInput.onchange = () => {
+        handleFiles(fileInput.files);
+        fileInput.value = "";
+      };
+
+      async function handleFiles(files) {
+        const arr = [...files].filter((f) => f.type.startsWith("image/"));
+        if (!arr.length) return;
+
+        for (const file of arr) {
+          const id = Date.now() + Math.random().toString(16);
+          const dataUrl = await new Promise((r) => {
+            const rd = new FileReader();
+            rd.onload = (e) => r(e.target.result);
+            rd.readAsDataURL(file);
+          });
+
+          imagesList.push({
+            id,
+            src: dataUrl,
+            type: "local",
+            name: file.name,
+            uploading: false,
+          });
+          renderGallery();
+
+          const key = keyInput.value.trim();
+          if (key) {
+            const item = imagesList.find((i) => i.id === id);
+            item.uploading = true;
+            renderGallery();
+            try {
+              const fd = new FormData();
+              fd.append("image", file);
+              const res = await fetch(
+                `https://api.imgbb.com/1/upload?key=${key}`,
+                { method: "POST", body: fd },
+              );
+              const json = await res.json();
+              if (json.success) {
+                item.src = json.data.url;
+                item.type = "remote";
+              } else throw new Error();
+            } catch {
+              item.error = true;
+              showToast(
+                "Lỗi upload Cloud, dùng ảnh Local!",
+                "fa-triangle-exclamation",
+              );
+            }
+            item.uploading = false;
+            renderGallery();
+          }
+        }
+      }
+
+      function removeImg(id) {
+        imagesList = imagesList.filter((i) => i.id !== id);
+        renderGallery();
+      }
+
+      function renderGallery() {
+        const gal = document.getElementById("gallery");
+        gal.innerHTML = "";
+        imagesList.forEach((im) => {
+          const div = document.createElement("div");
+          div.className = "img-item";
+          div.innerHTML = `<img src="${im.src}" />
+            <div class="badge ${im.type === "remote" ? "badge-cloud" : "badge-local"}">${im.type === "remote" ? "☁️ Cloud" : "💾 Local"}</div>
+            <button class="rm-btn" onclick="removeImg('${im.id}')"><i class="fa-solid fa-xmark"></i></button>`;
+          if (im.uploading)
+            div.innerHTML += `<div class="upl-overlay"><div class="spinner"></div></div>`;
+          gal.appendChild(div);
+        });
+        checkWarnings(imagesList.length, "img-warn");
+      }
+
+      // --- URL PREVIEW ---
+      const urlInput = document.getElementById("url-input");
+      let tId;
+      urlInput.addEventListener("input", () => {
+        clearTimeout(tId);
+        tId = setTimeout(renderUrlGallery, 500);
+      });
+
+      function renderUrlGallery() {
+        const urls = urlInput.value
+          .split("\n")
+          .map((s) => s.trim())
+          .filter(Boolean);
+        const gal = document.getElementById("url-gallery");
+        gal.innerHTML = "";
+        urls.forEach((u) => {
+          const div = document.createElement("div");
+          div.className = "img-item";
+          const img = document.createElement("img");
+          img.src = u;
+          img.onerror = () =>
+            (div.innerHTML = `<div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:1.5rem">❌</div>`);
+          div.appendChild(img);
+          gal.appendChild(div);
+        });
+        checkWarnings(urls.length, "url-warn");
+      }
+
+      // --- MUSIC ---
+      const MUSIC = [
+        { f: "./a.mp3", l: "Star river in your eyes - Dylanf" },
+        { f: "./d.mp3", l: "Tình Yêu Giữa Mùa Đông - Phan Mạnh Quỳnh" },
+        { f: "./e.mp3", l: "Lễ Đường - Kai Đinh" },
+        { f: "./g.mp3", l: "Không Thời Gian - Dương Domic" },
+        { f: "./k.mp3", l: "Kho Báu - (S)TRONG, Rhymastic" },
+        { f: "./s.mp3", l: "Happy Birthday To You - AMEE" },
+        { f: "./t.mp3", l: "Từng Ngày Yêu Em - buitruonglinh" },
+        { f: "./m.mp3", l: "Một Đời - 14 Casper, Bon Nghiêm, buitruonglinh" },
+      ];
+      const mGrid = document.getElementById("music-grid");
+      const cMusic = document.getElementById("custom-music");
+
+      function renderMusic() {
+        mGrid.innerHTML = "";
+        MUSIC.forEach((m) => {
+          const btn = document.createElement("button");
+          btn.className = `m-btn ${selectedMusic === m.f ? "active" : ""}`;
+          btn.style.padding = "14px 12px"; // Thêm padding ngang
+          btn.innerHTML = `<span>${m.l}</span>`;
+          btn.onclick = () => {
+            selectedMusic = m.f;
+            cMusic.value = "";
+            renderMusic();
+          };
+          mGrid.appendChild(btn);
+        });
+      }
+      cMusic.addEventListener("input", () => {
+        selectedMusic = cMusic.value.trim();
+        renderMusic();
+      });
+      renderMusic();
+
+      // --- GENERATE ---
+      function b64EncodeUnicode(str) {
+        return btoa(
+          encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) =>
+            String.fromCharCode("0x" + p1),
+          ),
+        );
+      }
+
+      function generateLink() {
+        let urls = [];
+        let hasLocal = false;
+
+        if (activeTab === "upload") {
+          imagesList.forEach((i) => {
+            if (i.type === "remote") urls.push(i.src);
+            else hasLocal = true;
+          });
+        } else {
+          urls = urlInput.value
+            .split("\n")
+            .map((s) => s.trim())
+            .filter(Boolean);
+        }
+
+        const texts = document
+          .getElementById("text-input")
+          .value.split("\n")
+          .map((s) => s.trim())
+          .filter(Boolean);
+        const music = selectedMusic || "./a.mp3";
+        const base =
+          window.location.href.split("/").slice(0, -1).join("/") + "/DAN.html";
+        const p = new URLSearchParams();
+
+        if (urls.length) p.set("id", b64EncodeUnicode(urls.join(",")));
+        if (texts.length) p.set("texts", b64EncodeUnicode(texts.join(",")));
+        p.set("music", music);
+
+        if (activeTab === "upload" && imagesList.length) {
+          sessionStorage.setItem(
+            "galaxy_local_images",
+            JSON.stringify(imagesList.map((i) => i.src)),
+          );
+          if (!urls.length && hasLocal) p.set("use_local", "1");
+        }
+
+        finalUrl = base + (p.toString() ? "?" + p.toString() : "");
+        document.getElementById("output").textContent = finalUrl;
+        document.getElementById("output").style.color = "#d8b4ff";
+
+        const btnGo = document.getElementById("btn-go");
+        btnGo.href = finalUrl;
+        btnGo.style.cssText = ""; // remove disabled styling
+
+        const btnShort = document.getElementById("btn-short");
+        btnShort.style.pointerEvents = "auto";
+        btnShort.style.opacity = "1";
+        btnShort.innerHTML = '<i class="fa-solid fa-compress"></i> Rút gọn';
+
+        const btnQR = document.getElementById("btn-qr");
+        btnQR.style.pointerEvents = "auto";
+        btnQR.style.opacity = "1";
+        btnQR.innerHTML = '<i class="fa-solid fa-qrcode"></i> Tạo QR';
+        document.getElementById("qr-container").style.display = "none";
+
+        if (hasLocal && urls.length < imagesList.length) {
+          showToast(
+            "Link đã tạo (Một số ảnh chỉ lưu nội bộ)",
+            "fa-triangle-exclamation",
+          );
+        } else {
+          showToast("Đã tạo link thành công!", "fa-check");
+        }
+      }
+
+      async function shortenLink() {
+        if (!finalUrl) return;
+        
+        // Kiểm tra xem có phải link local không
+        if (!finalUrl.startsWith('http')) {
+          showToast("Rút gọn chỉ hỗ trợ link web (http/https). Link local không thể rút gọn!", "fa-triangle-exclamation");
+          return;
+        }
+
+        const btnShort = document.getElementById("btn-short");
+        const originalText = btnShort.innerHTML;
+        
+        try {
+          btnShort.disabled = true;
+          btnShort.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang rút...';
+          
+          // Sử dụng is.gd thay vì gotiny vì is.gd hỗ trợ GET đơn giản, dễ né CORS hơn
+          const apiUrl = `https://is.gd/create.php?format=json&url=${encodeURIComponent(finalUrl)}`;
+          
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+          
+          if (data && data.shorturl) {
+            finalUrl = data.shorturl;
+            document.getElementById("output").textContent = finalUrl;
+            document.getElementById("output").style.color = "#4ade80"; 
+            btnShort.innerHTML = '<i class="fa-solid fa-check"></i> Đã rút gọn';
+            showToast("Đã rút gọn link thành công!", "fa-check");
+          } else if (data && data.errormessage) {
+            throw new Error(data.errormessage);
+          } else {
+            throw new Error("API error");
+          }
+        } catch (error) {
+          console.error("Shorten error:", error);
+          btnShort.innerHTML = originalText;
+          btnShort.disabled = false;
+          showToast("Lỗi rút gọn link!", "fa-triangle-exclamation");
+        }
+      }
+
+      function generateQR() {
+        if (!finalUrl) return;
+        const qrContainer = document.getElementById("qr-container");
+        const qrImg = document.getElementById("qr-image");
+        const btnQR = document.getElementById("btn-qr");
+        
+        // Dùng API của QRServer
+        const size = 200;
+        const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(finalUrl)}`;
+        
+        qrImg.src = apiUrl;
+        qrContainer.style.display = "block";
+        btnQR.innerHTML = '<i class="fa-solid fa-check"></i> Đã tạo QR';
+        
+        // Scroll down to see the QR
+        setTimeout(() => {
+          qrContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+
+      function copyLink() {
+        if (!finalUrl)
+          return showToast(
+            "Vui lòng tạo link trước!",
+            "fa-triangle-exclamation",
+          );
+        navigator.clipboard
+          .writeText(finalUrl)
+          .then(() => showToast("Đã copy link!", "fa-copy"))
+          .catch(() => {
+            const t = document.createElement("textarea");
+            t.value = finalUrl;
+            document.body.appendChild(t);
+            t.select();
+            document.execCommand("copy");
+            t.remove();
+            showToast("Đã copy link!", "fa-copy");
+          });
+      }
+
+      let toastT;
+      function showToast(msg, iconStr) {
+        clearTimeout(toastT);
+        const el = document.getElementById("toast");
+        document.getElementById("toast-msg").textContent = msg;
+        document.getElementById("toast-icon").className = `fa-solid ${iconStr}`;
+        el.className = "toast show";
+        toastT = setTimeout(() => (el.className = "toast"), 3000);
+      }
+
+      // --- INIT PREFILL ---
+      function b64DecodeUnicode(str) {
+        try {
+          return decodeURIComponent(
+            atob(str)
+              .split("")
+              .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+              .join(""),
+          );
+        } catch {
+          return "";
+        }
+      }
+      const p = new URLSearchParams(window.location.search);
+      if (p.get("id")) {
+        urlInput.value = b64DecodeUnicode(p.get("id")).split(",").join("\n");
+        switchTab("url");
+        renderUrlGallery();
+      }
+      if (p.get("texts")) {
+        document.getElementById("text-input").value = b64DecodeUnicode(
+          p.get("texts"),
+        )
+          .split(",")
+          .join("\n");
+      }
+      if (p.get("music")) {
+        const m = p.get("music");
+        if (MUSIC.find((x) => x.f === m)) {
+          selectedMusic = m;
+        } else {
+          selectedMusic = m;
+          cMusic.value = m;
+        }
+        renderMusic();
+      }
+
+      // --- CANVAS BACKGROUND ANIMATION ---
+      const canvas = document.getElementById("bg-canvas");
+      const ctx = canvas.getContext("2d");
+      let w, h;
+
+      const stars = [];
+      const shootingStars = [];
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resize);
+      resize();
+
+      // Create initial static stars
+      for (let i = 0; i < 200; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.5,
+          alpha: Math.random(),
+          speed: Math.random() * 0.05 + 0.01, // very slow drifting
+        });
+      }
+
+      function drawStars() {
+        ctx.clearRect(0, 0, w, h);
+
+        // Draw normal stars
+        stars.forEach((s) => {
+          ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Drifting up
+          s.y -= s.speed;
+          if (s.y < 0) {
+            s.y = h;
+            s.x = Math.random() * w;
+          }
+          // Twinkling
+          s.alpha += (Math.random() - 0.5) * 0.05;
+          if (s.alpha < 0.1) s.alpha = 0.1;
+          if (s.alpha > 0.8) s.alpha = 0.8;
+        });
+
+        // Chance to spawn a shooting star
+        if (Math.random() < 0.03 && shootingStars.length < 5) {
+          shootingStars.push({
+            x: Math.random() * w * 1.5 + w * 0.5, // Start top right off-screen
+            y: Math.random() * -h * 0.5,
+            len: Math.random() * 80 + 40,
+            speed: Math.random() * 10 + 15,
+            size: Math.random() * 1.5 + 0.5,
+            opacity: 1,
+          });
+        }
+
+        // Draw shooting stars
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+          const ss = shootingStars[i];
+
+          ctx.beginPath();
+          // Head of the meteor
+          const headX = ss.x;
+          const headY = ss.y;
+          // Tail
+          const tailX = ss.x + ss.len;
+          const tailY = ss.y - ss.len;
+
+          const grad = ctx.createLinearGradient(headX, headY, tailX, tailY);
+          grad.addColorStop(0, `rgba(255, 255, 255, ${ss.opacity})`);
+          grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = ss.size;
+          ctx.lineCap = "round";
+          ctx.moveTo(headX, headY);
+          ctx.lineTo(tailX, tailY);
+          ctx.stroke();
+
+          // Move down-left
+          ss.x -= ss.speed;
+          ss.y += ss.speed;
+
+          // Fade out based on life
+          ss.opacity -= 0.015;
+          if (ss.opacity <= 0 || ss.x < -100 || ss.y > h + 100) {
+            shootingStars.splice(i, 1);
+          }
+        }
+
+        requestAnimationFrame(drawStars);
+      }
+
+      drawStars();
+    </script>
+  </body>
+</html>
