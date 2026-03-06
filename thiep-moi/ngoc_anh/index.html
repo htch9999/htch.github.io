@@ -481,10 +481,63 @@
 
     .countdown-wrapper {
       margin: 20px 0;
-      padding: 15px;
+      padding: 20px 15px;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.15) 100%);
       border-radius: 15px;
       border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+    }
+
+    .countdown-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .countdown-header .event-time {
+      display: inline-block;
+      font-size: 16px;
+      color: #8b4513;
+      font-weight: 600;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .countdown-header .event-time i {
+      color: #d4af37;
+      margin-right: 5px;
+    }
+
+    .countdown-header .countdown-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #d4af37;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+
+    .countdown-header .countdown-title::before,
+    .countdown-header .countdown-title::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 1px;
+      background: rgba(212, 175, 55, 0.5);
+    }
+
+    .countdown-header .countdown-title::before {
+      right: 100%;
+      margin-right: 15px;
+    }
+
+    .countdown-header .countdown-title::after {
+      left: 100%;
+      margin-left: 15px;
     }
 
     .countdown-grid {
@@ -1051,27 +1104,30 @@
 
             <br>
             <hr><br>
-            <h3 class="section-script invite-title">Thông tin</h3>
-            <h2 class="section-sub">
+            <h3 class="section-script invite-title reveal">Thông tin</h3>
+            <h2 class="section-sub reveal">
               Thời gian & địa điểm <img src="/thiep-moi/uploads/icon/mu4.png" alt="" class="mu4" loading="lazy">
             </h2>
-            <div class="invite-info">
+            <div class="invite-info reveal">
               <div class="invite-image">
                 <div class="img-frame"><img src="uploads/avatars/2.jpg" alt="image" loading="lazy"></div>
                 <img class="cap" src="/thiep-moi/uploads/icon/mu3.png" alt="" loading="lazy">
               </div>
 
               <div class="about-text">
-                <p>Với chúng mình, mỗi ngày đến trường đều là một mảnh ghép kỷ niệm đẹp. 🧩
+                <p>Chụp bức ảnh chỉ mất mấy giây nhưng đều chứa tất cả những gì tươi đẹp nhất của những năm tháng học
+                  trò.⏳
                 </p>
               </div>
             </div>
-            <div class="mt-2">
+            <div class="mt-2 reveal">
               <!-- Countdown Timer -->
               <div class="countdown-wrapper">
-                <div style="text-align: center; font-size: 14px; color: #8b4513; font-weight: 600; margin-bottom: 5px;">
-                  🕒 Thời gian: Chủ Nhật, ngày 15/03/2026
-                  Thời gian còn lại:
+                <div class="countdown-header">
+                  <div class="event-time">
+                    <i class="far fa-clock"></i> 09:30 Chủ Nhật, 15/03/2026
+                  </div>
+                  <div class="countdown-title">Thời gian còn lại</div>
                 </div>
                 <div id="countdown" class="countdown-grid">
                   <div class="countdown-item">
@@ -1155,7 +1211,7 @@
                 rel="noopener">XEM CHỈ ĐƯỜNG</a>
             </div>
 
-            <div class="mt-2">
+            <div class="mt-2 reveal">
               <div class="contact-info mt-3">
                 <p><b>Hotline:</b>
                   <a href="tel: 0985 109 398"> 0985 109 398</a>
@@ -1169,11 +1225,11 @@
             <br><br>
             <hr>
 
-                        <div class="gallery">
+            <div class="gallery reveal">
               <h3 class="section-script mt-40 invite-title">Một số ảnh về</h3>
               <h2 class="section-sub">Quá trình học tập</h2>
 
-<!--               <a> <img src="/assets/loading.gif" alt=""></a>
+              <!--               <a> <img src="/assets/loading.gif" alt=""></a>
               <p>Vui lòng chờ đợi một chút nhé!</p>
               <p>Những tấm hình sẽ xuất hiện ở đây ngay sau buổi kỉ yếu nha!</p> -->
               <div class="gallery-main">
@@ -1197,73 +1253,7 @@
             <br>
             <hr>
 
-
-            <div class="timeline-section">
-              <h3 class="section-script mt-40 invite-title">Lịch trình</h3>
-              <h2 class="section-sub">Timeline • 15/03/2026</h2>
-
-              <p>Comming Soon...</p>
-              <!-- <div class="timeline-container">
-                <div class="timeline-item">
-                  <div class="timeline-time">07:00</div>
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <h4>Tập trung</h4>
-                    <p>Cả lớp tập trung tại trường, chuẩn bị cho một ngày đáng nhớ</p>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-time">07:15 - 09:30</div>
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <h4>Chụp ảnh chính thức</h4>
-                    <p>Chụp ảnh tập thể, cá nhân và các khoảnh khắc trong lớp học</p>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-time">09:30 - 11:30</div>
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <h4>Chụp ảnh cùng người thân</h4>
-                    <p>Lưu lại khoảnh khắc bên bạn bè, gia đình và những người yêu quý</p>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-time">11:30 - 13:30</div>
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <h4>Nghỉ ngơi</h4>
-                    <p>Thời gian ăn trưa, nghỉ ngơi và nạp lại năng lượng</p>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-time">13:45 - 17:30</div>
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <h4>Chụp concept Nhật</h4>
-                    <p>Chụp ảnh với vest phong cách Nhật Bản, nhẹ nhàng và đậm màu thanh xuân</p>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-time">18:30 - 20:30</div>
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <h4>Kết thúc đáng nhớ</h4>
-                    <p>Chụp ảnh buổi tối, tâm sự cùng nhau và khép lại ngày kỷ yếu trọn vẹn</p>
-                  </div>
-                </div>
-              </div> -->
-            </div>
-
-            <br>
-            <hr>
-
-            <form id="rsvp-form" class="invite-form" accept-charset="UTF-8">
+            <form id="rsvp-form" class="invite-form reveal" accept-charset="UTF-8">
               <h3 class="section-script mt-40 invite-title">Xác nhận tham dự</h3>
               <h2 class="section-sub">&amp; lời chúc</h2>
               <input type="hidden" name="csrf" value="">
@@ -1290,7 +1280,7 @@
             <br>
             <hr>
 
-            <div class="mt-40">
+            <div class="mt-40 reveal">
               <h3 class="section-script invite-title">Lời chúc từ bạn bè</h3>
               <h2 class="section-sub">Cảm ơn mọi người đã gửi lời chúc</h2>
               <div id="wishes-container" class="wishes-container">
@@ -1300,7 +1290,7 @@
 
             <br>
             <hr>
-            <div class="center mt-30">
+            <div class="center mt-30 reveal">
               <br><br>
               <img src="/thiep-moi/uploads/icon/thank-you.png" alt="" width="230" loading="lazy">
             </div>
@@ -1317,7 +1307,7 @@
     <div class="music-disc-container">
       <div class="music-disc playing" id="musicDisc">
         <div class="music-disc-inner">
-          <img src="/thiep-moi/uploads/music/nho-mai-chuyen-di-nay.jpg" alt="Music Cover" id="musicCover">
+          <img src="uploads/music/music.png" alt="Music Cover" id="musicCover">
         </div>
         <div class="music-disc-center"></div>
         <div class="music-drag-area" id="musicDragArea"></div>
@@ -1329,7 +1319,7 @@
   </div>
 
   <audio id="backgroundMusic" loop autoplay preload="auto">
-    <source src="/thiep-moi/uploads/music/nho-mai-chuyen-di-nay.mp3" type="audio/mpeg">
+    <source src="uploads/music/music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 </body>
@@ -1703,8 +1693,8 @@
       if ('mediaSession' in navigator) {
         try {
           const baseUrl = window.location.origin;
-          const artworkUrl = baseUrl + '/thiep-moi/uploads/music/nho-mai-chuyen-di-nay.jpg';
-          
+          const artworkUrl = baseUrl + 'uploads/music/music.png';
+
           navigator.mediaSession.metadata = new MediaMetadata({
             title: 'Nhớ Mãi Chuyến Đi Này',
             artist: 'Bùi Công Nam, Wren Evans, Tiến Luật, Diệu Nhi, Cầm | Ca khúc chủ đề MVNCD',
@@ -1722,28 +1712,28 @@
           // iOS Safari cần try-catch riêng cho từng handler
           try {
             navigator.mediaSession.setActionHandler('play', () => {
-              music.play().then(startRotation).catch(() => {});
+              music.play().then(startRotation).catch(() => { });
             });
-          } catch (e) {}
+          } catch (e) { }
 
           try {
             navigator.mediaSession.setActionHandler('pause', () => {
               music.pause();
               stopRotation();
             });
-          } catch (e) {}
+          } catch (e) { }
 
           try {
             navigator.mediaSession.setActionHandler('seekbackward', () => {
               music.currentTime = Math.max(music.currentTime - 10, 0);
             });
-          } catch (e) {}
+          } catch (e) { }
 
           try {
             navigator.mediaSession.setActionHandler('seekforward', () => {
               music.currentTime = Math.min(music.currentTime + 10, music.duration);
             });
-          } catch (e) {}
+          } catch (e) { }
 
           try {
             navigator.mediaSession.setActionHandler('seekto', (details) => {
@@ -1751,7 +1741,7 @@
                 music.currentTime = details.seekTime;
               }
             });
-          } catch (e) {}
+          } catch (e) { }
 
         } catch (error) {
           console.error('Media Session error:', error);
@@ -1769,7 +1759,7 @@
         }, 500);
       }
     };
-    
+
     // Lắng nghe interaction ĐẦU TIÊN từ user
     ['touchstart', 'click'].forEach(event => {
       document.addEventListener(event, setIOSMediaSession, { once: true, passive: true });
@@ -1777,13 +1767,13 @@
 
     // Set metadata ngay lập tức cho desktop
     updateMediaSession();
-    
+
     // Update khi các event xảy ra
     music.addEventListener('play', updateMediaSession);
     music.addEventListener('loadedmetadata', updateMediaSession);
     music.addEventListener('canplay', updateMediaSession);
     music.addEventListener('playing', updateMediaSession);
-    
+
     music.addEventListener('pause', () => {
       if ('mediaSession' in navigator && navigator.mediaSession.playbackState) {
         navigator.mediaSession.playbackState = 'paused';
@@ -1797,7 +1787,7 @@
 
   // ============ COUNTDOWN TIMER ============
   (function () {
-    const targetDate = new Date('2026-03-15T07:00:00+07:00').getTime();
+    const targetDate = new Date('2026-03-15T09:30:00+07:00').getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -1809,7 +1799,7 @@
           '<span class="countdown-expired-icon" aria-hidden="true">🎉</span>' +
           '<div class="countdown-expired-content">' +
           '<p class="countdown-expired-title">Buổi chụp đã diễn ra!</p>' +
-          
+
           '</div>' +
           '</div>';
         clearInterval(countdownInterval);
@@ -1838,7 +1828,23 @@
     window.addEventListener('beforeunload', () => clearInterval(countdownInterval));
   })();
 
-
+  // ============ SCROLL REVEAL ANIMATION ============
+  (function () {
+    function reveal() {
+      var reveals = document.querySelectorAll('.reveal');
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 50;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        }
+      }
+    }
+    window.addEventListener('scroll', reveal);
+    // Trigger once on load
+    setTimeout(reveal, 100);
+  })();
 
 </script>
 
