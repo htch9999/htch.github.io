@@ -572,6 +572,79 @@
         color: #fff;
         box-shadow: 0 4px 16px var(--primary-glow);
       }
+      
+      .m-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .m-btn .play-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        flex-shrink: 0;
+        color: var(--primary);
+      }
+
+      .m-btn:hover .play-icon {
+        background: var(--primary);
+        color: #fff;
+        transform: scale(1.1);
+      }
+
+      .m-btn.playing .play-icon {
+        background: var(--secondary);
+        color: #fff;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(255, 117, 195, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 117, 195, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 117, 195, 0); }
+      }
+
+      .custom-music-box {
+        position: relative;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .btn-preview {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--primary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        flex-shrink: 0;
+      }
+
+      .btn-preview:hover {
+        background: rgba(168, 117, 255, 0.15);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+      }
+
+      .btn-preview.playing {
+        color: var(--secondary);
+        border-color: var(--secondary);
+        background: rgba(255, 117, 195, 0.1);
+      }
+
       .divider {
         width: 100%;
         height: 1px;
@@ -993,11 +1066,16 @@
 
         <div class="divider"></div>
         <label>Hoặc sử dụng URL nhạc MP3 tuỳ chỉnh</label>
-        <input
-          type="text"
-          id="custom-music"
-          placeholder="https://domain.com/audio.mp3"
-        />
+        <div class="custom-music-box">
+          <input
+            type="text"
+            id="custom-music"
+            placeholder="https://domain.com/audio.mp3"
+          />
+          <button class="btn-preview" id="btn-preview-custom" onclick="togglePreviewCustom()" title="Nghe thử">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
         <p class="hint">
           <i class="fa-solid fa-circle-info"></i>
           <span>Dán link trực tiếp từ Google Drive, Dropbox hoặc Host riêng.</span>
@@ -1092,6 +1170,8 @@
       let imagesList = []; // { id, src, type: 'remote'|'local', name, uploading, error }
       let selectedMusic = "./a.mp3";
       let finalUrl = "";
+      let previewAudio = null;
+      let currentPreviewUrl = "";
 
       // --- TABS ---
       function switchTab(t) {
@@ -1277,10 +1357,16 @@
       function renderMusic() {
         mGrid.innerHTML = "";
         MUSIC.forEach((m) => {
+          const isPlaying = currentPreviewUrl === m.f;
           const btn = document.createElement("button");
-          btn.className = `m-btn ${selectedMusic === m.f ? "active" : ""}`;
-          btn.style.padding = "14px 12px"; // Thêm padding ngang
-          btn.innerHTML = `<span>${m.l}</span>`;
+          btn.className = `m-btn ${selectedMusic === m.f ? "active" : ""} ${isPlaying ? "playing" : ""}`;
+          btn.style.padding = "14px 16px";
+          btn.innerHTML = `
+            <span>${m.l}</span>
+            <div class="play-icon" onclick="event.stopPropagation(); togglePreview('${m.f}', this.parentElement)">
+              <i class="fa-solid ${isPlaying ? "fa-pause" : "fa-play"}"></i>
+            </div>
+          `;
           btn.onclick = () => {
             selectedMusic = m.f;
             cMusic.value = "";
@@ -1289,11 +1375,85 @@
           mGrid.appendChild(btn);
         });
       }
+
+      function togglePreview(url, btnEl) {
+        if (previewAudio && currentPreviewUrl === url) {
+          // Toggle pause/play of current song
+          if (!previewAudio.paused) {
+            previewAudio.pause();
+            currentPreviewUrl = "";
+            renderMusic();
+            updateCustomPreviewUI();
+          } else {
+            previewAudio.play();
+            currentPreviewUrl = url;
+            renderMusic();
+            updateCustomPreviewUI();
+          }
+          return;
+        }
+
+        // Play new song
+        if (previewAudio) {
+          previewAudio.pause();
+          previewAudio = null;
+        }
+
+        previewAudio = new Audio(url);
+        currentPreviewUrl = url;
+        previewAudio.play().catch(() => {
+          showToast("Không thể phát file nhạc này!", "fa-triangle-exclamation");
+          currentPreviewUrl = "";
+          renderMusic();
+        });
+
+        previewAudio.onended = () => {
+          currentPreviewUrl = "";
+          renderMusic();
+          updateCustomPreviewUI();
+        };
+
+        renderMusic();
+        updateCustomPreviewUI();
+      }
+
+      function togglePreviewCustom() {
+        const url = cMusic.value.trim();
+        if (!url) return showToast("Vui lòng nhập URL nhạc!", "fa-triangle-exclamation");
+        
+        togglePreview(url, document.getElementById('btn-preview-custom'));
+      }
+
+      function updateCustomPreviewUI() {
+        const btn = document.getElementById('btn-preview-custom');
+        const icon = btn.querySelector('i');
+        const customUrl = cMusic.value.trim();
+        
+        if (currentPreviewUrl && currentPreviewUrl === customUrl && previewAudio && !previewAudio.paused) {
+          btn.classList.add('playing');
+          icon.className = 'fa-solid fa-pause';
+        } else {
+          btn.classList.remove('playing');
+          icon.className = 'fa-solid fa-play';
+        }
+      }
+
       cMusic.addEventListener("input", () => {
         selectedMusic = cMusic.value.trim();
         renderMusic();
+        updateCustomPreviewUI();
       });
       renderMusic();
+
+      function stopAllPreviews() {
+        if (previewAudio) {
+          previewAudio.pause();
+          previewAudio = null;
+          currentPreviewUrl = "";
+          renderMusic();
+          updateCustomPreviewUI();
+        }
+      }
 
       // --- GENERATE ---
       function b64EncodeUnicode(str) {
